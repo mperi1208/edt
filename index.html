@@ -188,12 +188,26 @@ function firstDayWithCourses(from){
   return from;
 }
 
+// Le jour à ouvrir : aujourd'hui tant qu'il reste un cours à venir,
+// sinon on passe directement au prochain jour de cours.
+function dayToOpen(){
+  const now=new Date();
+  const reste=sessionsOn(now).some(s=>parseLocal(s.end)>now);
+  if(reste) return now;
+  const d=new Date(now); d.setDate(d.getDate()+1);
+  return firstDayWithCourses(d);
+}
+
 function renderDay(){
   const grid=document.getElementById("grid");
   const list=sessionsOn(cursor), now=new Date(), today=ymd(now);
   const f=new Intl.DateTimeFormat("fr-FR",{weekday:"long",day:"numeric",month:"long"});
   let t=f.format(cursor); t=t.charAt(0).toUpperCase()+t.slice(1);
-  document.getElementById("range").textContent = (ymd(cursor)===today ? t+"  ·  aujourd'hui" : t);
+  const dd=new Date(cursor), tm=new Date(); tm.setDate(tm.getDate()+1);
+  let suffixe="";
+  if(ymd(dd)===today) suffixe="  ·  aujourd'hui";
+  else if(ymd(dd)===ymd(tm)) suffixe="  ·  demain";
+  document.getElementById("range").textContent = t + suffixe;
 
   if(!list.length){ grid.innerHTML='<div class="empty">Aucun cours ce jour-là.</div>'; return; }
 
@@ -296,7 +310,7 @@ function move(n){
 addEventListener("resize", ()=>{ if(DATA) render(); });
 document.getElementById("prev").onclick=()=>move(-1);
 document.getElementById("next").onclick=()=>move(1);
-document.getElementById("today").onclick=()=>{cursor=isNarrow()?firstDayWithCourses(new Date()):new Date();render();};
+document.getElementById("today").onclick=()=>{cursor=isNarrow()?dayToOpen():new Date();render();};
 document.getElementById("togglesec").onclick=()=>{
   document.body.classList.toggle("hide-sec");
   try{localStorage.setItem("hideSec",document.body.classList.contains("hide-sec")?"1":"0")}catch(e){}
@@ -309,10 +323,10 @@ try{ if(localStorage.getItem("hideSec")==="1") document.body.classList.add("hide
 
 window.applyData = function(d){
   DATA=d;
-  if(!cursor) cursor = isNarrow() ? firstDayWithCourses(new Date()) : new Date();
+  if(!cursor) cursor = isNarrow() ? dayToOpen() : new Date();
   render();
 };
 if(window.EDT_DATA) applyData(window.EDT_DATA);
-else fetch("data.json").then(r=>r.json()).then(applyData)
+else fetch("data.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(applyData)
      .catch(()=>{document.getElementById("grid").innerHTML='<div class="empty">Aucune donnée.</div>';});
 </script>
