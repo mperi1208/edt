@@ -121,7 +121,14 @@ body.day #togglesec{display:none}
 <div class="wrap"><div class="grid" id="grid"></div></div>
 
 <script>
-const PRIMARY = ["MYANM007","MYANM001","MYANM009","MYMAS001","MYANM011","MSANGS1","MYMAS006"];
+// Seules les OPTIONS non choisies sont grisées (cf. maquette M1 AMS, BCC 3).
+// Tout le reste — cours obligatoires, y compris ceux du S2 pas encore publiés,
+// forum, projet de groupe, pré-rentrée — s'affiche normalement.
+const MUTED_MODULES = ["MYMAA002","MYCHP104"];   // Calcul formel, POO (Guyancourt)
+const MUTED_TITLES  = [
+  /MYCHP104|Programmation Orient/i,   // la POO n'a pas de code module dans Celcat, seulement dans l'intitulé
+  /TRAJET/i                           // navette Versailles–Guyancourt, liée à la POO
+];
 const COLORS = {
   MYANM007:"#2f7ae5", MYANM001:"#d2691e", MYANM009:"#7b53c1", MYMAS001:"#1f9e6e",
   MYANM011:"#c2417a", MSANGS1:"#4b7f52",  MYMAS006:"#8a7a2f"
@@ -159,7 +166,19 @@ function labelFor(s){
   if (t) t = t.charAt(0).toUpperCase() + t.slice(1);
   return t || s.category || "—";
 }
-const isPrimary = s => !!(s.module && PRIMARY.includes(s.module));
+const isMuted = s => (s.module && MUTED_MODULES.includes(s.module))
+                  || MUTED_TITLES.some(r => r.test(s.title || ""));
+const isPrimary = s => !isMuted(s);
+
+// Couleur de la barre : fixe pour les matières connues, stable (hachage) pour les
+// futures, neutre pour les créneaux sans module (forum, projet…).
+const EXTRA = ["#0f8b8d","#b5523b","#5a67d8","#9c6b30","#2e7d32","#ad3f8f"];
+function colorFor(s){
+  if (s.module && COLORS[s.module]) return COLORS[s.module];
+  if (!s.module) return "#6b7a8c";
+  let h = 0; for (const c of s.module) h = (h*31 + c.charCodeAt(0)) >>> 0;
+  return EXTRA[h % EXTRA.length];
+}
 
 function layout(list){                    // colonnes pour les chevauchements
   const sorted=[...list].sort((a,b)=>a.s-b.s||a.e-b.e);
@@ -214,7 +233,7 @@ function renderDay(){
   let h='<div class="daylist">';
   list.forEach(s=>{
     const a=parseLocal(s.start), b=parseLocal(s.end);
-    const prim=isPrimary(s), c=prim?(COLORS[s.module]||"#2f7ae5"):"var(--dim)";
+    const prim=isPrimary(s), c=prim?colorFor(s):"var(--dim)";
     const isToday=ymd(cursor)===today;
     const ongoing=isToday && a<=now && now<b, past=isToday && b<=now;
     const cat=(s.category||"").replace("Contrôle continu","CC").replace("Réunion de pré-rentrée","Pré-rentrée");
@@ -277,7 +296,7 @@ function render(){
     }
     layout(byDay[key]||[]).forEach(ev=>{
       const top=(ev.s-DAY_START*60)/60*62, h=Math.max(22,(ev.e-ev.s)/60*62-3);
-      const prim=isPrimary(ev), c=prim?(COLORS[ev.module]||"#2f7ae5"):"var(--dim)";
+      const prim=isPrimary(ev), c=prim?colorFor(ev):"var(--dim)";
       const w=100/ev.ncols, left=ev.col*w;
       const cat=(ev.category||"").replace("Contrôle continu","CC").replace("Réunion de pré-rentrée","Pré-rentrée");
       html+=`<div class="ev${prim?"":" sec"}${h<46?" short":""}" style="--c:${c};top:${top}px;height:${h}px;left:calc(${left}% + 2px);width:calc(${w}% - 4px)" title="${(ev.title||"").replace(/"/g,"&quot;")}${ev.room?" — "+ev.room:""}">
