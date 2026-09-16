@@ -1,5 +1,5 @@
 {
-  "fetchedAt" : "2026-09-16T10:08:17Z",
+  "fetchedAt" : "2026-09-16T17:00:03Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -176,8 +176,8 @@
       "id" : "-1742255826:1073733534:17:5829278:5",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI I - FERMAT",
-      "site" : "FERMAT",
+      "room" : "414/416 - BUFFON",
+      "site" : "BUFFON",
       "start" : "2026-09-17T13:50:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
@@ -188,8 +188,8 @@
       "id" : "-1742255826:1073733534:17:5829280:5",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI J - FERMAT",
-      "site" : "FERMAT",
+      "room" : "414/416 - BUFFON",
+      "site" : "BUFFON",
       "start" : "2026-09-17T15:30:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
@@ -200,8 +200,8 @@
       "id" : "-1742255826:1073733534:17:5829282:5",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI J - FERMAT",
-      "site" : "FERMAT",
+      "room" : "414/416 - BUFFON",
+      "site" : "BUFFON",
       "start" : "2026-09-17T17:10:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
@@ -368,7 +368,7 @@
       "id" : "-1742255826:1073733534:17:5829278:6",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI I - FERMAT",
+      "room" : "2202 - FERMAT",
       "site" : "FERMAT",
       "start" : "2026-09-24T13:50:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
@@ -380,7 +380,7 @@
       "id" : "-1742255826:1073733534:17:5829280:6",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI J - FERMAT",
+      "room" : "2202 - FERMAT",
       "site" : "FERMAT",
       "start" : "2026-09-24T15:30:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
@@ -392,7 +392,7 @@
       "id" : "-1742255826:1073733534:17:5829282:6",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI J - FERMAT",
+      "room" : "2202 - FERMAT",
       "site" : "FERMAT",
       "start" : "2026-09-24T17:10:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
@@ -447,38 +447,38 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-09-29T11:10:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829263:7",
-      "module" : "MYANM007",
-      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI D - DESCARTES",
-      "site" : "DESCARTES",
-      "start" : "2026-09-29T09:40:00",
-      "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2026-09-29T12:50:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829271:7",
-      "module" : "MYANM007",
-      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI D - DESCARTES",
-      "site" : "DESCARTES",
-      "start" : "2026-09-29T11:20:00",
-      "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "CM/TD",
       "end" : "2026-09-29T15:20:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5829274:7",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI I - FERMAT",
+      "room" : "2202 - FERMAT",
       "site" : "FERMAT",
       "start" : "2026-09-29T13:50:00",
+      "title" : "Inférence statistique et théorie de l'apprentissage"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2026-09-29T17:00:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "id" : "-1742255826:1073733534:17:5861811:7",
+      "module" : "MYANM007",
+      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
+      "room" : "2202 - FERMAT",
+      "site" : "FERMAT",
+      "start" : "2026-09-29T15:30:00",
+      "title" : "Inférence statistique et théorie de l'apprentissage"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2026-09-29T18:40:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "id" : "-1742255826:1073733534:17:5861816:7",
+      "module" : "MYANM007",
+      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
+      "room" : "2202 - FERMAT",
+      "site" : "FERMAT",
+      "start" : "2026-09-29T17:10:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -1150,7 +1150,7 @@
       "category" : "CM/TD",
       "end" : "2026-11-03T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829263:12",
+      "id" : "-1742255826:1073733534:17:5861841:12",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
       "room" : "AMPHI D - DESCARTES",
@@ -1162,24 +1162,12 @@
       "category" : "CM/TD",
       "end" : "2026-11-03T12:50:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829271:12",
+      "id" : "-1742255826:1073733534:17:5861853:12",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
       "room" : "AMPHI D - DESCARTES",
       "site" : "DESCARTES",
       "start" : "2026-11-03T11:20:00",
-      "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2026-11-03T15:20:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829274:12",
-      "module" : "MYANM007",
-      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI I - FERMAT",
-      "site" : "FERMAT",
-      "start" : "2026-11-03T13:50:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -1825,7 +1813,6 @@
       "room" : "AMPHI G - FERMAT",
       "site" : "FERMAT",
       "start" : "2026-11-27T09:40:00",
-      "teacher" : "Pascal Moyal",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -1838,7 +1825,6 @@
       "room" : "AMPHI G - FERMAT",
       "site" : "FERMAT",
       "start" : "2026-11-27T11:20:00",
-      "teacher" : "Pascal Moyal",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -1915,11 +1901,11 @@
       "category" : "CM/TD",
       "end" : "2026-12-01T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829263:16",
+      "id" : "-1742255826:1073733534:17:5861858:16",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI I - FERMAT",
-      "site" : "FERMAT",
+      "room" : "E103- Bât Joliot-Curie",
+      "site" : "JOLIOT- CURIE",
       "start" : "2026-12-01T09:40:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
@@ -1927,24 +1913,11 @@
       "category" : "CM/TD",
       "end" : "2026-12-01T12:50:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829271:16",
+      "id" : "-1742255826:1073733534:17:5861864:16",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI I - FERMAT",
-      "site" : "FERMAT",
+      "site" : "JOLIOT- CURIE",
       "start" : "2026-12-01T11:20:00",
-      "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2026-12-01T15:20:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829274:16",
-      "module" : "MYANM007",
-      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI I - FERMAT",
-      "site" : "FERMAT",
-      "start" : "2026-12-01T13:50:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -2003,7 +1976,6 @@
       "room" : "G104 M- GERMAIN",
       "site" : "GERMAIN",
       "start" : "2026-12-03T09:40:00",
-      "teacher" : "Pascal Moyal",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -2023,7 +1995,7 @@
       "category" : "Séminaire",
       "end" : "2026-12-03T17:00:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26], M2 Saclay Mathématiques et Apprentissage Statistique (MAS) [MYMAS2_26]",
-      "id" : "-1742255826:1073733534:17:5829286:16",
+      "id" : "-1742255826:1073733534:17:5861890:16",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
       "start" : "2026-12-03T13:50:00",
@@ -2039,7 +2011,6 @@
       "room" : "G104 M- GERMAIN",
       "site" : "GERMAIN",
       "start" : "2026-12-04T09:40:00",
-      "teacher" : "Pascal Moyal",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -2052,7 +2023,6 @@
       "room" : "G104 M- GERMAIN",
       "site" : "GERMAIN",
       "start" : "2026-12-04T11:20:00",
-      "teacher" : "Pascal Moyal",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -2229,7 +2199,6 @@
       "room" : "G104 M- GERMAIN",
       "site" : "GERMAIN",
       "start" : "2026-12-10T09:40:00",
-      "teacher" : "Pascal Moyal",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -2249,7 +2218,7 @@
       "category" : "Séminaire",
       "end" : "2026-12-10T17:00:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26], M2 Saclay Mathématiques et Apprentissage Statistique (MAS) [MYMAS2_26]",
-      "id" : "-1742255826:1073733534:17:5829286:17",
+      "id" : "-1742255826:1073733534:17:5861890:17",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
       "start" : "2026-12-10T13:50:00",
@@ -2265,7 +2234,6 @@
       "room" : "G104 M- GERMAIN",
       "site" : "GERMAIN",
       "start" : "2026-12-11T09:40:00",
-      "teacher" : "Pascal Moyal",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -2278,7 +2246,6 @@
       "room" : "G104 M- GERMAIN",
       "site" : "GERMAIN",
       "start" : "2026-12-11T11:20:00",
-      "teacher" : "Pascal Moyal",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -2429,7 +2396,6 @@
       "room" : "G104 M- GERMAIN",
       "site" : "GERMAIN",
       "start" : "2026-12-17T09:40:00",
-      "teacher" : "Pascal Moyal",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -2449,7 +2415,7 @@
       "category" : "Séminaire",
       "end" : "2026-12-17T17:00:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26], M2 Saclay Mathématiques et Apprentissage Statistique (MAS) [MYMAS2_26]",
-      "id" : "-1742255826:1073733534:17:5829286:18",
+      "id" : "-1742255826:1073733534:17:5861890:18",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
       "start" : "2026-12-17T13:50:00",
@@ -2465,7 +2431,6 @@
       "room" : "G104 M- GERMAIN",
       "site" : "GERMAIN",
       "start" : "2026-12-18T09:40:00",
-      "teacher" : "Pascal Moyal",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -2478,7 +2443,6 @@
       "room" : "G104 M- GERMAIN",
       "site" : "GERMAIN",
       "start" : "2026-12-18T11:20:00",
-      "teacher" : "Pascal Moyal",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -2603,7 +2567,7 @@
       "category" : "Séminaire",
       "end" : "2027-01-07T17:00:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26], M2 Saclay Mathématiques et Apprentissage Statistique (MAS) [MYMAS2_26]",
-      "id" : "-1742255826:1073733534:17:5829286:21",
+      "id" : "-1742255826:1073733534:17:5861890:21",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
       "start" : "2027-01-07T13:50:00",
