@@ -1,5 +1,5 @@
 {
-  "fetchedAt" : "2026-09-16T05:15:08Z",
+  "fetchedAt" : "2026-09-16T10:08:17Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -112,7 +112,7 @@
     {
       "category" : "TD",
       "end" : "2026-09-16T12:50:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5829277:5",
       "module" : "MYMAS001",
       "moduleName" : "Probabilités",
@@ -304,7 +304,7 @@
     {
       "category" : "TD",
       "end" : "2026-09-23T12:50:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5829277:6",
       "module" : "MYMAS001",
       "moduleName" : "Probabilités",
@@ -496,7 +496,7 @@
     {
       "category" : "TD",
       "end" : "2026-09-30T12:50:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5829277:7",
       "module" : "MYMAS001",
       "moduleName" : "Probabilités",
@@ -655,7 +655,7 @@
     {
       "category" : "TD",
       "end" : "2026-10-07T12:50:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5829277:8",
       "module" : "MYMAS001",
       "moduleName" : "Probabilités",
@@ -845,7 +845,7 @@
     {
       "category" : "TD",
       "end" : "2026-10-14T12:50:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5829277:9",
       "module" : "MYMAS001",
       "moduleName" : "Probabilités",
@@ -1027,7 +1027,7 @@
     {
       "category" : "TD",
       "end" : "2026-10-21T12:50:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5829277:10",
       "module" : "MYMAS001",
       "moduleName" : "Probabilités",
@@ -1197,7 +1197,7 @@
     {
       "category" : "TD",
       "end" : "2026-11-04T12:50:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5829277:12",
       "module" : "MYMAS001",
       "moduleName" : "Probabilités",
@@ -1552,7 +1552,7 @@
     {
       "category" : "TD",
       "end" : "2026-11-18T12:50:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5829277:14",
       "module" : "MYMAS001",
       "moduleName" : "Probabilités",
@@ -1765,7 +1765,7 @@
     {
       "category" : "TD",
       "end" : "2026-11-25T12:50:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5829277:15",
       "module" : "MYMAS001",
       "moduleName" : "Probabilités",
