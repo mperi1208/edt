@@ -124,9 +124,16 @@ body.day #togglesec{display:none}
 // Seules les OPTIONS non choisies sont grisées (cf. maquette M1 AMS, BCC 3).
 // Tout le reste — cours obligatoires, y compris ceux du S2 pas encore publiés,
 // forum, projet de groupe, pré-rentrée — s'affiche normalement.
-const MUTED_MODULES = ["MYMAA002","MYCHP104"];   // Calcul formel, POO (Guyancourt)
+const MUTED_MODULES = [
+  "MYMAA002",   // Introduction au calcul formel
+  "MYCHP104",   // Programmation orientée objet (Guyancourt)
+  "MYMAA006",   // Analyse d'algorithmes, programmation (S2)
+  "MYCHP200"    // Optimisation et recherche opérationnelle (S2, Guyancourt)
+];              // Théorie de l'information (MYMAA008) est choisie : pas grisée.
 const MUTED_TITLES  = [
-  /MYCHP104|Programmation Orient/i,   // la POO n'a pas de code module dans Celcat, seulement dans l'intitulé
+  /MYCHP104|Programmation Orient/i,   // les cours de Guyancourt n'ont pas de code module dans Celcat,
+  /MYCHP200|recherche op[ée]rationnelle/i,  // seulement dans l'intitulé
+  /MYMAA006|analyse d.algorithmes/i,
   /TRAJET/i                           // navette Versailles–Guyancourt, liée à la POO
 ];
 const COLORS = {
