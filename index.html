@@ -75,6 +75,30 @@ body.hide-sec .ev.sec{display:none}
 
 .empty{color:var(--dim);padding:40px 0;text-align:center}
 
+/* ---- édition ---- */
+body.can-edit .ev,body.can-edit .dcard{cursor:pointer}
+.ev.perso,.dcard.perso{border-left-width:3px;border-left-style:solid}
+.ev.perso .n::after,.dcard.perso .ttl::after{content:" ●";color:var(--c);font-size:9px;vertical-align:middle}
+.ev.modif .n::after,.dcard.modif .ttl::after{content:" ✎";color:var(--dim);font-size:10px}
+#add{display:none}
+body.can-edit #add{display:inline-block}
+
+.ovl{position:fixed;inset:0;background:rgba(0,0,0,.34);display:flex;align-items:center;
+  justify-content:center;padding:18px;z-index:50}
+.ovl[hidden]{display:none}
+.dlg{background:var(--bg);border:1px solid var(--line);border-radius:14px;width:min(420px,100%);
+  max-height:90vh;overflow:auto;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.dlg h2{margin:0 0 14px;font-size:15px;font-weight:600}
+.dlg label{display:block;font-size:11px;color:var(--dim);margin:10px 0 3px;letter-spacing:.02em}
+.dlg input,.dlg select{width:100%;font:inherit;color:var(--fg);background:var(--card);
+  border:1px solid var(--line);border-radius:8px;padding:7px 9px}
+.dlg .row{display:flex;gap:10px}
+.dlg .row>div{flex:1}
+.acts{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.acts .sp{flex:1}
+button.primary{background:var(--fg);color:var(--bg);border-color:var(--fg);font-weight:600}
+button.danger{color:#c0392b;border-color:#c0392b55}
+
 /* ---- vue jour (téléphone) ---- */
 .daylist{padding-top:2px}
 .dcard{display:flex;gap:13px;padding:13px 2px 13px 10px;border-bottom:1px solid var(--line);
@@ -116,9 +140,34 @@ body.day #togglesec{display:none}
   <button class="icon" id="prev" title="Semaine précédente">←</button>
   <button id="today">Aujourd'hui</button>
   <button class="icon" id="next" title="Semaine suivante">→</button>
+  <button id="add" title="Ajouter un créneau">+</button>
   <button id="togglesec" title="Afficher ou masquer les créneaux secondaires">Secondaires</button>
 </header>
 <div class="wrap"><div class="grid" id="grid"></div></div>
+
+<div class="ovl" id="ovl" hidden><div class="dlg">
+  <h2 id="dlgTitle">Modifier</h2>
+  <label>Intitulé</label><input id="fTitle" placeholder="Nom du créneau">
+  <label>Salle / lieu</label><input id="fRoom" placeholder="Facultatif">
+  <div class="row">
+    <div><label>Date</label><input id="fDate" type="date"></div>
+    <div><label>Type</label><select id="fCat">
+      <option>Perso</option><option>CM/TD</option><option>CM</option><option>TD</option>
+      <option>Contrôle continu</option><option>Séminaire</option><option value="">(aucun)</option>
+    </select></div>
+  </div>
+  <div class="row">
+    <div><label>Début</label><input id="fStart" type="time"></div>
+    <div><label>Fin</label><input id="fEnd" type="time"></div>
+  </div>
+  <div class="acts">
+    <button class="primary" id="bSave">Enregistrer</button>
+    <button id="bReset">Réinitialiser</button>
+    <span class="sp"></span>
+    <button class="danger" id="bDel">Supprimer</button>
+    <button id="bCancel">Annuler</button>
+  </div>
+</div></div>
 
 <script>
 // Seules les OPTIONS non choisies sont grisées (cf. maquette M1 AMS, BCC 3).
@@ -148,6 +197,7 @@ const CAT_COLORS = {
   "Contrôle continu": "#c0392b",
   "CC":    "#c0392b",
   "Séminaire": "#7b53c1",
+  "Perso":  "#0f8b8d",
   "Réunion de pré-rentrée": "#8a8a84",
   "Pré-rentrée": "#8a8a84"
 };
@@ -162,6 +212,27 @@ const parseLocal = s => { const [d,t]=s.split("T"); const [Y,M,D]=d.split("-").m
 const minutes = d => d.getHours()*60 + d.getMinutes();
 
 let DATA = null, cursor = null;
+let OVER = (window.EDT_OVERRIDES) || {custom:[], edits:{}, hidden:[]};
+let ALL = [];
+const canEdit = !!window.EDT_CAN_EDIT;
+
+// Les modifications vivent à part : data.json est réécrit en entier deux fois par jour.
+function rebuild(){
+  OVER.custom = OVER.custom || []; OVER.edits = OVER.edits || {}; OVER.hidden = OVER.hidden || [];
+  const cache = new Set(OVER.hidden);
+  const base = ((DATA && DATA.sessions) || [])
+    .filter(s => !cache.has(s.id))
+    .map(s => { const e = OVER.edits[s.id]; return e ? {...s, ...e, modif:true} : s; });
+  ALL = base.concat(OVER.custom.map(s => ({...s, perso:true})));
+}
+
+function saveOver(){
+  rebuild(); render();
+  try {
+    if (window.webkit && webkit.messageHandlers && webkit.messageHandlers.edt)
+      webkit.messageHandlers.edt.postMessage(JSON.parse(JSON.stringify(OVER)));
+  } catch(e){ console.warn("sauvegarde impossible", e); }
+}
 const isNarrow = () => window.innerWidth < 700;
 
 function mondayOf(d){ const x=new Date(d); const w=(x.getDay()+6)%7; x.setDate(x.getDate()-w); x.setHours(0,0,0,0); return x; }
@@ -181,6 +252,7 @@ const isPrimary = s => !isMuted(s);
 // futures, neutre pour les créneaux sans module (forum, projet…).
 const EXTRA = ["#0f8b8d","#b5523b","#5a67d8","#9c6b30","#2e7d32","#ad3f8f"];
 function colorFor(s){
+  if (s.perso) return "#0f8b8d";
   if (s.module && COLORS[s.module]) return COLORS[s.module];
   if (!s.module) return "#6b7a8c";
   let h = 0; for (const c of s.module) h = (h*31 + c.charCodeAt(0)) >>> 0;
@@ -203,7 +275,7 @@ function layout(list){                    // colonnes pour les chevauchements
 
 function sessionsOn(d){
   const k=ymd(d);
-  return DATA.sessions.filter(s=>s.start.startsWith(k))
+  return ALL.filter(s=>s.start.startsWith(k))
     .sort((a,b)=>a.start<b.start?-1:1);
 }
 
@@ -244,7 +316,7 @@ function renderDay(){
     const isToday=ymd(cursor)===today;
     const ongoing=isToday && a<=now && now<b, past=isToday && b<=now;
     const cat=(s.category||"").replace("Contrôle continu","CC").replace("Réunion de pré-rentrée","Pré-rentrée");
-    h+=`<div class="dcard${prim?"":" sec"}${ongoing?" ongoing":""}${past?" past":""}" style="--c:${c}">
+    h+=`<div class="dcard${prim?"":" sec"}${ongoing?" ongoing":""}${past?" past":""}${s.perso?" perso":""}${s.modif?" modif":""}" data-id="${s.id}" style="--c:${c}">
       <div class="when"><b>${pad(a.getHours())}:${pad(a.getMinutes())}</b>${pad(b.getHours())}:${pad(b.getMinutes())}</div>
       <div class="bd">
         <div class="ttl">${labelFor(s)}</div>
@@ -263,7 +335,7 @@ function render(){
 
   const start=mondayOf(cursor);
   const byDay={}; let maxDay=4;
-  DATA.sessions.forEach(s=>{
+  ALL.forEach(s=>{
     const sd=parseLocal(s.start), ed=parseLocal(s.end);
     const k=ymd(sd);
     (byDay[k]=byDay[k]||[]).push({...s,s:minutes(sd),e:minutes(ed),sd,ed});
@@ -306,7 +378,7 @@ function render(){
       const prim=isPrimary(ev), c=prim?colorFor(ev):"var(--dim)";
       const w=100/ev.ncols, left=ev.col*w;
       const cat=(ev.category||"").replace("Contrôle continu","CC").replace("Réunion de pré-rentrée","Pré-rentrée");
-      html+=`<div class="ev${prim?"":" sec"}${h<46?" short":""}" style="--c:${c};top:${top}px;height:${h}px;left:calc(${left}% + 2px);width:calc(${w}% - 4px)" title="${(ev.title||"").replace(/"/g,"&quot;")}${ev.room?" — "+ev.room:""}">
+      html+=`<div class="ev${prim?"":" sec"}${h<46?" short":""}${ev.perso?" perso":""}${ev.modif?" modif":""}" data-id="${ev.id}" style="--c:${c};top:${top}px;height:${h}px;left:calc(${left}% + 2px);width:calc(${w}% - 4px)" title="${(ev.title||"").replace(/"/g,"&quot;")}${ev.room?" — "+ev.room:""}">
         <div class="hd">
           <span class="t">${pad(ev.sd.getHours())}:${pad(ev.sd.getMinutes())}–${pad(ev.ed.getHours())}:${pad(ev.ed.getMinutes())}</span>
           ${cat?`<span class="b" style="--bc:${catColor(cat)}">${cat}</span>`:""}
@@ -347,12 +419,120 @@ addEventListener("keydown",e=>{
 });
 try{ if(localStorage.getItem("hideSec")==="1") document.body.classList.add("hide-sec"); }catch(e){}
 
+// ---------------------------------------------------------------- édition
+if (canEdit) document.body.classList.add("can-edit");
+
+const $ = id => document.getElementById(id);
+let editing = null;                       // {id, perso} ou null pour un nouveau
+
+function splitISO(iso){ return {d: iso.slice(0,10), t: iso.slice(11,16)}; }
+function joinISO(d,t){ return d + "T" + t + ":00"; }
+
+function openEditor(id){
+  if (!canEdit) return;
+  const s = ALL.find(x => x.id === id);
+  if (!s) return;
+  editing = {id, perso: !!s.perso};
+  const a = splitISO(s.start), b = splitISO(s.end);
+  $("dlgTitle").textContent = s.perso ? "Créneau perso" : "Modifier le cours";
+  $("fTitle").value = s.title || "";
+  $("fRoom").value  = s.room || "";
+  $("fDate").value  = a.d;
+  $("fStart").value = a.t;
+  $("fEnd").value   = b.t;
+  $("fCat").value   = s.category || "";
+  $("bReset").hidden = !!s.perso;         // rien à réinitialiser sur un créneau perso
+  $("bDel").textContent = s.perso ? "Supprimer" : "Masquer";
+  $("ovl").hidden = false;
+  $("fTitle").focus();
+}
+
+function openNew(){
+  if (!canEdit) return;
+  editing = null;
+  const base = cursor || new Date();
+  $("dlgTitle").textContent = "Nouveau créneau";
+  $("fTitle").value = ""; $("fRoom").value = "";
+  $("fDate").value = ymd(base);
+  $("fStart").value = "12:00"; $("fEnd").value = "13:00";
+  $("fCat").value = "Perso";
+  $("bReset").hidden = true;
+  $("bDel").textContent = "Supprimer";
+  $("ovl").hidden = false;
+  $("fTitle").focus();
+}
+
+function closeEditor(){ $("ovl").hidden = true; editing = null; }
+
+function readForm(){
+  const d = $("fDate").value, t1 = $("fStart").value, t2 = $("fEnd").value;
+  if (!d || !t1 || !t2) { alert("Date et horaires sont nécessaires."); return null; }
+  if (t2 <= t1) { alert("L'heure de fin doit être après l'heure de début."); return null; }
+  return {
+    title: ($("fTitle").value || "").trim() || "Sans titre",
+    room: ($("fRoom").value || "").trim() || null,
+    category: $("fCat").value,
+    start: joinISO(d, t1),
+    end: joinISO(d, t2)
+  };
+}
+
+$("bSave").onclick = () => {
+  const f = readForm(); if (!f) return;
+  if (editing && !editing.perso) {
+    OVER.edits[editing.id] = f;                       // retouche d'un cours Celcat
+  } else if (editing) {
+    const i = OVER.custom.findIndex(x => x.id === editing.id);
+    if (i >= 0) OVER.custom[i] = {...OVER.custom[i], ...f};
+  } else {
+    OVER.custom.push({id: "perso-" + Date.now(), module: null, teacher: null, ...f});
+  }
+  closeEditor(); saveOver();
+};
+
+$("bDel").onclick = () => {
+  if (!editing) { closeEditor(); return; }
+  if (editing.perso) OVER.custom = OVER.custom.filter(x => x.id !== editing.id);
+  else { OVER.hidden.push(editing.id); delete OVER.edits[editing.id]; }
+  closeEditor(); saveOver();
+};
+
+$("bReset").onclick = () => {
+  if (!editing) return;
+  delete OVER.edits[editing.id];
+  OVER.hidden = OVER.hidden.filter(x => x !== editing.id);
+  closeEditor(); saveOver();
+};
+
+$("bCancel").onclick = closeEditor;
+$("ovl").onclick = e => { if (e.target === $("ovl")) closeEditor(); };
+$("add").onclick = openNew;
+
+document.getElementById("grid").addEventListener("click", e => {
+  const el = e.target.closest("[data-id]");
+  if (el) openEditor(el.getAttribute("data-id"));
+});
+
+addEventListener("keydown", e => {
+  if (e.key === "Escape" && !$("ovl").hidden) closeEditor();
+  else if (e.key === "Enter" && !$("ovl").hidden) $("bSave").click();
+});
+
+window.applyOverrides = function(o){ OVER = o || OVER; rebuild(); render(); };
+
 window.applyData = function(d){
   DATA=d;
+  rebuild();
   if(!cursor) cursor = isNarrow() ? dayToOpen() : new Date();
   render();
 };
 if(window.EDT_DATA) applyData(window.EDT_DATA);
-else fetch("data.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(applyData)
-     .catch(()=>{document.getElementById("grid").innerHTML='<div class="empty">Aucune donnée.</div>';});
+else {
+  fetch("overrides.json?t="+Date.now(),{cache:"no-store"})
+    .then(r=>r.ok?r.json():null).then(o=>{ if(o) OVER=o; }).catch(()=>{})
+    .finally(()=>{
+      fetch("data.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(applyData)
+        .catch(()=>{document.getElementById("grid").innerHTML='<div class="empty">Aucune donnée.</div>';});
+    });
+}
 </script>
