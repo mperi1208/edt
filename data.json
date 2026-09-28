@@ -1,5 +1,5 @@
 {
-  "fetchedAt" : "2026-09-23T05:04:44Z",
+  "fetchedAt" : "2026-09-28T17:20:56Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -446,6 +446,16 @@
       "title" : "Optimisation numérique"
     },
     {
+      "category" : "Réunion",
+      "end" : "2026-09-28T18:40:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5874442:7",
+      "room" : "G210 - GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2026-09-28T17:10:00",
+      "title" : "Réunion se portant sur les choix des UEs optionnelles"
+    },
+    {
       "category" : "CM/TD",
       "end" : "2026-09-29T15:20:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
@@ -560,6 +570,8 @@
       "id" : "-1742255826:1073733534:17:5829286:7",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
       "start" : "2026-10-01T13:50:00",
       "title" : "PPEI et Séminaire invité entreprise"
     },
@@ -626,18 +638,6 @@
       "room" : "AMPHI D - DESCARTES",
       "site" : "DESCARTES",
       "start" : "2026-10-06T11:20:00",
-      "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2026-10-06T15:20:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829274:8",
-      "module" : "MYANM007",
-      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI I - FERMAT",
-      "site" : "FERMAT",
-      "start" : "2026-10-06T13:50:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -795,39 +795,15 @@
       "title" : "Optimisation numérique"
     },
     {
-      "category" : "CM/TD",
-      "end" : "2026-10-13T11:10:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829263:9",
-      "module" : "MYANM007",
-      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI D - DESCARTES",
-      "site" : "DESCARTES",
-      "start" : "2026-10-13T09:40:00",
-      "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "CM/TD",
+      "category" : "Contrôle continu",
       "end" : "2026-10-13T12:50:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829271:9",
+      "id" : "-1742255826:1073733534:17:5874809:9",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI D - DESCARTES",
+      "room" : "AMPHI A - DESCARTES",
       "site" : "DESCARTES",
-      "start" : "2026-10-13T11:20:00",
-      "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2026-10-13T15:20:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829274:9",
-      "module" : "MYANM007",
-      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "G104 M- GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2026-10-13T13:50:00",
+      "start" : "2026-10-13T09:40:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -1998,6 +1974,8 @@
       "id" : "-1742255826:1073733534:17:5861890:16",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
+      "room" : "102 - BUFFON",
+      "site" : "BUFFON",
       "start" : "2026-12-03T13:50:00",
       "title" : "PPEI et Séminaire invité entreprise"
     },
@@ -2221,6 +2199,8 @@
       "id" : "-1742255826:1073733534:17:5861890:17",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
       "start" : "2026-12-10T13:50:00",
       "title" : "PPEI et Séminaire invité entreprise"
     },
@@ -2418,6 +2398,8 @@
       "id" : "-1742255826:1073733534:17:5861890:18",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
+      "room" : "E105- Bât Joliot-Curie",
+      "site" : "JOLIOT- CURIE",
       "start" : "2026-12-17T13:50:00",
       "title" : "PPEI et Séminaire invité entreprise"
     },
@@ -2570,6 +2552,8 @@
       "id" : "-1742255826:1073733534:17:5861890:21",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
       "start" : "2027-01-07T13:50:00",
       "title" : "PPEI et Séminaire invité entreprise"
     },
@@ -2604,6 +2588,8 @@
       "id" : "-1742255826:1073733534:17:5829304:21",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
+      "room" : "2204 - FERMAT",
+      "site" : "FERMAT",
       "start" : "2027-01-08T13:50:00",
       "title" : "PPEI et Séminaire invité entreprise"
     },
@@ -2662,6 +2648,8 @@
       "id" : "-1742255826:1073733534:17:5829304:22",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
+      "room" : "2204 - FERMAT",
+      "site" : "FERMAT",
       "start" : "2027-01-15T13:50:00",
       "title" : "PPEI et Séminaire invité entreprise"
     },
@@ -2720,6 +2708,8 @@
       "id" : "-1742255826:1073733534:17:5829306:23",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
+      "room" : "2204 - FERMAT",
+      "site" : "FERMAT",
       "start" : "2027-01-22T09:40:00",
       "title" : "PPEI et Séminaire invité entreprise"
     },
@@ -2730,6 +2720,8 @@
       "id" : "-1742255826:1073733534:17:5829304:23",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
+      "room" : "2204 - FERMAT",
+      "site" : "FERMAT",
       "start" : "2027-01-22T13:50:00",
       "title" : "PPEI et Séminaire invité entreprise"
     },
@@ -2764,6 +2756,8 @@
       "id" : "-1742255826:1073733534:17:5829306:24",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
+      "room" : "G105 - GERMAIN",
+      "site" : "GERMAIN",
       "start" : "2027-01-29T09:40:00",
       "title" : "PPEI et Séminaire invité entreprise"
     },
@@ -2774,6 +2768,8 @@
       "id" : "-1742255826:1073733534:17:5829304:24",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
+      "room" : "G105 - GERMAIN",
+      "site" : "GERMAIN",
       "start" : "2027-01-29T13:50:00",
       "title" : "PPEI et Séminaire invité entreprise"
     },
