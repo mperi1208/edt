@@ -68,9 +68,12 @@ button.icon{padding:4px 9px}
 
 /* secondaires : présents mais très en retrait */
 /* Discrets, mais leur étendue doit rester lisible : sans fond ni bordure visible,
-   un bloc de 3 h se lit comme un bloc d'1 h. */
+   un bloc de 3 h se lit comme un bloc d'1 h.
+   L'opacité porte sur le CONTENU seulement — sur le bloc entier, elle rendrait le fond
+   translucide et les lignes d'heures traverseraient la carte. */
 .ev.sec{background:var(--card);box-shadow:none;border:1px dashed var(--dim);
-  border-left:2px dashed var(--dim);opacity:.42}
+  border-left:2px dashed var(--dim);opacity:1}
+.ev.sec>*{opacity:.45}
 .ev.sec .n{font-weight:500}
 .ev.sec .b{display:none}
 body.hide-sec .ev.sec{display:none}
@@ -117,7 +120,8 @@ button.danger{color:#c0392b;border-color:#c0392b55}
 .dcard .sub{font-size:13px;color:var(--dim);margin-top:2px}
 .dcard .bg{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.04em;margin-top:5px;
   color:var(--bc);border:1px solid var(--bc);border-radius:4px;padding:1px 5px}
-.dcard.sec{opacity:.36;border-left-style:dashed}
+.dcard.sec{opacity:1;border-left-style:dashed}
+.dcard.sec>*{opacity:.42}
 .dcard.sec .bg{display:none}
 .dcard.past{opacity:.4}
 .dcard.ongoing{background:var(--today)}
