@@ -67,8 +67,10 @@ button.icon{padding:4px 9px}
 .ev.short .r{display:none}
 
 /* secondaires : présents mais très en retrait */
-.ev.sec{background:transparent;box-shadow:none;border:1px dashed var(--line);
-  border-left:1px dashed var(--line);opacity:.34}
+/* Discrets, mais leur étendue doit rester lisible : sans fond ni bordure visible,
+   un bloc de 3 h se lit comme un bloc d'1 h. */
+.ev.sec{background:var(--card);box-shadow:none;border:1px dashed var(--dim);
+  border-left:2px dashed var(--dim);opacity:.42}
 .ev.sec .n{font-weight:500}
 .ev.sec .b{display:none}
 body.hide-sec .ev.sec{display:none}
