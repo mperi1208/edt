@@ -1,5 +1,5 @@
 {
-  "fetchedAt" : "2026-10-05T11:00:06Z",
+  "fetchedAt" : "2026-10-06T15:00:06Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -1023,6 +1023,14 @@
       "site" : "GERMAIN",
       "start" : "2026-10-21T13:50:00",
       "title" : "Introduction au calcul formel"
+    },
+    {
+      "category" : "Journée banalisée",
+      "end" : "2026-10-22T19:00:00",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Chimie et Sciences du vivant parcours FESAPCA [MYFES1_26], M1 Saclay Ingénierie Statistique, Actuariat et Data Science ISADS [MYISA1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26], M1 Saclay Matières Premières Naturelles en Cosmétique (MPNC) [MYMPN1_26], M1 Saclay Méthodes Mathématiques pour la Mécanique [MYMMM1_26], M2 FESAPCA [M2 FESAPCA], M2 Matières Premières Naturelles en Cosmétique [MSMPC2_20], M2 Saclay Algèbre Appliquée et Cryptologie [MYAAC2_26], M2 Saclay Analyse, Modélisation, Simulation [MYAMS2_26], M2 Saclay Ingénierie Statistique, Actuariat et Data Science (ISADS) [MYISA2_26], M2 Saclay Mathématiques et Apprentissage Statistique (MAS) [MYMAS2_26]",
+      "id" : "-1742255826:1073733534:17:5880800:10",
+      "start" : "2026-10-22T08:00:00",
+      "title" : "[ Trophée des étudiants SQY Campus ] https://www.uvsq.fr/trophee-des-etudiants-de-sqy2026"
     },
     {
       "category" : "CM/TD",
