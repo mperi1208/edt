@@ -1,5 +1,5 @@
 {
-  "fetchedAt" : "2026-10-06T15:00:06Z",
+  "fetchedAt" : "2026-10-07T12:00:02Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -576,15 +576,6 @@
       "title" : "PPEI et Séminaire invité entreprise"
     },
     {
-      "category" : "CM/TD",
-      "end" : "2026-10-05T12:50:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5829766:8",
-      "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-10-05T09:40:00",
-      "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
-    },
-    {
       "category" : "",
       "end" : "2026-10-05T15:20:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
@@ -690,12 +681,23 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-10-08T12:50:00",
+      "end" : "2026-10-08T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829769:8",
       "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-10-08T09:40:00",
+      "start" : "2026-10-08T09:30:00",
       "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
+    },
+    {
+      "category" : "",
+      "end" : "2026-10-08T12:45:00",
+      "groups" : "M1 Saclay  Calcul Haute Performance, Simulation [MYCPS1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5830399:8",
+      "module" : "MYCHP104",
+      "moduleName" : "Programmation Orientée Objet pour le calcul scientifique",
+      "site" : "ISTY_RABELAIS",
+      "start" : "2026-10-08T09:30:00",
+      "title" : "Programmation Orientée Objet pour le calcul scientifique"
     },
     {
       "category" : "",
@@ -755,11 +757,11 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-10-12T12:50:00",
+      "end" : "2026-10-12T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829766:9",
       "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-10-12T09:40:00",
+      "start" : "2026-10-12T09:30:00",
       "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
@@ -856,11 +858,11 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-10-15T12:50:00",
+      "end" : "2026-10-15T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829769:9",
       "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-10-15T09:40:00",
+      "start" : "2026-10-15T09:30:00",
       "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
@@ -913,11 +915,11 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-10-19T12:50:00",
+      "end" : "2026-10-19T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829766:10",
       "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-10-19T09:40:00",
+      "start" : "2026-10-19T09:30:00",
       "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
@@ -1034,15 +1036,6 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-10-22T12:50:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5829769:10",
-      "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-10-22T09:40:00",
-      "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
-    },
-    {
-      "category" : "CM/TD",
       "end" : "2026-10-23T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829749:10",
@@ -1091,11 +1084,11 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-11-02T12:50:00",
+      "end" : "2026-11-02T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829766:12",
       "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-11-02T09:40:00",
+      "start" : "2026-11-02T09:30:00",
       "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
@@ -1204,11 +1197,11 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-11-05T12:50:00",
+      "end" : "2026-11-05T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829769:12",
       "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-11-05T09:40:00",
+      "start" : "2026-11-05T09:30:00",
       "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
@@ -1269,11 +1262,11 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-11-09T12:50:00",
+      "end" : "2026-11-09T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829766:13",
       "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-11-09T09:40:00",
+      "start" : "2026-11-09T09:30:00",
       "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
@@ -1346,11 +1339,11 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-11-12T12:50:00",
+      "end" : "2026-11-12T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829769:13",
       "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-11-12T09:40:00",
+      "start" : "2026-11-12T09:30:00",
       "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
@@ -1410,11 +1403,11 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-11-16T12:50:00",
+      "end" : "2026-11-16T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829766:14",
       "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-11-16T09:40:00",
+      "start" : "2026-11-16T09:30:00",
       "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
@@ -1559,11 +1552,11 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-11-19T12:50:00",
+      "end" : "2026-11-19T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829769:14",
       "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-11-19T09:40:00",
+      "start" : "2026-11-19T09:30:00",
       "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
@@ -1647,11 +1640,11 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-11-23T12:50:00",
+      "end" : "2026-11-23T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829766:15",
       "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-11-23T09:40:00",
+      "start" : "2026-11-23T09:30:00",
       "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
@@ -1772,11 +1765,11 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-11-26T12:50:00",
+      "end" : "2026-11-26T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829769:15",
       "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
-      "start" : "2026-11-26T09:40:00",
+      "start" : "2026-11-26T09:30:00",
       "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
@@ -1836,26 +1829,12 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-11-30T11:10:00",
+      "end" : "2026-11-30T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5829787:16",
-      "module" : "MYANM009",
-      "moduleName" : "Analyse hilbertienne et distribution",
-      "room" : "E304- Bât Joliot-Curie",
-      "site" : "JOLIOT- CURIE",
-      "start" : "2026-11-30T09:40:00",
-      "title" : "Analyse hilbertienne et distribution"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2026-11-30T12:50:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5829788:16",
-      "module" : "MYANM009",
-      "moduleName" : "Analyse hilbertienne et distribution",
-      "site" : "JOLIOT- CURIE",
-      "start" : "2026-11-30T11:20:00",
-      "title" : "Analyse hilbertienne et distribution"
+      "id" : "-1742255826:1073733534:17:5829766:16",
+      "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
+      "start" : "2026-11-30T09:30:00",
+      "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
       "category" : "CM/TD",
@@ -2035,27 +2014,13 @@
       "title" : "anglais science Master S1"
     },
     {
-      "category" : "CM/TD",
-      "end" : "2026-12-07T11:10:00",
+      "category" : "Contrôle continu",
+      "end" : "2026-12-07T12:45:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5829787:17",
-      "module" : "MYANM009",
-      "moduleName" : "Analyse hilbertienne et distribution",
-      "room" : "E304- Bât Joliot-Curie",
-      "site" : "JOLIOT- CURIE",
-      "start" : "2026-12-07T09:40:00",
-      "title" : "Analyse hilbertienne et distribution"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2026-12-07T12:50:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5829788:17",
-      "module" : "MYANM009",
-      "moduleName" : "Analyse hilbertienne et distribution",
-      "site" : "JOLIOT- CURIE",
-      "start" : "2026-12-07T11:20:00",
-      "title" : "Analyse hilbertienne et distribution"
+      "id" : "-1742255826:1073733534:17:5882539:17",
+      "room" : "M1 CHPHS -  Bâtiment Rabelais - Guyancourt",
+      "start" : "2026-12-07T09:30:00",
+      "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
       "category" : "CM/TD",
@@ -2269,17 +2234,6 @@
       "site" : "JOLIOT- CURIE",
       "start" : "2026-12-14T09:40:00",
       "title" : "Analyse Convexe et Techniques d'Optimisation"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2026-12-14T12:50:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5829788:18",
-      "module" : "MYANM009",
-      "moduleName" : "Analyse hilbertienne et distribution",
-      "site" : "JOLIOT- CURIE",
-      "start" : "2026-12-14T11:20:00",
-      "title" : "Analyse hilbertienne et distribution"
     },
     {
       "category" : "CM/TD",
