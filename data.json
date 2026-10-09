@@ -1,5 +1,5 @@
 {
-  "fetchedAt" : "2026-10-09T07:30:06Z",
+  "fetchedAt" : "2026-10-09T08:00:01Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -807,6 +807,18 @@
       "site" : "DESCARTES",
       "start" : "2026-10-13T09:40:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2026-10-13T17:30:00",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5884585:9",
+      "module" : "MYMAA002",
+      "moduleName" : "Introduction au calcul formel",
+      "room" : "101 - BUFFON",
+      "site" : "BUFFON",
+      "start" : "2026-10-13T15:30:00",
+      "title" : "Introduction au calcul formel"
     },
     {
       "category" : "CM",
