@@ -3,20 +3,20 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="supported-color-schemes" content="light">
 <meta name="apple-mobile-web-app-title" content="EDT">
-<meta name="theme-color" content="#fbfbf9" media="(prefers-color-scheme:light)">
-<meta name="theme-color" content="#141518" media="(prefers-color-scheme:dark)">
+<meta name="theme-color" content="#f6f7f9">
 <link rel="apple-touch-icon" href="icon.png">
 <title>EDT</title>
 <style>
 :root{
+  /* Interface volontairement TOUJOURS claire : pas de bascule en mode sombre,
+     ni sur le Mac ni sur le téléphone. color-scheme fige aussi les contrôles
+     du navigateur (champs, ascenseurs) en clair. */
+  color-scheme: light;
   --bg:#f6f7f9; --fg:#1b1b19; --dim:#8a8a84; --line:#e3e6ec; --card:#fff;
   --today:#eef2ff; --shadow:none;
   --h:62px;
-}
-@media (prefers-color-scheme:dark){
-  :root{ --bg:#0f1115; --fg:#e9e9e6; --dim:#7d7f86; --line:#232833; --card:#171a21;
-         --today:#1a1f2b; --shadow:none; }
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
