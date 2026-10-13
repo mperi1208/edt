@@ -1,5 +1,5 @@
 {
-  "fetchedAt" : "2026-10-12T08:30:01Z",
+  "fetchedAt" : "2026-10-13T08:55:58Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -11,7 +11,7 @@
       "room" : "G209 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2026-09-11T10:30:00",
-      "title" : "Réunion de pré-rentrée"
+      "title" : "BOULMEZAOUD, TAHAR ZAMENE"
     },
     {
       "category" : "CM/TD",
@@ -878,30 +878,6 @@
       "title" : "MYCHP104 _ Programmation Orientée Objet pour le CS"
     },
     {
-      "category" : "Contrôle continu",
-      "end" : "2026-10-15T17:00:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5886474:9",
-      "module" : "MYANM009",
-      "moduleName" : "Analyse hilbertienne et distribution",
-      "room" : "AMPHI C - DESCARTES",
-      "site" : "DESCARTES",
-      "start" : "2026-10-15T15:30:00",
-      "title" : "Analyse hilbertienne et distribution"
-    },
-    {
-      "category" : "Contrôle continu",
-      "end" : "2026-10-15T18:40:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5886513:9",
-      "module" : "MYANM009",
-      "moduleName" : "Analyse hilbertienne et distribution",
-      "room" : "AMPHI C - DESCARTES",
-      "site" : "DESCARTES",
-      "start" : "2026-10-15T17:10:00",
-      "title" : "Analyse hilbertienne et distribution"
-    },
-    {
       "category" : "CM/TD",
       "end" : "2026-10-16T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
@@ -1027,6 +1003,18 @@
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
+      "category" : "Contrôle continu",
+      "end" : "2026-10-20T18:40:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5886474:10",
+      "module" : "MYANM009",
+      "moduleName" : "Analyse hilbertienne et distribution",
+      "room" : "AMPHI D - DESCARTES",
+      "site" : "DESCARTES",
+      "start" : "2026-10-20T15:30:00",
+      "title" : "Analyse hilbertienne et distribution"
+    },
+    {
       "category" : "CM",
       "end" : "2026-10-21T11:10:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
@@ -1065,10 +1053,11 @@
     {
       "category" : "Journée banalisée",
       "end" : "2026-10-22T19:00:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Chimie et Sciences du vivant parcours FESAPCA [MYFES1_26], M1 Saclay Ingénierie Statistique, Actuariat et Data Science ISADS [MYISA1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26], M1 Saclay Matières Premières Naturelles en Cosmétique (MPNC) [MYMPN1_26], M1 Saclay Méthodes Mathématiques pour la Mécanique [MYMMM1_26], M2 FESAPCA [M2 FESAPCA], M2 Matières Premières Naturelles en Cosmétique [MSMPC2_20], M2 Saclay Algèbre Appliquée et Cryptologie [MYAAC2_26], M2 Saclay Analyse, Modélisation, Simulation [MYAMS2_26], M2 Saclay Ingénierie Statistique, Actuariat et Data Science (ISADS) [MYISA2_26], M2 Saclay Mathématiques et Apprentissage Statistique (MAS) [MYMAS2_26]",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Chimie et Sciences du vivant parcours FESAPCA [MYFES1_26]",
       "id" : "-1742255826:1073733534:17:5880800:10",
+      "room" : "10 autres...",
       "start" : "2026-10-22T08:00:00",
-      "title" : "[ Trophée des étudiants SQY Campus ] https://www.uvsq.fr/trophee-des-etudiants-de-sqy2026"
+      "title" : ""
     },
     {
       "category" : "CM/TD",
