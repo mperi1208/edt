@@ -90,6 +90,7 @@ body.can-edit .ev,body.can-edit .dcard{cursor:pointer}
 .ev.perso .n::after,.dcard.perso .ttl::after{content:" ●";color:var(--c);font-size:9px;vertical-align:middle}
 .ev.modif .n::after,.dcard.modif .ttl::after{content:" ✎";color:var(--dim);font-size:10px}
 #add{display:none}
+button.busy{opacity:.55;pointer-events:none}
 body.can-edit #add{display:inline-block}
 
 .ovl{position:fixed;inset:0;background:rgba(0,0,0,.34);display:flex;align-items:center;
@@ -149,6 +150,7 @@ body.day #togglesec{display:none}
   <button class="icon" id="prev" title="Semaine précédente">←</button>
   <button id="today">Aujourd'hui</button>
   <button class="icon" id="next" title="Semaine suivante">→</button>
+  <button id="refresh" title="Forcer une mise à jour depuis Celcat">↻</button>
   <button id="add" title="Ajouter un créneau">+</button>
   <button id="togglesec" title="Afficher ou masquer les créneaux secondaires">Secondaires</button>
   <a class="btn" id="site" href="https://edt.uvsq.fr/" target="_blank" rel="noopener"
@@ -241,7 +243,7 @@ function saveOver(){
   rebuild(); render();
   try {
     if (window.webkit && webkit.messageHandlers && webkit.messageHandlers.edt)
-      webkit.messageHandlers.edt.postMessage(JSON.parse(JSON.stringify(OVER)));
+      webkit.messageHandlers.edt.postMessage({type:"overrides", data: JSON.parse(JSON.stringify(OVER))});
   } catch(e){ console.warn("sauvegarde impossible", e); }
 }
 const isNarrow = () => window.innerWidth < 700;
@@ -531,6 +533,37 @@ $("bReset").onclick = () => {
 $("bCancel").onclick = closeEditor;
 $("ovl").onclick = e => { if (e.target === $("ovl")) closeEditor(); };
 $("add").onclick = openNew;
+
+// --- bouton « forcer une mise à jour » ---
+function majStatut(txt, erreur){
+  const el = $("meta");
+  el.textContent = txt;
+  el.classList.toggle("stale", !!erreur);
+  if (erreur) el.title = erreur;
+}
+
+window.edtRefreshDone = function(ok, message){
+  $("refresh").classList.remove("busy");
+  if (ok) { majStatut("", false); stampMeta(); }
+  else majStatut("échec de la maj", message || "Erreur inconnue");
+};
+
+$("refresh").onclick = () => {
+  const b = $("refresh");
+  b.classList.add("busy");
+  majStatut("mise à jour…", false);
+  if (window.webkit && webkit.messageHandlers && webkit.messageHandlers.edt) {
+    // app Mac : c'est elle qui interroge Celcat, puis nous renvoie le résultat
+    webkit.messageHandlers.edt.postMessage({type:"refresh"});
+    setTimeout(()=>{ if (b.classList.contains("busy")) edtRefreshDone(false, "Pas de réponse de l'application."); }, 45000);
+  } else {
+    // page publiée : on recharge simplement les données publiées par le Mac
+    fetch("data.json?t="+Date.now(), {cache:"no-store"})
+      .then(r => r.ok ? r.json() : Promise.reject(new Error("HTTP "+r.status)))
+      .then(d => { applyData(d); edtRefreshDone(true); })
+      .catch(e => edtRefreshDone(false, String(e.message||e)));
+  }
+};
 
 document.getElementById("grid").addEventListener("click", e => {
   const el = e.target.closest("[data-id]");
