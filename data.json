@@ -1,5 +1,5 @@
 {
-  "fetchedAt" : "2026-10-14T07:11:53Z",
+  "fetchedAt" : "2026-10-14T09:30:00Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -2737,7 +2737,7 @@
       "category" : "Séminaire",
       "end" : "2027-01-29T12:50:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26], M2 Saclay Mathématiques et Apprentissage Statistique (MAS) [MYMAS2_26]",
-      "id" : "-1742255826:1073733534:17:5829306:24",
+      "id" : "-1742255826:1073733534:17:5891939:24",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
       "room" : "G105 - GERMAIN",
@@ -2749,7 +2749,7 @@
       "category" : "Séminaire",
       "end" : "2027-01-29T17:00:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26], M2 Saclay Mathématiques et Apprentissage Statistique (MAS) [MYMAS2_26]",
-      "id" : "-1742255826:1073733534:17:5890646:24",
+      "id" : "-1742255826:1073733534:17:5891946:24",
       "module" : "MYMAS006",
       "moduleName" : "PPEI et Séminaire invité entreprise",
       "room" : "G105 - GERMAIN",
