@@ -1,5 +1,5 @@
 {
-  "fetchedAt" : "2026-10-14T09:30:00Z",
+  "fetchedAt" : "2026-10-15T08:07:42Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -1165,7 +1165,7 @@
       "id" : "-1742255826:1073733534:17:5828745:12",
       "module" : "MYMAS001",
       "moduleName" : "Probabilités",
-      "room" : "AMPHI E - DESCARTES",
+      "room" : "AMPHI C - DESCARTES",
       "site" : "DESCARTES",
       "start" : "2026-11-04T09:40:00",
       "title" : "Probabilités"
