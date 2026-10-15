@@ -424,14 +424,20 @@ function stampMeta(){
   const el = document.getElementById("meta");
   if(!DATA || !DATA.fetchedAt){ el.textContent=""; return; }
   const f = new Date(DATA.fetchedAt), now = new Date();
+  // Le Mac sait quand il a vérifié pour la dernière fois ; la page publiée, non
+  // (elle n'est republiée qu'en cas de changement) — seuil plus large pour elle.
+  const controle = (canEdit && DATA.checkedAt) ? new Date(DATA.checkedAt) : f;
+  const seuil = canEdit ? 26*3600*1000 : 4*24*3600*1000;
   const memeJour = ymd(f) === ymd(now);
   el.textContent = "maj " + (memeJour ? "" : pad(f.getDate())+"/"+pad(f.getMonth()+1)+" ")
                  + pad(f.getHours())+":"+pad(f.getMinutes());
   // Au-delà de 26 h, la mise à jour automatique n'a pas tourné : ça doit se voir.
-  const vieux = (now - f) > 26*3600*1000;
+  const vieux = (now - controle) > seuil;
   el.classList.toggle("stale", vieux);
   el.title = vieux ? "Données anciennes : la mise à jour automatique n'a pas tourné."
-                   : "Dernière récupération depuis Celcat";
+                   : "Dernier changement de l'emploi du temps"
+                     + (DATA.checkedAt ? " — vérifié à " + pad(new Date(DATA.checkedAt).getHours())
+                        + ":" + pad(new Date(DATA.checkedAt).getMinutes()) : "");
 }
 
 function move(n){
