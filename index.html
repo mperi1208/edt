@@ -429,8 +429,15 @@ function stampMeta(){
   const controle = (canEdit && DATA.checkedAt) ? new Date(DATA.checkedAt) : f;
   const seuil = canEdit ? 26*3600*1000 : 4*24*3600*1000;
   const memeJour = ymd(f) === ymd(now);
-  el.textContent = "maj " + (memeJour ? "" : pad(f.getDate())+"/"+pad(f.getMonth()+1)+" ")
-                 + pad(f.getHours())+":"+pad(f.getMinutes());
+  let txt = "maj " + (memeJour ? "" : pad(f.getDate())+"/"+pad(f.getMonth()+1)+" ")
+          + pad(f.getHours())+":"+pad(f.getMinutes());
+  // Sur le Mac, on montre AUSSI l'heure de la dernière vérification : sans ça, un
+  // emploi du temps inchangé donne l'impression que le bouton ne fait rien.
+  if (canEdit && DATA.checkedAt) {
+    const c = new Date(DATA.checkedAt);
+    txt += " · vérifié " + pad(c.getHours()) + ":" + pad(c.getMinutes());
+  }
+  el.textContent = txt;
   // Au-delà de 26 h, la mise à jour automatique n'a pas tourné : ça doit se voir.
   const vieux = (now - controle) > seuil;
   el.classList.toggle("stale", vieux);
@@ -558,8 +565,14 @@ function majStatut(txt, erreur){
 
 window.edtRefreshDone = function(ok, message){
   $("refresh").classList.remove("busy");
-  if (ok) { majStatut("", false); stampMeta(); }
-  else majStatut("échec de la maj", message || "Erreur inconnue");
+  if (!ok) { majStatut("échec de la maj", message || "Erreur inconnue"); return; }
+  // Accusé de réception explicite : l'emploi du temps est souvent inchangé,
+  // il faut quand même que le clic produise quelque chose de visible.
+  const el = $("meta");
+  el.classList.remove("stale");
+  el.textContent = "✓ vérifié à l'instant";
+  clearTimeout(window._minuteurMaj);
+  window._minuteurMaj = setTimeout(stampMeta, 4000);
 };
 
 $("refresh").onclick = () => {
