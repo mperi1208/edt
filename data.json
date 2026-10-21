@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-10-20T09:53:23Z",
-  "fetchedAt" : "2026-10-19T18:52:36Z",
+  "checkedAt" : "2026-10-21T09:17:50Z",
+  "fetchedAt" : "2026-10-21T09:17:50Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -1026,26 +1026,22 @@
       "title" : "Probabilités"
     },
     {
-      "category" : "CM/TD",
+      "category" : "Annulation",
       "end" : "2026-10-21T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5895801:10",
       "module" : "MYMAA002",
       "moduleName" : "Introduction au calcul formel",
-      "room" : "AMPHI I - FERMAT",
-      "site" : "FERMAT",
       "start" : "2026-10-21T13:50:00",
       "title" : "Introduction au calcul formel"
     },
     {
-      "category" : "Contrôle continu",
+      "category" : "Annulation",
       "end" : "2026-10-21T17:00:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5849748:10",
       "module" : "MYMAA002",
       "moduleName" : "Introduction au calcul formel",
-      "room" : "2107 - FERMAT",
-      "site" : "FERMAT",
       "start" : "2026-10-21T15:30:00",
       "title" : "Introduction au calcul formel"
     },
@@ -1202,20 +1198,32 @@
       "id" : "-1742255826:1073733534:17:5779530:12",
       "module" : "MYMAA002",
       "moduleName" : "Introduction au calcul formel",
-      "room" : "G107 - GERMAIN",
-      "site" : "GERMAIN",
+      "room" : "AMPHI C - DESCARTES",
+      "site" : "DESCARTES",
       "start" : "2026-11-04T13:50:00",
       "title" : "Introduction au calcul formel"
     },
     {
-      "category" : "CM/TD",
+      "category" : "Contrôle continu",
       "end" : "2026-11-04T17:00:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5829770:12",
+      "id" : "-1742255826:1073733534:17:5899230:12",
       "module" : "MYMAA002",
       "moduleName" : "Introduction au calcul formel",
-      "room" : "G107 - GERMAIN",
-      "site" : "GERMAIN",
+      "room" : "AMPHI C - DESCARTES",
+      "site" : "DESCARTES",
+      "start" : "2026-11-04T15:30:00",
+      "title" : "Introduction au calcul formel"
+    },
+    {
+      "category" : "Contrôle continu",
+      "end" : "2026-11-04T17:30:00",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5899243:12",
+      "module" : "MYMAA002",
+      "moduleName" : "Introduction au calcul formel",
+      "room" : "RC28 - DESCARTES",
+      "site" : "DESCARTES",
       "start" : "2026-11-04T15:30:00",
       "title" : "Introduction au calcul formel"
     },
