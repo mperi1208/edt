@@ -424,10 +424,13 @@ function stampMeta(){
   const el = document.getElementById("meta");
   if(!DATA || !DATA.fetchedAt){ el.textContent=""; return; }
   const f = new Date(DATA.fetchedAt), now = new Date();
-  // Le Mac sait quand il a vérifié pour la dernière fois ; la page publiée, non
-  // (elle n'est republiée qu'en cas de changement) — seuil plus large pour elle.
-  const controle = (canEdit && DATA.checkedAt) ? new Date(DATA.checkedAt) : f;
-  const seuil = canEdit ? 26*3600*1000 : 4*24*3600*1000;
+  // L'alerte doit se baser sur la dernière VÉRIFICATION, jamais sur le dernier
+  // changement : un emploi du temps stable pendant une semaine est normal, pas périmé.
+  // checkedAt est publié dans data.json, donc exploitable aussi côté téléphone ;
+  // la page n'étant republiée qu'une fois par jour au minimum, on lui laisse 30 h.
+  const controle = DATA.checkedAt ? new Date(DATA.checkedAt) : f;
+  const seuil = DATA.checkedAt ? (canEdit ? 26 : 30) * 3600 * 1000
+                               : 7 * 24 * 3600 * 1000;   // vieux fichier sans checkedAt
   const memeJour = ymd(f) === ymd(now);
   let txt = "maj " + (memeJour ? "" : pad(f.getDate())+"/"+pad(f.getMonth()+1)+" ")
           + pad(f.getHours())+":"+pad(f.getMinutes());
