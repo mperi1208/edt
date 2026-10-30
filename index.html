@@ -222,6 +222,7 @@ const CAT_COLORS = {
   "Réunion de pré-rentrée": "#8a8a84",
   "Pré-rentrée": "#8a8a84"
 };
+const esc = v => String(v==null?"":v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
 const catColor = c => CAT_COLORS[c] || "#8a8a84";
 
 const DAY_START = 8, DAY_END = 20;
@@ -337,12 +338,12 @@ function renderDay(){
     const isToday=ymd(cursor)===today;
     const ongoing=isToday && a<=now && now<b, past=isToday && b<=now;
     const cat=(s.category||"").replace("Contrôle continu","CC").replace("Réunion de pré-rentrée","Pré-rentrée");
-    h+=`<div class="dcard${prim?"":" sec"}${ongoing?" ongoing":""}${past?" past":""}${s.perso?" perso":""}${s.modif?" modif":""}" data-id="${s.id}" style="--c:${c}">
+    h+=`<div class="dcard${prim?"":" sec"}${ongoing?" ongoing":""}${past?" past":""}${s.perso?" perso":""}${s.modif?" modif":""}" data-id="${esc(s.id)}" style="--c:${c}">
       <div class="when"><b>${pad(a.getHours())}:${pad(a.getMinutes())}</b>${pad(b.getHours())}:${pad(b.getMinutes())}</div>
       <div class="bd">
-        <div class="ttl">${labelFor(s)}</div>
-        ${s.room?`<div class="sub">${s.room}${s.teacher?" · "+s.teacher:""}</div>`:(s.teacher?`<div class="sub">${s.teacher}</div>`:"")}
-        ${cat?`<span class="bg" style="--bc:${catColor(cat)}">${cat}</span>`:""}
+        <div class="ttl">${esc(labelFor(s))}</div>
+        ${s.room?`<div class="sub">${esc(s.room)}${s.teacher?" · "+esc(s.teacher):""}</div>`:(s.teacher?`<div class="sub">${esc(s.teacher)}</div>`:"")}
+        ${cat?`<span class="bg" style="--bc:${catColor(cat)}">${esc(cat)}</span>`:""}
       </div></div>`;
   });
   grid.innerHTML=h+"</div>";
@@ -395,17 +396,19 @@ function render(){
       if(m>=DAY_START*60&&m<=DAY_END*60) html+=`<div class="now" style="top:${(m-DAY_START*60)/60*62}px"></div>`;
     }
     layout(byDay[key]||[]).forEach(ev=>{
-      const top=(ev.s-DAY_START*60)/60*62, h=Math.max(22,(ev.e-ev.s)/60*62-3);
+      const s0=Math.max(ev.s,DAY_START*60), e0=Math.min(ev.e,DAY_END*60);
+      if(e0<=s0) return;
+      const top=(s0-DAY_START*60)/60*62, h=Math.max(22,(e0-s0)/60*62-3);
       const prim=isPrimary(ev), c=prim?colorFor(ev):"var(--dim)";
       const w=100/ev.ncols, left=ev.col*w;
       const cat=(ev.category||"").replace("Contrôle continu","CC").replace("Réunion de pré-rentrée","Pré-rentrée");
-      html+=`<div class="ev${prim?"":" sec"}${h<46?" short":""}${ev.perso?" perso":""}${ev.modif?" modif":""}" data-id="${ev.id}" style="--c:${c};top:${top}px;height:${h}px;left:calc(${left}% + 2px);width:calc(${w}% - 4px)" title="${(ev.title||"").replace(/"/g,"&quot;")}${ev.room?" — "+ev.room:""}">
+      html+=`<div class="ev${prim?"":" sec"}${h<46?" short":""}${ev.perso?" perso":""}${ev.modif?" modif":""}" data-id="${esc(ev.id)}" style="--c:${c};top:${top}px;height:${h}px;left:calc(${left}% + 2px);width:calc(${w}% - 4px)" title="${esc(ev.title||"")}${ev.room?" — "+esc(ev.room):""}">
         <div class="hd">
           <span class="t">${pad(ev.sd.getHours())}:${pad(ev.sd.getMinutes())}–${pad(ev.ed.getHours())}:${pad(ev.ed.getMinutes())}</span>
-          ${cat?`<span class="b" style="--bc:${catColor(cat)}">${cat}</span>`:""}
+          ${cat?`<span class="b" style="--bc:${catColor(cat)}">${esc(cat)}</span>`:""}
         </div>
-        <div class="n">${labelFor(ev)}</div>
-        ${ev.room?`<div class="r">${ev.room}${ev.teacher?" · "+ev.teacher:""}</div>`:(ev.teacher?`<div class="r">${ev.teacher}</div>`:"")}
+        <div class="n">${esc(labelFor(ev))}</div>
+        ${ev.room?`<div class="r">${esc(ev.room)}${ev.teacher?" · "+esc(ev.teacher):""}</div>`:(ev.teacher?`<div class="r">${esc(ev.teacher)}</div>`:"")}
       </div>`;
     });
     html+="</div>";
@@ -464,6 +467,8 @@ document.getElementById("togglesec").onclick=()=>{
   try{localStorage.setItem("hideSec",document.body.classList.contains("hide-sec")?"1":"0")}catch(e){}
 };
 addEventListener("keydown",e=>{
+  if(!$("ovl").hidden || /^(INPUT|SELECT|TEXTAREA)$/.test((e.target||{}).tagName)) return;
+  if(e.ctrlKey||e.metaKey||e.altKey) return;
   if(e.key==="ArrowLeft")move(-1); else if(e.key==="ArrowRight")move(1);
   else if(e.key.toLowerCase()==="t"){cursor=dayToOpen();render();}
 });
@@ -602,7 +607,7 @@ document.getElementById("grid").addEventListener("click", e => {
 
 addEventListener("keydown", e => {
   if (e.key === "Escape" && !$("ovl").hidden) closeEditor();
-  else if (e.key === "Enter" && !$("ovl").hidden) $("bSave").click();
+  else if (e.key === "Enter" && !$("ovl").hidden && (e.target||{}).tagName !== "BUTTON") $("bSave").click();
 });
 
 window.applyOverrides = function(o){ OVER = o || OVER; rebuild(); render(); };
