@@ -97,6 +97,9 @@ body.can-edit .ev,body.can-edit .dcard{cursor:pointer}
 #add{display:none}
 button.busy{opacity:.55;pointer-events:none}
 body.can-edit #add{display:inline-block}
+#unhide[hidden]{display:none}
+#hiddenList .h{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)}
+#hiddenList .h span{flex:1;min-width:0}
 
 .ovl{position:fixed;inset:0;background:rgba(0,0,0,.34);display:flex;align-items:center;
   justify-content:center;padding:18px;z-index:50}
@@ -160,6 +163,7 @@ body.day #togglesec{display:none}
   <button class="icon" id="next" title="Semaine suivante">→</button>
   <button id="refresh" title="Forcer une mise à jour depuis Celcat">↻</button>
   <button id="add" title="Ajouter un créneau">+</button>
+  <button id="unhide" title="Séances masquées" hidden>Masquées</button>
   <button id="togglesec" title="Afficher ou masquer les créneaux secondaires">Secondaires</button>
   <a class="btn" id="site" href="https://edt.uvsq.fr/" target="_blank" rel="noopener"
      title="Ouvrir l'emploi du temps officiel sur edt.uvsq.fr">Site UVSQ ↗</a>
@@ -188,6 +192,12 @@ body.day #togglesec{display:none}
     <button class="danger" id="bDel">Supprimer</button>
     <button id="bCancel">Annuler</button>
   </div>
+</div></div>
+
+<div class="ovl" id="ovl2" hidden><div class="dlg">
+  <h2>Séances masquées</h2>
+  <div id="hiddenList"></div>
+  <div class="acts"><span class="sp"></span><button id="bClose2">Fermer</button></div>
 </div></div>
 
 <script>
@@ -246,6 +256,7 @@ function rebuild(){
     .filter(s => !cache.has(s.id))
     .map(s => { const e = OVER.edits[s.id]; return e ? {...s, ...e, modif:true} : s; });
   ALL = base.concat(OVER.custom.map(s => ({...s, perso:true})));
+  if (typeof majUnhide === "function") majUnhide();
 }
 
 function saveOver(){
@@ -283,15 +294,18 @@ function colorFor(s){
 
 function layout(list){                    // colonnes pour les chevauchements
   const sorted=[...list].sort((a,b)=>a.s-b.s||a.e-b.e);
-  const cols=[];
+  let cols=[], groupe=[], fin=-1;
+  const clore=()=>{ groupe.forEach(ev=>ev.ncols=cols.length); cols=[]; groupe=[]; };
   sorted.forEach(ev=>{
+    if(groupe.length && ev.s>=fin) clore();      // plus de chevauchement : nouveau groupe
+    fin=groupe.length?Math.max(fin,ev.e):ev.e; groupe.push(ev);
     let placed=false;
     for(let i=0;i<cols.length;i++){
       if(cols[i][cols[i].length-1].e <= ev.s){ cols[i].push(ev); ev.col=i; placed=true; break; }
     }
     if(!placed){ ev.col=cols.length; cols.push([ev]); }
   });
-  sorted.forEach(ev=>ev.ncols=cols.length);
+  clore();
   return sorted;
 }
 
@@ -459,6 +473,16 @@ function move(n){
   render();
 }
 addEventListener("resize", ()=>{ if(DATA) render(); });
+// Passage à minuit : si on regardait « aujourd'hui », on suit ; la ligne « maintenant » se met à jour.
+let lastDay = ymd(new Date());
+function tick(){
+  if(!DATA) return;
+  const d = ymd(new Date());
+  if(d !== lastDay){ if(cursor && ymd(cursor) === lastDay) cursor = dayToOpen(); lastDay = d; }
+  if($("ovl").hidden && $("ovl2").hidden) render();
+}
+setInterval(tick, 60000);
+document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) tick(); });
 document.getElementById("prev").onclick=()=>move(-1);
 document.getElementById("next").onclick=()=>move(1);
 document.getElementById("today").onclick=()=>{cursor=dayToOpen();render();};
@@ -467,7 +491,7 @@ document.getElementById("togglesec").onclick=()=>{
   try{localStorage.setItem("hideSec",document.body.classList.contains("hide-sec")?"1":"0")}catch(e){}
 };
 addEventListener("keydown",e=>{
-  if(!$("ovl").hidden || /^(INPUT|SELECT|TEXTAREA)$/.test((e.target||{}).tagName)) return;
+  if(!$("ovl").hidden || !$("ovl2").hidden || /^(INPUT|SELECT|TEXTAREA)$/.test((e.target||{}).tagName)) return;
   if(e.ctrlKey||e.metaKey||e.altKey) return;
   if(e.key==="ArrowLeft")move(-1); else if(e.key==="ArrowRight")move(1);
   else if(e.key.toLowerCase()==="t"){cursor=dayToOpen();render();}
@@ -495,6 +519,11 @@ function openEditor(id){
   $("fDate").value  = a.d;
   $("fStart").value = a.t;
   $("fEnd").value   = b.t;
+  [...$("fCat").querySelectorAll("[data-tmp]")].forEach(o => o.remove());
+  if (s.category && ![...$("fCat").options].some(o => o.value === s.category)) {
+    const o = document.createElement("option"); o.value = o.textContent = s.category; o.dataset.tmp = "1";
+    $("fCat").appendChild(o);                 // sinon la catégorie d'origine serait effacée à l'enregistrement
+  }
   $("fCat").value   = s.category || "";
   $("bReset").hidden = !!s.perso;         // rien à réinitialiser sur un créneau perso
   $("bDel").textContent = s.perso ? "Supprimer" : "Masquer";
@@ -535,7 +564,14 @@ function readForm(){
 $("bSave").onclick = () => {
   const f = readForm(); if (!f) return;
   if (editing && !editing.perso) {
-    OVER.edits[editing.id] = f;                       // retouche d'un cours Celcat
+    // On ne mémorise que les champs réellement modifiés : le reste continue de suivre Celcat.
+    const base = ((DATA && DATA.sessions) || []).find(x => x.id === editing.id) || {};
+    const diff = {};
+    for (const k of Object.keys(f)) {
+      const a = f[k] || null, b = typeof base[k] === "string" ? (base[k].trim() || null) : (base[k] || null);
+      if (a !== b) diff[k] = f[k];
+    }
+    if (Object.keys(diff).length) OVER.edits[editing.id] = diff; else delete OVER.edits[editing.id];
   } else if (editing) {
     const i = OVER.custom.findIndex(x => x.id === editing.id);
     if (i >= 0) OVER.custom[i] = {...OVER.custom[i], ...f};
@@ -560,6 +596,27 @@ $("bReset").onclick = () => {
 };
 
 $("bCancel").onclick = closeEditor;
+
+function majUnhide(){ $("unhide").hidden = !(canEdit && OVER.hidden && OVER.hidden.length); $("unhide").textContent = "Masquées ("+((OVER.hidden||[]).length)+")"; }
+function openHidden(){
+  const byId = {}; ((DATA && DATA.sessions) || []).forEach(x => byId[x.id] = x);
+  $("hiddenList").innerHTML = OVER.hidden.map(id => {
+    const x = byId[id];
+    const lib = x ? x.start.slice(8,10)+"/"+x.start.slice(5,7)+" "+x.start.slice(11,16)+" · "+labelFor(x) : id;
+    return `<div class="h"><span>${esc(lib)}</span><button data-un="${esc(id)}">Réafficher</button></div>`;
+  }).join("") || "Aucune.";
+  $("ovl2").hidden = false;
+}
+$("unhide").onclick = openHidden;
+$("bClose2").onclick = () => { $("ovl2").hidden = true; };
+$("ovl2").onclick = e => {
+  if (e.target === $("ovl2")) { $("ovl2").hidden = true; return; }
+  const id = e.target.getAttribute && e.target.getAttribute("data-un");
+  if (!id) return;
+  OVER.hidden = OVER.hidden.filter(x => x !== id);
+  saveOver();
+  if (OVER.hidden.length) openHidden(); else $("ovl2").hidden = true;
+};
 $("ovl").onclick = e => { if (e.target === $("ovl")) closeEditor(); };
 $("add").onclick = openNew;
 
@@ -571,14 +628,14 @@ function majStatut(txt, erreur){
   if (erreur) el.title = erreur;
 }
 
-window.edtRefreshDone = function(ok, message){
+window.edtRefreshDone = function(ok, message, accuse){
   $("refresh").classList.remove("busy");
   if (!ok) { majStatut("échec de la maj", message || "Erreur inconnue"); return; }
   // Accusé de réception explicite : l'emploi du temps est souvent inchangé,
   // il faut quand même que le clic produise quelque chose de visible.
   const el = $("meta");
   el.classList.remove("stale");
-  el.textContent = "✓ vérifié à l'instant";
+  el.textContent = accuse || "✓ vérifié à l'instant";
   clearTimeout(window._minuteurMaj);
   window._minuteurMaj = setTimeout(stampMeta, 4000);
 };
@@ -595,7 +652,7 @@ $("refresh").onclick = () => {
     // page publiée : on recharge simplement les données publiées par le Mac
     fetch("data.json?t="+Date.now(), {cache:"no-store"})
       .then(r => r.ok ? r.json() : Promise.reject(new Error("HTTP "+r.status)))
-      .then(d => { applyData(d); edtRefreshDone(true); })
+      .then(d => { applyData(d); edtRefreshDone(true, null, "✓ données rechargées"); })
       .catch(e => edtRefreshDone(false, String(e.message||e)));
   }
 };
@@ -606,7 +663,8 @@ document.getElementById("grid").addEventListener("click", e => {
 });
 
 addEventListener("keydown", e => {
-  if (e.key === "Escape" && !$("ovl").hidden) closeEditor();
+  if (e.key === "Escape" && !$("ovl2").hidden) $("ovl2").hidden = true;
+  else if (e.key === "Escape" && !$("ovl").hidden) closeEditor();
   else if (e.key === "Enter" && !$("ovl").hidden && (e.target||{}).tagName !== "BUTTON") $("bSave").click();
 });
 
@@ -625,8 +683,11 @@ else {
   fetch("overrides.json?t="+Date.now(),{cache:"no-store"})
     .then(r=>r.ok?r.json():null).then(o=>{ if(o) OVER=o; }).catch(()=>{})
     .finally(()=>{
-      fetch("data.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(applyData)
-        .catch(()=>{document.getElementById("grid").innerHTML='<div class="empty">Aucune donnée.</div>';});
+      fetch("data.json?t="+Date.now(),{cache:"no-store"})
+        .then(r=>r.ok?r.json():Promise.reject(new Error("HTTP "+r.status)))
+        .then(applyData)
+        .catch(e=>{document.getElementById("grid").innerHTML=
+          '<div class="empty">Impossible de charger l\'emploi du temps ('+esc(e.message||e)+').<br>Vérifie la connexion puis touche ↻.</div>';});
     });
 }
 </script>
