@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-06T17:37:04Z",
-  "fetchedAt" : "2026-11-06T17:37:04Z",
+  "checkedAt" : "2026-11-07T18:28:33Z",
+  "fetchedAt" : "2026-11-07T18:28:33Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -1411,8 +1411,8 @@
       "id" : "-1742255826:1073733534:17:5908154:13",
       "module" : "MYMAA002",
       "moduleName" : "Introduction au calcul formel",
-      "room" : "G104 M- GERMAIN",
-      "site" : "GERMAIN",
+      "room" : "101 - BUFFON",
+      "site" : "BUFFON",
       "start" : "2026-11-13T13:50:00",
       "title" : "Introduction au calcul formel"
     },
@@ -1420,11 +1420,11 @@
       "category" : "CM/TD",
       "end" : "2026-11-13T17:00:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5909229:13",
+      "id" : "-1742255826:1073733534:17:5910211:13",
       "module" : "MYMAA002",
       "moduleName" : "Introduction au calcul formel",
-      "room" : "G104 M- GERMAIN",
-      "site" : "GERMAIN",
+      "room" : "101 - BUFFON",
+      "site" : "BUFFON",
       "start" : "2026-11-13T15:30:00",
       "title" : "Introduction au calcul formel"
     },
