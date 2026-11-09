@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-09T09:14:46Z",
-  "fetchedAt" : "2026-11-07T18:28:33Z",
+  "checkedAt" : "2026-11-09T21:26:11Z",
+  "fetchedAt" : "2026-11-09T21:26:11Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -1452,8 +1452,8 @@
       "id" : "-1742255826:1073733534:17:5829262:14",
       "module" : "MYANM001",
       "moduleName" : "Optimisation numérique",
-      "room" : "AMPHI G - FERMAT",
-      "site" : "FERMAT",
+      "room" : "103 - BUFFON",
+      "site" : "BUFFON",
       "start" : "2026-11-16T15:30:00",
       "title" : "Optimisation numérique"
     },
@@ -1464,8 +1464,8 @@
       "id" : "-1742255826:1073733534:17:5829321:14",
       "module" : "MYANM001",
       "moduleName" : "Optimisation numérique",
-      "room" : "AMPHI G - FERMAT",
-      "site" : "FERMAT",
+      "room" : "103 - BUFFON",
+      "site" : "BUFFON",
       "start" : "2026-11-16T17:10:00",
       "title" : "Optimisation numérique"
     },
