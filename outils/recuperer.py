@@ -36,7 +36,11 @@ def main():
         stop("secrets EDT_USER / EDT_PASSWORD absents")
 
     nav = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
-    nav.addheaders = [("User-Agent", "Mozilla/5.0 (Macintosh) edt-maj")]
+    # Celcat traduit certains libellés (« 10 autres... » / « 10 more... ») selon la langue du
+    # navigateur. Le Mac est en français : sans cet en-tête, GitHub recevrait de l'anglais et
+    # chacun republierait par-dessus l'autre un emploi du temps « modifié ».
+    nav.addheaders = [("User-Agent", "Mozilla/5.0 (Macintosh) edt-maj"),
+                      ("Accept-Language", "fr-FR,fr;q=0.9")]
 
     def appel(etape, chemin, champs=None, ajax=False):
         req = urllib.request.Request(c["host"] + chemin)
