@@ -311,6 +311,15 @@ let OVER = (window.EDT_OVERRIDES) || {custom:[], edits:{}, hidden:[]};
 let ALL = [];
 const canEdit = !!window.EDT_CAN_EDIT;
 
+// Mémoire du téléphone (jeton GitHub, heure de la dernière vérification réussie).
+// Reste sur l'appareil : rien de tout ça n'est publié.
+const CLE = { jeton:"edt.jeton", verif:"edt.verifie", essai:"edt.essai" };
+let statutMaj = null;   // {txt, erreur} tant qu'une mise à jour est en cours ou a échoué
+const mem = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch(e){} }
+};
+
 // Les modifications vivent à part : data.json est réécrit en entier deux fois par jour.
 function rebuild(){
   OVER.custom = OVER.custom || []; OVER.edits = OVER.edits || {}; OVER.hidden = OVER.hidden || [];
@@ -509,13 +518,25 @@ function stampMeta(){
     "https://edt.uvsq.fr/cal?vt=agendaWeek&dt=" + jour + "&et=group&fid0=MYAMS1_26";
 
   const el = document.getElementById("meta");
+  // Une mise à jour en cours ou en échec reste affichée : sans ça, le redessin de chaque
+  // minute effacerait « mise à jour… » ou la raison de l'échec avant qu'on l'ait lue.
+  if (statutMaj) {
+    el.textContent = statutMaj.txt;
+    el.classList.toggle("stale", !!statutMaj.erreur);
+    if (statutMaj.erreur) el.title = statutMaj.erreur;
+    return;
+  }
   if(!DATA || !DATA.fetchedAt){ el.textContent=""; return; }
   const f = new Date(DATA.fetchedAt), now = new Date();
   // L'alerte doit se baser sur la dernière VÉRIFICATION, jamais sur le dernier
   // changement : un emploi du temps stable pendant une semaine est normal, pas périmé.
-  // checkedAt est publié dans data.json, donc exploitable aussi côté téléphone ;
-  // la page n'étant republiée qu'une fois par jour au minimum, on lui laisse 30 h.
-  const controle = DATA.checkedAt ? new Date(DATA.checkedAt) : f;
+  // checkedAt est publié dans data.json, donc exploitable aussi côté téléphone.
+  // Mais une vérification sans changement n'est pas republiée : le téléphone retient
+  // donc lui-même l'heure de sa dernière vérification réussie, et on garde la plus récente.
+  let controle = DATA.checkedAt ? new Date(DATA.checkedAt) : f;
+  const local = canEdit ? null : mem.get(CLE.verif);
+  const verifLocale = local && !isNaN(new Date(local)) && new Date(local) > controle;
+  if (verifLocale) controle = new Date(local);
   const seuil = DATA.checkedAt ? (canEdit ? 26 : 30) * 3600 * 1000
                                : 7 * 24 * 3600 * 1000;   // vieux fichier sans checkedAt
   const memeJour = ymd(f) === ymd(now);
@@ -523,15 +544,17 @@ function stampMeta(){
           + pad(f.getHours())+":"+pad(f.getMinutes());
   // Sur le Mac, on montre AUSSI l'heure de la dernière vérification : sans ça, un
   // emploi du temps inchangé donne l'impression que le bouton ne fait rien.
-  if (canEdit && DATA.checkedAt) {
-    const c = new Date(DATA.checkedAt);
-    txt += " · vérifié " + pad(c.getHours()) + ":" + pad(c.getMinutes());
+  if ((canEdit && DATA.checkedAt) || verifLocale) {
+    const c = controle;
+    txt += " · vérifié " + (ymd(c) === ymd(now) ? "" : pad(c.getDate())+"/"+pad(c.getMonth()+1)+" ")
+         + pad(c.getHours()) + ":" + pad(c.getMinutes());
   }
   el.textContent = txt;
-  // Au-delà de 26 h, la mise à jour automatique n'a pas tourné : ça doit se voir.
+  // Les mises à jour ne se font plus qu'à la demande : au-delà du seuil, personne n'a
+  // vérifié depuis longtemps (ou la vérification échoue). Ça doit se voir.
   const vieux = (now - controle) > seuil;
   el.classList.toggle("stale", vieux);
-  el.title = vieux ? "Données anciennes : la mise à jour automatique n'a pas tourné."
+  el.title = vieux ? "Données anciennes : aucune vérification réussie depuis plus d'un jour."
                    : "Dernier changement de l'emploi du temps"
                      + (DATA.checkedAt ? " — vérifié à " + pad(new Date(DATA.checkedAt).getHours())
                         + ":" + pad(new Date(DATA.checkedAt).getMinutes()) : "");
@@ -692,6 +715,7 @@ $("add").onclick = openNew;
 
 // --- bouton « forcer une mise à jour » ---
 function majStatut(txt, erreur){
+  statutMaj = {txt, erreur};
   const el = $("meta");
   el.textContent = txt;
   el.classList.toggle("stale", !!erreur);
@@ -703,6 +727,7 @@ window.edtRefreshDone = function(ok, message, accuse){
   if (!ok) { majStatut("échec de la maj", message || "Erreur inconnue"); return; }
   // Accusé de réception explicite : l'emploi du temps est souvent inchangé,
   // il faut quand même que le clic produise quelque chose de visible.
+  statutMaj = null;
   const el = $("meta");
   el.classList.remove("stale");
   el.textContent = accuse || "✓ vérifié à l'instant";
@@ -719,13 +744,161 @@ $("refresh").onclick = () => {
     webkit.messageHandlers.edt.postMessage({type:"refresh"});
     setTimeout(()=>{ if (b.classList.contains("busy")) edtRefreshDone(false, "Pas de réponse de l'application."); }, 45000);
   } else {
-    // page publiée : on recharge simplement les données publiées par le Mac
-    fetch("data.json?t="+Date.now(), {cache:"no-store"})
-      .then(r => r.ok ? r.json() : Promise.reject(new Error("HTTP "+r.status)))
-      .then(d => { applyData(d); edtRefreshDone(true, null, "✓ données rechargées"); })
-      .catch(e => edtRefreshDone(false, String(e.message||e)));
+    lancerMaj(true);
   }
 };
+
+// --- mise à jour depuis le téléphone, sans le Mac ---
+// La page ne peut pas interroger Celcat elle-même (session UVSQ, autre site). Elle demande
+// donc à GitHub de le faire : elle lance le workflow « maj.yml », attend sa fin, puis relit
+// les données. Il lui faut un jeton GitHub limité à ce dépôt (droit « Actions » en écriture),
+// saisi une fois sur le téléphone et jamais publié. Sans jeton, on relit ce qui est publié.
+const GH = "https://api.github.com/repos/mperi1208/edt";
+const WF = GH + "/actions/workflows/maj.yml";
+const DELAI_AUTO = 2 * 60 * 1000;      // pas deux lancements automatiques coup sur coup
+const ATTENTE_MAX = 4 * 60 * 1000;
+let majEnCours = false;
+const pause = ms => new Promise(r => setTimeout(r, ms));
+const erreurJeton = () => Object.assign(new Error("jeton refusé"), {jeton:true});
+
+function gh(url, opt){
+  // no-store indispensable : GitHub autorise 60 s de cache, on relirait le même état en boucle.
+  return fetch(url, {...(opt||{}), cache:"no-store", headers:{
+    "Accept":"application/vnd.github+json", "X-GitHub-Api-Version":"2022-11-28",
+    "Authorization":"Bearer " + mem.get(CLE.jeton)}});
+}
+
+// Les derniers lancements, du plus récent au plus ancien.
+// Le dépôt est public : ici seul un 401 dénonce le jeton. Un 403 est une limite de débit,
+// et effacer pour ça un jeton que GitHub n'affiche qu'une fois serait une punition.
+async function lancements(){
+  const r = await gh(WF + "/runs?per_page=5&event=workflow_dispatch&t=" + Date.now());
+  if (r.status === 401) throw erreurJeton();
+  if (r.status === 404) throw new Error("workflow introuvable");
+  if (r.status === 403 || r.status === 429) throw new Error("GitHub limite les requêtes");
+  if (!r.ok) throw new Error("GitHub " + r.status);
+  return (await r.json()).workflow_runs || [];
+}
+
+// Attend la fin du premier lancement de numéro > n0 (le nôtre, pas celui d'un autre appareil
+// arrivé après).
+async function attendre(n0){
+  const limite = Date.now() + ATTENTE_MAX;
+  for (;;) {
+    await pause(4000);
+    // On relit TOUJOURS une fois après la pause : si le téléphone a mis la page en veille
+    // entre-temps, l'heure limite est dépassée alors que le travail est peut-être fini.
+    let liste = null;
+    try { liste = await lancements(); }
+    catch(e) { if (e.jeton) throw e; }   // coupure passagère (veille iOS, métro) : on insiste
+    const run = liste && liste.filter(x => x.run_number > n0)
+                              .sort((a,b) => a.run_number - b.run_number)[0];
+    if (run && run.status === "completed") {
+      // Annulé = remplacé dans la file par un lancement plus récent : on attend celui-là.
+      if (run.conclusion === "cancelled") { n0 = run.run_number; continue; }
+      if (run.conclusion !== "success") throw new Error("Celcat injoignable depuis GitHub");
+      return;
+    }
+    if (Date.now() > limite) throw new Error(liste ? "GitHub ne répond pas" : "pas de réseau");
+  }
+}
+
+async function demarrer(){
+  const d = await gh(WF + "/dispatches", {method:"POST", body: JSON.stringify({ref:"main"})});
+  if (d.ok) return;
+  const debit = d.status === 429 || (d.status === 403 && d.headers.get("x-ratelimit-remaining") === "0");
+  if (debit) throw new Error("GitHub limite les requêtes");
+  // La liste vient d'être lue avec succès, donc le workflow existe : un refus ici vient du
+  // jeton (expiré, ou sans le droit « Actions » en écriture sur ce dépôt).
+  if (d.status === 401 || d.status === 403 || d.status === 404) throw erreurJeton();
+  throw new Error("GitHub " + d.status);
+}
+
+// Le site publié met environ une minute à suivre un commit : on lit le fichier dans le dépôt,
+// avec le jeton s'il y en a un (sans lui, le quota est de 60 lectures par heure et par
+// adresse IP, vite épuisé sur un Wi-Fi partagé). `frais` dit si la lecture vient du dépôt.
+async function lireDonnees(){
+  const url = GH + "/contents/data.json?ref=main&t=" + Date.now();
+  const brut = {"Accept":"application/vnd.github.raw+json"};
+  const essais = mem.get(CLE.jeton) ? [{...brut, "Authorization":"Bearer " + mem.get(CLE.jeton)}, brut] : [brut];
+  for (const headers of essais) {
+    try {
+      const r = await fetch(url, {cache:"no-store", headers});
+      if (r.ok) return {d: await r.json(), frais: true};
+    } catch(e) {}
+  }
+  const r = await fetch("data.json?t=" + Date.now(), {cache:"no-store"});
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  return {d: await r.json(), frais: false};
+}
+
+function saisirJeton(){
+  const s = (prompt("Pour mettre à jour depuis ce téléphone, colle ici le jeton GitHub (demandé une seule fois).\nAnnuler : recharger seulement ce qui est déjà publié.") || "").trim();
+  if (!s) return;
+  // Un caractère parasite (guillemet, espace insécable) rendrait l'en-tête invalide à vie.
+  if (/^[A-Za-z0-9_]+$/.test(s)) mem.set(CLE.jeton, s);
+  else alert("Ce texte ne ressemble pas à un jeton GitHub : il n'a pas été enregistré.");
+}
+
+// manuel = bouton ↻ ; sinon ouverture de la page ou retour dessus.
+async function lancerMaj(manuel){
+  if (majEnCours) return;
+  if (!mem.get(CLE.jeton) && manuel) saisirJeton();
+  const b = $("refresh");
+  if (!mem.get(CLE.jeton)) {
+    if (!manuel) return;
+    majEnCours = true;
+    try { applyData((await lireDonnees()).d); edtRefreshDone(true, null, "✓ données rechargées"); }
+    catch(e) { edtRefreshDone(false, String(e.message || e)); }
+    finally { majEnCours = false; }
+    return;
+  }
+  majEnCours = true;
+  try {
+    const liste = await lancements();
+    const dernier = liste[0] || null;
+    const actif = !!dernier && dernier.status !== "completed";
+    const recent = !manuel && Date.now() - Number(mem.get(CLE.essai) || 0) < DELAI_AUTO;
+    if (!actif && recent) {
+      // Vérifié il y a moins de 2 min : inutile de relancer, mais on relit quand même,
+      // car la page a pu être rechargée par iOS avant d'avoir vu le résultat.
+      applyData((await lireDonnees()).d);
+      return;
+    }
+    b.classList.add("busy");
+    majStatut("mise à jour… (1 à 2 min)", false);
+    if (actif) {
+      // Un lancement tourne déjà (le nôtre d'avant un rechargement, ou un autre appareil) :
+      // on s'y rattache au lieu d'en empiler un second.
+      const actifs = liste.filter(x => x.status !== "completed").map(x => x.run_number);
+      await attendre(Math.min(...actifs) - 1);
+    } else {
+      await demarrer();
+      mem.set(CLE.essai, String(Date.now()));
+      await attendre(dernier ? dernier.run_number : 0);
+    }
+    const lu = await lireDonnees();
+    mem.set(CLE.verif, new Date().toISOString());
+    applyData(lu.d);
+    edtRefreshDone(true);
+    // Lecture retombée sur le site publié, en retard d'une minute sur le dépôt : on repasse.
+    if (!lu.frais) setTimeout(() => lireDonnees().then(x => applyData(x.d)).catch(() => {}), 75000);
+  } catch(e) {
+    if (e.jeton) mem.set(CLE.jeton, null);      // il sera redemandé au prochain ↻
+    mem.set(CLE.essai, null);                   // un échec ne doit pas bloquer le prochain retour
+    b.classList.remove("busy");
+    // Sur téléphone il n'y a pas d'infobulle : la raison doit être dans le texte.
+    majStatut("échec : " + (e.jeton ? "jeton refusé, touche ↻" : String(e.message || e)), String(e.message || e));
+  } finally { majEnCours = false; }
+}
+
+// Revenir sur la page sans l'avoir fermée doit aussi vérifier (sur le Mac, c'est l'app
+// qui s'en charge, voir applicationDidBecomeActive).
+if (!(window.webkit && webkit.messageHandlers && webkit.messageHandlers.edt)) {
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible" && DATA) lancerMaj(false);
+  });
+}
 
 document.getElementById("grid").addEventListener("click", e => {
   const mb = e.target.closest(".mapbtn");
@@ -764,7 +937,7 @@ else {
     .finally(()=>{
       fetch("data.json?t="+Date.now(),{cache:"no-store"})
         .then(r=>r.ok?r.json():Promise.reject(new Error("HTTP "+r.status)))
-        .then(applyData)
+        .then(d=>{ applyData(d); lancerMaj(false); })
         .catch(e=>{document.getElementById("grid").innerHTML=
           '<div class="empty">Impossible de charger l\'emploi du temps ('+esc(e.message||e)+').<br>Vérifie la connexion puis touche ↻.</div>';});
     });
