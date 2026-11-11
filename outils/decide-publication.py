@@ -2,8 +2,10 @@
 """Décide s'il faut publier. Affiche la raison, ou une ligne vide s'il ne faut rien faire.
 usage : decide-publication.py <cache local> <data.json déjà publié>
 
-Deux raisons seulement :
+Trois raisons seulement :
   - l'emploi du temps a réellement changé ;
+  - même emploi du temps, mais notre date de dernier changement est plus ancienne que celle
+    publiée (voir recaler-horodatage.py pour le cas inverse) ;
   - le battement de vie : la dernière VÉRIFICATION publiée date de plus de 18 h.
     (La page iPhone passe en rouge à 30 h. Il n'y a plus de passage toutes les 30 min :
     cette règle ne joue que lorsqu'une vérification est demandée, sur le Mac ou le téléphone.)
@@ -27,6 +29,12 @@ def decide(local, publie, maintenant=None):
         return "première publication"
     if local["sessions"] != publie["sessions"]:
         return "emploi du temps modifié"
+    # Même emploi du temps, mais le dépôt date le dernier changement plus tard que nous :
+    # il l'a vu après nous (ou a cru à un changement qui n'en était pas un). On republie pour
+    # que le Mac et le téléphone affichent la même heure « maj », la plus ancienne étant la vraie.
+    fl, fp = instant(local.get("fetchedAt")), instant(publie.get("fetchedAt"))
+    if fl and fp and fl < fp:
+        return "horodatage recalé"
     ref = instant(publie.get("checkedAt")) or instant(publie.get("fetchedAt"))
     if ref is None or maintenant - ref > SEUIL:
         return "battement de vie (vérification publiée trop ancienne)"
