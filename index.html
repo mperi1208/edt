@@ -326,11 +326,11 @@ const minutes = d => d.getHours()*60 + d.getMinutes();
 
 let DATA = null, cursor = null;
 // Sur le Mac, les ajouts et retouches viennent de l'app (overrides.json). Sur le téléphone,
-// il n'y a que des ajouts (les CC saisis à la main) : ils restent dans la mémoire de l'appareil,
-// jamais publiés, et ne sont donc pas partagés avec le Mac.
+// on peut ajouter un CC et retoucher un cours (un « TD » qui est en fait un CC, par exemple) :
+// tout reste dans la mémoire de l'appareil, jamais publié, donc pas partagé avec le Mac.
 function ajoutsLocaux(){
   try { const o = JSON.parse(localStorage.getItem("edt.perso") || "null");
-        if (o && Array.isArray(o.custom)) return {custom:o.custom, edits:{}, hidden:[]}; } catch(e){}
+        if (o && Array.isArray(o.custom)) return {custom:o.custom, edits:o.edits||{}, hidden:[]}; } catch(e){}
   return null;
 }
 let OVER = (window.EDT_OVERRIDES) || ajoutsLocaux() || {custom:[], edits:{}, hidden:[]};
@@ -370,7 +370,7 @@ function saveOver(){
     if (window.webkit && webkit.messageHandlers && webkit.messageHandlers.edt)
       webkit.messageHandlers.edt.postMessage({type:"overrides", data: JSON.parse(JSON.stringify(OVER))});
     else if (!canEdit)
-      localStorage.setItem("edt.perso", JSON.stringify({custom: OVER.custom}));
+      localStorage.setItem("edt.perso", JSON.stringify({custom: OVER.custom, edits: OVER.edits}));
   } catch(e){ console.warn("sauvegarde impossible", e); }
 }
 const isNarrow = () => window.innerWidth < 700;
@@ -693,7 +693,6 @@ function joinISO(d,t){ return d + "T" + t + ":00"; }
 function openEditor(id){
   const s = ALL.find(x => x.id === id);
   if (!s) return;
-  if (!canEdit && !s.perso) return;      // téléphone : on ne retouche que ce qu'on a ajouté soi-même
   editing = {id, perso: !!s.perso};
   const a = splitISO(s.start), b = splitISO(s.end);
   $("dlgTitle").textContent = s.perso ? "Créneau perso" : "Modifier le cours";
@@ -710,6 +709,9 @@ function openEditor(id){
   $("fCat").value   = s.category || "";
   $("bReset").hidden = !!s.perso;         // rien à réinitialiser sur un créneau perso
   $("bDel").textContent = s.perso ? "Supprimer" : "Masquer";
+  // Téléphone : pas de « Masquer » sur un cours officiel, la liste « Masquées » qui permet
+  // de le faire revenir n'existe que dans l'app Mac.
+  $("bDel").hidden = !canEdit && !s.perso;
   $("ovl").hidden = false;
   $("fTitle").focus();
 }
@@ -725,6 +727,7 @@ function openNew(categorie){
   $("fStart").value = "12:00"; $("fEnd").value = "13:00";
   $("fCat").value = cc ? "Contrôle continu" : "Perso";
   $("bReset").hidden = true;
+  $("bDel").hidden = false;
   $("bDel").textContent = "Supprimer";
   $("ovl").hidden = false;
   $("fTitle").focus();
