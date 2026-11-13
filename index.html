@@ -417,6 +417,20 @@ function renderDay(){
 
   if(!list.length){ grid.innerHTML='<div class="empty">Aucun cours ce jour-là.</div>'; return; }
 
+  // Créneaux secondaires masqués et rien d'autre ce jour-là : sans ce message la page
+  // restait blanche, et en vue jour le bouton « Secondaires » n'existe pas pour les rétablir.
+  if (document.body.classList.contains("hide-sec") && !list.some(isPrimary)) {
+    const n = list.length;
+    grid.innerHTML = '<div class="empty">Aucun cours principal ce jour-là.<br><br>'
+      + '<button id="showsec">Afficher ' + (n > 1 ? 'les ' + n + ' créneaux secondaires' : 'le créneau secondaire') + '</button></div>';
+    document.getElementById("showsec").onclick = () => {
+      document.body.classList.remove("hide-sec");
+      try { localStorage.setItem("hideSec", "0"); } catch(e) {}
+      render();
+    };
+    return;
+  }
+
   let h='<div class="daylist">';
   list.forEach(s=>{
     const a=parseLocal(s.start), b=parseLocal(s.end);
