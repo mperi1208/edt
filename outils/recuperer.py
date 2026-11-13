@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Récupère les données brutes de Celcat SANS le Mac : se connecte avec un identifiant
 et un mot de passe, puis écrit la réponse de GetCalendarData dans un fichier.
-usage : recuperer.py <EDTKit.swift> <fichier de sortie>
+usage : recuperer.py <EDTKit.swift> <fichier de sortie> [profs.json]
         identifiants dans les variables d'environnement EDT_USER et EDT_PASSWORD
 
 Tourne dans GitHub Actions, sur un dépôt PUBLIC : les journaux sont lisibles par tous.
@@ -10,7 +10,78 @@ seulement l'étape atteinte. Ne pas y ajouter de trace « pour déboguer ».
 
 La configuration (groupe, période) est lue dans EDTKit.swift pour ne pas exister en double.
 """
-import http.cookiejar, json, os, re, sys, urllib.parse, urllib.request
+import datetime, html, http.cookiejar, json, os, re, sys, time, urllib.parse, urllib.request
+
+# Enseignants. Celcat ne les met presque jamais dans la liste des cours, seulement dans la
+# fiche détaillée de chaque cours : une requête par cours. On garde donc ce qu'on a déjà
+# trouvé dans profs.json ({identifiant du cours: nom}) et on ne va chercher, à chaque passage,
+# que les cours À VENIR encore inconnus, dans la limite de MAX_FICHES.
+# Fichier à part, et non un champ de data.json : le Mac ne sait pas lire ces fiches, il
+# republierait sans cesse un emploi du temps « modifié » où les noms auraient disparu.
+MAX_FICHES = 90
+REVOIR_VIDES_JOURS = 14     # un cours proche sans enseignant connu est redemandé
+
+
+def nettoyer(v):
+    """Contenu d'un champ de fiche -> texte simple (il peut contenir du HTML)."""
+    if isinstance(v, (list, tuple)):
+        v = ", ".join(str(x) for x in v if x)
+    t = html.unescape(re.sub(r"<[^>]+>", " ", str(v or "")))
+    return re.sub(r"\s+", " ", t).strip(" ,;")
+
+
+def enseignant(fiche):
+    """Nom(s) du champ « Enseignant ». Les lignes sans libellé qui le suivent sont sa suite
+    (Celcat écrit ainsi les champs à plusieurs valeurs)."""
+    noms, dedans = [], False
+    for e in (fiche.get("elements") or []) if isinstance(fiche, dict) else []:
+        lab = e.get("label")
+        if lab and re.search(r"enseignant", str(lab), re.I):
+            dedans = True
+        elif lab:
+            dedans = False
+        if dedans:
+            n = nettoyer(e.get("content"))
+            if n and len(n) <= 80 and n not in noms:
+                noms.append(n)
+    return ", ".join(noms)
+
+
+def maj_profs(appel_souple, seances, chemin):
+    try:
+        connus = json.load(open(chemin, encoding="utf-8"))
+        assert isinstance(connus, dict)
+    except Exception:
+        connus = {}
+    maintenant = datetime.datetime.now()
+    proche = (maintenant + datetime.timedelta(days=REVOIR_VIDES_JOURS)).isoformat()
+    ids = {str(e.get("id")) for e in seances if e.get("id")}
+    a_voir = []
+    for e in sorted(seances, key=lambda x: str(x.get("start"))):
+        i, debut = str(e.get("id") or ""), str(e.get("start") or "")
+        if not i or debut < maintenant.isoformat()[:10]:
+            continue                                  # cours passé : inutile
+        if i not in connus or (connus[i] == "" and debut <= proche):
+            a_voir.append(i)
+    trouves = 0
+    for i in a_voir[:MAX_FICHES]:
+        brut = appel_souple("/Home/GetSideBarEvent", {"eventId": i})
+        if brut is None:
+            break                                     # Celcat ne répond plus : on garde l'acquis
+        try:
+            nom = enseignant(json.loads(brut))
+        except ValueError:
+            continue
+        connus[i] = nom
+        trouves += bool(nom)
+        time.sleep(0.05)
+    connus = {i: n for i, n in connus.items() if i in ids}      # cours disparus
+    with open(chemin, "w", encoding="utf-8") as f:
+        json.dump(connus, f, ensure_ascii=False, indent=0, sort_keys=True)
+        f.write("\n")
+    # Journal public : des nombres seulement.
+    print(f"[recuperer] enseignants : {min(len(a_voir), MAX_FICHES)} fiches lues, {trouves} noms, "
+          f"{sum(1 for n in connus.values() if n)} connus au total, {max(0, len(a_voir) - MAX_FICHES)} restent à lire")
 
 
 def stop(msg):
@@ -28,8 +99,8 @@ def conf(source):
 
 
 def main():
-    if len(sys.argv) != 3:
-        stop("usage : recuperer.py <EDTKit.swift> <sortie>")
+    if len(sys.argv) not in (3, 4):
+        stop("usage : recuperer.py <EDTKit.swift> <sortie> [profs.json]")
     c = conf(sys.argv[1])
     user, mdp = os.environ.get("EDT_USER", ""), os.environ.get("EDT_PASSWORD", "")
     if not user or not mdp:
@@ -82,6 +153,20 @@ def main():
     with open(sys.argv[2], "w", encoding="utf-8") as f:
         f.write(brut)
     print(f"[recuperer] {len(seances)} événements bruts")
+
+    if len(sys.argv) == 4:
+        def appel_souple(chemin, champs):             # ne doit jamais faire échouer la mise à jour
+            req = urllib.request.Request(c["host"] + chemin, data=urllib.parse.urlencode(champs).encode())
+            req.add_header("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+            req.add_header("X-Requested-With", "XMLHttpRequest")
+            try:
+                return nav.open(req, timeout=20).read().decode("utf-8", "replace")
+            except Exception:
+                return None
+        try:
+            maj_profs(appel_souple, seances, sys.argv[3])
+        except Exception as e:
+            print(f"[recuperer] enseignants ignorés — {type(e).__name__}")
 
 
 if __name__ == "__main__":

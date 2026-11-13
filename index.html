@@ -340,6 +340,23 @@ const canEdit = !!window.EDT_CAN_EDIT;
 // Mémoire du téléphone (jeton GitHub, heure de la dernière vérification réussie).
 // Reste sur l'appareil : rien de tout ça n'est publié.
 const CLE = { jeton:"edt.jeton", verif:"edt.verifie", essai:"edt.essai" };
+// Enseignants : {identifiant du cours: nom}, publié à part dans profs.json par GitHub (Celcat
+// ne les donne que dans la fiche détaillée de chaque cours). Gardé en mémoire pour l'affichage
+// hors connexion.
+let PROFS = {};
+try { PROFS = JSON.parse(localStorage.getItem("edt.profs") || "{}") || {}; } catch(e){}
+function chargerProfs(){
+  // L'app Mac ouvre la page depuis un fichier : il lui faut l'adresse complète du site.
+  const base = location.protocol === "file:" ? "https://mperi1208.github.io/edt/" : "";
+  fetch(base + "profs.json?t=" + Date.now(), {cache:"no-store"})
+    .then(r => r.ok ? r.json() : null)
+    .then(o => {
+      if (!o || typeof o !== "object") return;
+      PROFS = o;
+      try { localStorage.setItem("edt.profs", JSON.stringify(o)); } catch(e){}
+      if (DATA) { rebuild(); render(); }
+    }).catch(() => {});
+}
 let statutMaj = null;   // {txt, erreur} tant qu'une mise à jour est en cours ou a échoué
 const mem = {
   get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
@@ -353,7 +370,8 @@ function rebuild(){
   const base = ((DATA && DATA.sessions) || [])
     .filter(s => !cache.has(s.id))
     .map(s => { const e = OVER.edits[s.id]; return e ? {...s, ...e, modif:true} : s; });
-  ALL = base.concat(OVER.custom.map(s => ({...s, perso:true})));
+  ALL = base.concat(OVER.custom.map(s => ({...s, perso:true})))
+            .map(s => (!s.teacher && PROFS[s.id]) ? {...s, teacher: PROFS[s.id]} : s);
   // Celcat ne donne l'enseignant que sur de rares séances. Quand un module n'en a qu'un seul
   // de connu, on le reporte sur ses autres séances (jamais s'il y en a plusieurs : on ne
   // saurait pas lequel fait quel cours).
@@ -822,6 +840,7 @@ window.edtRefreshDone = function(ok, message, accuse){
   // Accusé de réception explicite : l'emploi du temps est souvent inchangé,
   // il faut quand même que le clic produise quelque chose de visible.
   statutMaj = null;
+  setTimeout(chargerProfs, 70000);     // le site publié suit le dépôt avec une minute de retard
   const el = $("meta");
   el.classList.remove("stale");
   el.textContent = accuse || "✓ vérifié à l'instant";
@@ -1024,6 +1043,7 @@ window.applyData = function(d){
   if(!cursor) cursor = dayToOpen();
   render();
 };
+chargerProfs();
 if(window.EDT_DATA) applyData(window.EDT_DATA);
 else {
   fetch("overrides.json?t="+Date.now(),{cache:"no-store"})
