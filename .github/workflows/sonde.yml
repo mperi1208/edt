@@ -1,0 +1,14 @@
+# TEMPORAIRE — à supprimer après usage. N'affiche que des noms de champs.
+name: Sonde Celcat
+on:
+  workflow_dispatch:
+jobs:
+  sonde:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          EDT_USER: ${{ secrets.EDT_USER }}
+          EDT_PASSWORD: ${{ secrets.EDT_PASSWORD }}
+        run: python3 outils/sonde.py
