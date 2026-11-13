@@ -345,6 +345,13 @@ const CLE = { jeton:"edt.jeton", verif:"edt.verifie", essai:"edt.essai" };
 // hors connexion.
 let PROFS = {};
 try { PROFS = JSON.parse(localStorage.getItem("edt.profs") || "{}") || {}; } catch(e){}
+// Celcat écrit « Nom, Prénom » (et « ; » entre plusieurs enseignants) : on affiche « Prénom Nom ».
+function nomProf(v){
+  return String(v).split(";").map(n => {
+    const m = n.trim().match(/^([^,]+),\s*([^,]+)$/);
+    return m ? m[2].trim() + " " + m[1].trim() : n.trim();
+  }).filter(Boolean).join(" · ");
+}
 function chargerProfs(){
   // L'app Mac ouvre la page depuis un fichier : il lui faut l'adresse complète du site.
   const base = location.protocol === "file:" ? "https://mperi1208.github.io/edt/" : "";
@@ -371,7 +378,7 @@ function rebuild(){
     .filter(s => !cache.has(s.id))
     .map(s => { const e = OVER.edits[s.id]; return e ? {...s, ...e, modif:true} : s; });
   ALL = base.concat(OVER.custom.map(s => ({...s, perso:true})))
-            .map(s => (!s.teacher && PROFS[s.id]) ? {...s, teacher: PROFS[s.id]} : s);
+            .map(s => (!s.teacher && PROFS[s.id]) ? {...s, teacher: nomProf(PROFS[s.id])} : s);
   // Celcat ne donne l'enseignant que sur de rares séances. Quand un module n'en a qu'un seul
   // de connu, on le reporte sur ses autres séances (jamais s'il y en a plusieurs : on ne
   // saurait pas lequel fait quel cours).

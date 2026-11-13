@@ -44,7 +44,7 @@ def enseignant(fiche):
             n = nettoyer(e.get("content"))
             if n and len(n) <= 80 and n not in noms:
                 noms.append(n)
-    return ", ".join(noms)
+    return "; ".join(noms)      # « ; » et non « , » : Celcat écrit déjà « Nom, Prénom »
 
 
 def maj_profs(appel_souple, seances, chemin):
