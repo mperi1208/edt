@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-13T13:29:06Z",
-  "fetchedAt" : "2026-11-13T13:29:06Z",
+  "checkedAt" : "2026-11-13T15:24:07Z",
+  "fetchedAt" : "2026-11-13T15:24:07Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -1548,7 +1548,7 @@
       "id" : "-1742255826:1073733534:17:5829277:14",
       "module" : "MYMAS001",
       "moduleName" : "Probabilités",
-      "room" : "AMPHI E - DESCARTES",
+      "room" : "AMPHI C - DESCARTES",
       "site" : "DESCARTES",
       "start" : "2026-11-18T11:20:00",
       "title" : "Probabilités"
@@ -2167,25 +2167,37 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-12-09T11:10:00",
+      "end" : "2026-12-09T09:30:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829792:17",
       "module" : "MYANM009",
       "moduleName" : "Analyse hilbertienne et distributions",
-      "room" : "E103- Bât Joliot-Curie",
-      "site" : "JOLIOT- CURIE",
-      "start" : "2026-12-09T09:40:00",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2026-12-09T08:00:00",
       "title" : "Analyse hilbertienne et distributions"
     },
     {
-      "category" : "Contrôle continu",
+      "category" : "CM/TD",
+      "end" : "2026-12-09T11:10:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5914879:17",
+      "module" : "MYANM011",
+      "moduleName" : "Analyse Convexe et Techniques d'Optimisation",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2026-12-09T09:40:00",
+      "title" : "Analyse Convexe et Techniques d'Optimisation"
+    },
+    {
+      "category" : "CM/TD",
       "end" : "2026-12-09T12:50:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829796:17",
       "module" : "MYANM011",
       "moduleName" : "Analyse Convexe et Techniques d'Optimisation",
-      "room" : "AMPHI B - DESCARTES",
-      "site" : "DESCARTES",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
       "start" : "2026-12-09T11:20:00",
       "title" : "Analyse Convexe et Techniques d'Optimisation"
     },
@@ -2318,6 +2330,17 @@
       "moduleName" : "Analyse Convexe et Techniques d'Optimisation",
       "site" : "JOLIOT- CURIE",
       "start" : "2026-12-14T09:40:00",
+      "title" : "Analyse Convexe et Techniques d'Optimisation"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2026-12-14T12:50:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5914825:18",
+      "module" : "MYANM011",
+      "moduleName" : "Analyse Convexe et Techniques d'Optimisation",
+      "site" : "JOLIOT- CURIE",
+      "start" : "2026-12-14T11:20:00",
       "title" : "Analyse Convexe et Techniques d'Optimisation"
     },
     {
@@ -2544,6 +2567,28 @@
     },
     {
       "category" : "CM/TD",
+      "end" : "2027-01-05T15:20:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5914843:21",
+      "module" : "MYANM011",
+      "moduleName" : "Analyse Convexe et Techniques d'Optimisation",
+      "site" : "JOLIOT- CURIE",
+      "start" : "2027-01-05T13:50:00",
+      "title" : "Analyse Convexe et Techniques d'Optimisation"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-01-05T17:00:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5914846:21",
+      "module" : "MYANM011",
+      "moduleName" : "Analyse Convexe et Techniques d'Optimisation",
+      "site" : "JOLIOT- CURIE",
+      "start" : "2027-01-05T15:30:00",
+      "title" : "Analyse Convexe et Techniques d'Optimisation"
+    },
+    {
+      "category" : "CM/TD",
       "end" : "2027-01-06T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5829748:21",
@@ -2662,6 +2707,28 @@
       "site" : "GERMAIN",
       "start" : "2027-01-11T15:30:00",
       "title" : "Optimisation numérique"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-01-12T15:20:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5914847:22",
+      "module" : "MYANM011",
+      "moduleName" : "Analyse Convexe et Techniques d'Optimisation",
+      "site" : "JOLIOT- CURIE",
+      "start" : "2027-01-12T13:50:00",
+      "title" : "Analyse Convexe et Techniques d'Optimisation"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-01-12T17:00:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5914850:22",
+      "module" : "MYANM011",
+      "moduleName" : "Analyse Convexe et Techniques d'Optimisation",
+      "site" : "JOLIOT- CURIE",
+      "start" : "2027-01-12T15:30:00",
+      "title" : "Analyse Convexe et Techniques d'Optimisation"
     },
     {
       "category" : "Contrôle continu",
