@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-13T15:24:07Z",
-  "fetchedAt" : "2026-11-13T15:24:07Z",
+  "checkedAt" : "2026-11-13T19:06:26Z",
+  "fetchedAt" : "2026-11-13T19:06:26Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -2710,24 +2710,24 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2027-01-12T15:20:00",
+      "end" : "2027-01-13T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5914847:22",
       "module" : "MYANM011",
       "moduleName" : "Analyse Convexe et Techniques d'Optimisation",
       "site" : "JOLIOT- CURIE",
-      "start" : "2027-01-12T13:50:00",
+      "start" : "2027-01-13T09:40:00",
       "title" : "Analyse Convexe et Techniques d'Optimisation"
     },
     {
       "category" : "CM/TD",
-      "end" : "2027-01-12T17:00:00",
+      "end" : "2027-01-13T12:50:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5914850:22",
       "module" : "MYANM011",
       "moduleName" : "Analyse Convexe et Techniques d'Optimisation",
       "site" : "JOLIOT- CURIE",
-      "start" : "2027-01-12T15:30:00",
+      "start" : "2027-01-13T11:20:00",
       "title" : "Analyse Convexe et Techniques d'Optimisation"
     },
     {
