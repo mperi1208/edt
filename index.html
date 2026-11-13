@@ -103,6 +103,8 @@ body.hide-sec .ev.sec{display:none}
 .ccrow .j.near{color:#c0392b}
 .ccrow.sec{border-left-style:dashed;background:var(--card)}
 .ccrow.sec>*{opacity:.45}
+.ccadd{margin-top:4px;font-size:13px;color:var(--dim);border-style:dashed}
+.ccvide{color:var(--dim);font-size:13px;margin-bottom:8px}
 
 /* ---- édition ---- */
 body.can-edit .ev,body.can-edit .dcard{cursor:pointer}
@@ -323,7 +325,15 @@ const parseLocal = s => { const [d,t]=s.split("T"); const [Y,M,D]=d.split("-").m
 const minutes = d => d.getHours()*60 + d.getMinutes();
 
 let DATA = null, cursor = null;
-let OVER = (window.EDT_OVERRIDES) || {custom:[], edits:{}, hidden:[]};
+// Sur le Mac, les ajouts et retouches viennent de l'app (overrides.json). Sur le téléphone,
+// il n'y a que des ajouts (les CC saisis à la main) : ils restent dans la mémoire de l'appareil,
+// jamais publiés, et ne sont donc pas partagés avec le Mac.
+function ajoutsLocaux(){
+  try { const o = JSON.parse(localStorage.getItem("edt.perso") || "null");
+        if (o && Array.isArray(o.custom)) return {custom:o.custom, edits:{}, hidden:[]}; } catch(e){}
+  return null;
+}
+let OVER = (window.EDT_OVERRIDES) || ajoutsLocaux() || {custom:[], edits:{}, hidden:[]};
 let ALL = [];
 const canEdit = !!window.EDT_CAN_EDIT;
 
@@ -359,6 +369,8 @@ function saveOver(){
   try {
     if (window.webkit && webkit.messageHandlers && webkit.messageHandlers.edt)
       webkit.messageHandlers.edt.postMessage({type:"overrides", data: JSON.parse(JSON.stringify(OVER))});
+    else if (!canEdit)
+      localStorage.setItem("edt.perso", JSON.stringify({custom: OVER.custom}));
   } catch(e){ console.warn("sauvegarde impossible", e); }
 }
 const isNarrow = () => window.innerWidth < 700;
@@ -487,8 +499,9 @@ function renderCC(){
        else { if(s.end>g.fin) g.fin=s.end; if(s.room && !g.salles.includes(s.room)) g.salles.push(s.room); }
      });
   const liste=[...groupes.values()].sort((a,b)=>a.s.start<b.s.start?-1:1);
-  el.hidden=!liste.length;
-  if(!liste.length){ el.innerHTML=""; return; }
+  el.hidden=false;
+  const ajout='<button class="ccadd" id="ccadd">+ Ajouter un CC</button>';
+  if(!liste.length){ el.innerHTML='<h3>Prochains contrôles continus</h3><div class="ccvide">Aucun CC annoncé pour l\'instant.</div>'+ajout; return; }
   const fj=new Intl.DateTimeFormat("fr-FR",{weekday:"short",day:"numeric",month:"short"});
   const minuit=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate());
   el.innerHTML='<h3>Prochains contrôles continus</h3>'+liste.map(g=>{
@@ -499,10 +512,11 @@ function renderCC(){
       <span class="d"><b>${esc(fj.format(a).replace(/\./g,""))}</b>${pad(a.getHours())}:${pad(a.getMinutes())}–${pad(b.getHours())}:${pad(b.getMinutes())}</span>
       <span class="m"><span class="n">${esc(labelFor(g.s))}</span>${(g.salles.length||g.prof)?`<div class="r">${esc(g.salles.concat(g.prof?[g.prof]:[]).join(" · "))}</div>`:""}</span>
       <span class="j${j<=7?" near":""}">${quand}</span></button>`;
-  }).join("");
+  }).join("")+ajout;
 }
 // Toucher un CC ouvre l'emploi du temps sur ce jour-là.
 document.getElementById("cc").addEventListener("click", e=>{
+  if(e.target.closest("#ccadd")){ openNew("Contrôle continu"); return; }
   const r=e.target.closest(".ccrow"); if(!r) return;
   const [Y,M,D]=r.getAttribute("data-jour").split("-").map(Number);
   cursor=new Date(Y,M-1,D); render();
@@ -677,9 +691,9 @@ function splitISO(iso){ return {d: iso.slice(0,10), t: iso.slice(11,16)}; }
 function joinISO(d,t){ return d + "T" + t + ":00"; }
 
 function openEditor(id){
-  if (!canEdit) return;
   const s = ALL.find(x => x.id === id);
   if (!s) return;
+  if (!canEdit && !s.perso) return;      // téléphone : on ne retouche que ce qu'on a ajouté soi-même
   editing = {id, perso: !!s.perso};
   const a = splitISO(s.start), b = splitISO(s.end);
   $("dlgTitle").textContent = s.perso ? "Créneau perso" : "Modifier le cours";
@@ -700,15 +714,16 @@ function openEditor(id){
   $("fTitle").focus();
 }
 
-function openNew(){
-  if (!canEdit) return;
+function openNew(categorie){
+  const cc = categorie === "Contrôle continu";
+  if (!canEdit && !cc) return;           // téléphone : seul l'ajout d'un CC est proposé
   editing = null;
   const base = cursor || new Date();
-  $("dlgTitle").textContent = "Nouveau créneau";
+  $("dlgTitle").textContent = cc ? "Nouveau contrôle continu" : "Nouveau créneau";
   $("fTitle").value = ""; $("fRoom").value = "";
   $("fDate").value = ymd(base);
   $("fStart").value = "12:00"; $("fEnd").value = "13:00";
-  $("fCat").value = "Perso";
+  $("fCat").value = cc ? "Contrôle continu" : "Perso";
   $("bReset").hidden = true;
   $("bDel").textContent = "Supprimer";
   $("ovl").hidden = false;
@@ -787,7 +802,7 @@ $("ovl2").onclick = e => {
   if (OVER.hidden.length) openHidden(); else $("ovl2").hidden = true;
 };
 $("ovl").onclick = e => { if (e.target === $("ovl")) closeEditor(); };
-$("add").onclick = openNew;
+$("add").onclick = () => openNew();
 
 // --- bouton « forcer une mise à jour » ---
 function majStatut(txt, erreur){
@@ -1009,7 +1024,7 @@ window.applyData = function(d){
 if(window.EDT_DATA) applyData(window.EDT_DATA);
 else {
   fetch("overrides.json?t="+Date.now(),{cache:"no-store"})
-    .then(r=>r.ok?r.json():null).then(o=>{ if(o) OVER=o; }).catch(()=>{})
+    .then(r=>r.ok?r.json():null).then(o=>{ if(o && !ajoutsLocaux()) OVER=o; }).catch(()=>{})
     .finally(()=>{
       fetch("data.json?t="+Date.now(),{cache:"no-store"})
         .then(r=>r.ok?r.json():Promise.reject(new Error("HTTP "+r.status)))
