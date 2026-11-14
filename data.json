@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-13T19:06:26Z",
-  "fetchedAt" : "2026-11-13T19:06:26Z",
+  "checkedAt" : "2026-11-14T10:53:46Z",
+  "fetchedAt" : "2026-11-14T10:53:46Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -1560,7 +1560,7 @@
       "id" : "-1742255826:1073733534:17:5911126:14",
       "module" : "MYMAA002",
       "moduleName" : "Introduction au calcul formel",
-      "room" : "2107 - FERMAT",
+      "room" : "2105 - FERMAT",
       "site" : "FERMAT",
       "start" : "2026-11-18T13:50:00",
       "title" : "Introduction au calcul formel"
