@@ -364,6 +364,25 @@ function chargerProfs(){
       if (DATA) { rebuild(); render(); }
     }).catch(() => {});
 }
+// Contrôles continus corrigés ou ajoutés dans l'app Mac, publiés dans retouches.json pour que
+// le téléphone les voie. Le Mac, lui, a l'original (overrides.json) et n'en a pas besoin.
+let PUB = {edits:{}, custom:[]};
+function poserRetouches(o){
+  if (!o || typeof o !== "object") return false;
+  PUB = {edits: o.edits || {}, custom: Array.isArray(o.custom) ? o.custom : []};
+  return true;
+}
+if (!canEdit) { try { poserRetouches(JSON.parse(localStorage.getItem("edt.retouches") || "null")); } catch(e){} }
+function chargerRetouches(){
+  if (canEdit) return;
+  fetch("retouches.json?t=" + Date.now(), {cache:"no-store"})
+    .then(r => r.ok ? r.json() : null)
+    .then(o => {
+      if (!poserRetouches(o)) return;
+      try { localStorage.setItem("edt.retouches", JSON.stringify(o)); } catch(e){}
+      if (DATA) { rebuild(); render(); }
+    }).catch(() => {});
+}
 let statutMaj = null;   // {txt, erreur} tant qu'une mise à jour est en cours ou a échoué
 const mem = {
   get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
@@ -376,8 +395,11 @@ function rebuild(){
   const cache = new Set(OVER.hidden);
   const base = ((DATA && DATA.sessions) || [])
     .filter(s => !cache.has(s.id))
-    .map(s => { const e = OVER.edits[s.id]; return e ? {...s, ...e, modif:true} : s; });
-  ALL = base.concat(OVER.custom.map(s => ({...s, perso:true})))
+    .map(s => { const p = PUB.edits[s.id], l = OVER.edits[s.id];      // le local l'emporte
+                return (p || l) ? {...s, ...(p||{}), ...(l||{}), modif:true} : s; });
+  const miens = new Set(OVER.custom.map(s => s.id));
+  ALL = base.concat(PUB.custom.filter(s => !miens.has(s.id)).map(s => ({...s, perso:true, publie:true})))
+            .concat(OVER.custom.map(s => ({...s, perso:true})))
             .map(s => (!s.teacher && PROFS[s.id]) ? {...s, teacher: nomProf(PROFS[s.id])} : s);
   // Celcat ne donne l'enseignant que sur de rares séances. Quand un module n'en a qu'un seul
   // de connu, on le reporte sur ses autres séances (jamais s'il y en a plusieurs : on ne
@@ -392,9 +414,13 @@ function rebuild(){
 function saveOver(){
   rebuild(); render();
   try {
-    if (window.webkit && webkit.messageHandlers && webkit.messageHandlers.edt)
+    if (window.webkit && webkit.messageHandlers && webkit.messageHandlers.edt) {
       webkit.messageHandlers.edt.postMessage({type:"overrides", data: JSON.parse(JSON.stringify(OVER))});
-    else if (!canEdit)
+      // Le téléphone ne voit une retouche qu'une fois publiée, et la publication suit une
+      // vérification : on en lance une, après un court délai pour regrouper plusieurs retouches.
+      clearTimeout(window._publierRetouches);
+      window._publierRetouches = setTimeout(() => $("refresh").click(), 2500);
+    } else if (!canEdit)
       localStorage.setItem("edt.perso", JSON.stringify({custom: OVER.custom, edits: OVER.edits}));
   } catch(e){ console.warn("sauvegarde impossible", e); }
 }
@@ -718,6 +744,7 @@ function joinISO(d,t){ return d + "T" + t + ":00"; }
 function openEditor(id){
   const s = ALL.find(x => x.id === id);
   if (!s) return;
+  if (s.publie) return;                  // CC venu du Mac : il se modifie sur le Mac
   editing = {id, perso: !!s.perso};
   const a = splitISO(s.start), b = splitISO(s.end);
   $("dlgTitle").textContent = s.perso ? "Créneau perso" : "Modifier le cours";
@@ -847,7 +874,8 @@ window.edtRefreshDone = function(ok, message, accuse){
   // Accusé de réception explicite : l'emploi du temps est souvent inchangé,
   // il faut quand même que le clic produise quelque chose de visible.
   statutMaj = null;
-  setTimeout(chargerProfs, 70000);     // le site publié suit le dépôt avec une minute de retard
+  chargerRetouches();
+  setTimeout(() => { chargerProfs(); chargerRetouches(); }, 70000);   // le site publié suit le dépôt avec une minute de retard
   const el = $("meta");
   el.classList.remove("stale");
   el.textContent = accuse || "✓ vérifié à l'instant";
@@ -1016,7 +1044,7 @@ async function lancerMaj(manuel){
 // qui s'en charge, voir applicationDidBecomeActive).
 if (!(window.webkit && webkit.messageHandlers && webkit.messageHandlers.edt)) {
   document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible" && DATA) lancerMaj(false);
+    if (document.visibilityState === "visible" && DATA) { chargerRetouches(); lancerMaj(false); }
   });
 }
 
@@ -1050,7 +1078,7 @@ window.applyData = function(d){
   if(!cursor) cursor = dayToOpen();
   render();
 };
-chargerProfs();
+chargerProfs(); chargerRetouches();
 if(window.EDT_DATA) applyData(window.EDT_DATA);
 else {
   fetch("overrides.json?t="+Date.now(),{cache:"no-store"})
