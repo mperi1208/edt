@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-17T09:33:30Z",
-  "fetchedAt" : "2026-11-16T14:28:52Z",
+  "checkedAt" : "2026-11-17T13:18:57Z",
+  "fetchedAt" : "2026-11-17T13:18:57Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -1832,6 +1832,30 @@
     },
     {
       "category" : "CM/TD",
+      "end" : "2026-11-26T17:00:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5829771:15",
+      "module" : "MYANM009",
+      "moduleName" : "Analyse hilbertienne et distributions",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2026-11-26T15:30:00",
+      "title" : "Analyse hilbertienne et distributions"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2026-11-26T18:40:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5829773:15",
+      "module" : "MYANM009",
+      "moduleName" : "Analyse hilbertienne et distributions",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2026-11-26T17:10:00",
+      "title" : "Analyse hilbertienne et distributions"
+    },
+    {
+      "category" : "CM/TD",
       "end" : "2026-11-27T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5829505:15",
@@ -2167,18 +2191,6 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-12-09T09:30:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5829792:17",
-      "module" : "MYANM009",
-      "moduleName" : "Analyse hilbertienne et distributions",
-      "room" : "G104 M- GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2026-12-09T08:00:00",
-      "title" : "Analyse hilbertienne et distributions"
-    },
-    {
-      "category" : "CM/TD",
       "end" : "2026-12-09T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5914879:17",
@@ -2320,6 +2332,18 @@
       "site" : "JOLIOT- CURIE",
       "start" : "2026-12-11T15:30:00",
       "title" : "anglais science Master S1"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2026-12-14T09:30:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917104:18",
+      "module" : "MYANM009",
+      "moduleName" : "Analyse hilbertienne et distributions",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2026-12-14T08:00:00",
+      "title" : "Analyse hilbertienne et distributions"
     },
     {
       "category" : "CM/TD",
@@ -2533,6 +2557,30 @@
     },
     {
       "category" : "CM/TD",
+      "end" : "2027-01-04T11:10:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917322:21",
+      "module" : "MYANM009",
+      "moduleName" : "Analyse hilbertienne et distributions",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-04T09:40:00",
+      "title" : "Analyse hilbertienne et distributions"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-01-04T12:50:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917326:21",
+      "module" : "MYANM009",
+      "moduleName" : "Analyse hilbertienne et distributions",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-04T11:20:00",
+      "title" : "Analyse hilbertienne et distributions"
+    },
+    {
+      "category" : "CM/TD",
       "end" : "2027-01-04T15:20:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5914693:21",
@@ -2556,14 +2604,28 @@
       "title" : "Optimisation numérique"
     },
     {
-      "category" : "TD",
-      "end" : "2027-01-05T13:00:00",
+      "category" : "CM/TD",
+      "end" : "2027-01-05T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5845430:21",
-      "room" : "AMPHI I - FERMAT",
-      "site" : "FERMAT",
-      "start" : "2027-01-05T09:50:00",
-      "title" : "Projet de groupe"
+      "id" : "-1742255826:1073733534:17:5917327:21",
+      "module" : "MYANM009",
+      "moduleName" : "Analyse hilbertienne et distributions",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-05T09:40:00",
+      "title" : "Analyse hilbertienne et distributions"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-01-05T12:50:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917328:21",
+      "module" : "MYANM009",
+      "moduleName" : "Analyse hilbertienne et distributions",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-05T11:20:00",
+      "title" : "Analyse hilbertienne et distributions"
     },
     {
       "category" : "CM/TD",
@@ -2649,6 +2711,18 @@
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
+      "category" : "Séminaire",
+      "end" : "2027-01-07T17:00:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26], M2 Saclay Mathématiques et Apprentissage Statistique (MAS) [MYMAS2_26]",
+      "id" : "-1742255826:1073733534:17:5917346:21",
+      "module" : "MYMAS006",
+      "moduleName" : "Séminaire invité (entreprise et recherche)",
+      "room" : "2204 - FERMAT",
+      "site" : "FERMAT",
+      "start" : "2027-01-07T13:50:00",
+      "title" : "Séminaire invité (entreprise et recherche)"
+    },
+    {
       "category" : "CM/TD",
       "end" : "2027-01-08T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
@@ -2686,6 +2760,30 @@
     },
     {
       "category" : "CM/TD",
+      "end" : "2027-01-11T11:10:00",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917441:22",
+      "module" : "MYANM001",
+      "moduleName" : "Optimisation numérique",
+      "room" : "G105 - GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-11T09:40:00",
+      "title" : "Optimisation numérique"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-01-11T12:50:00",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917577:22",
+      "module" : "MYANM001",
+      "moduleName" : "Optimisation numérique",
+      "room" : "G105 - GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-11T11:20:00",
+      "title" : "Optimisation numérique"
+    },
+    {
+      "category" : "CM/TD",
       "end" : "2027-01-11T15:20:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5914693:22",
@@ -2707,6 +2805,30 @@
       "site" : "GERMAIN",
       "start" : "2027-01-11T15:30:00",
       "title" : "Optimisation numérique"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-01-12T17:00:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917347:22",
+      "module" : "MYANM009",
+      "moduleName" : "Analyse hilbertienne et distributions",
+      "room" : "G003 - GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-12T15:30:00",
+      "title" : "Analyse hilbertienne et distributions"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-01-12T18:40:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917350:22",
+      "module" : "MYANM009",
+      "moduleName" : "Analyse hilbertienne et distributions",
+      "room" : "G003 - GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-12T17:10:00",
+      "title" : "Analyse hilbertienne et distributions"
     },
     {
       "category" : "CM/TD",
@@ -2765,6 +2887,30 @@
       "site" : "FERMAT",
       "start" : "2027-01-15T13:50:00",
       "title" : "Séminaire invité (entreprise et recherche)"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-01-18T11:10:00",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917578:23",
+      "module" : "MYANM001",
+      "moduleName" : "Optimisation numérique",
+      "room" : "AMPHI E - DESCARTES",
+      "site" : "DESCARTES",
+      "start" : "2027-01-18T09:40:00",
+      "title" : "Optimisation numérique"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-01-18T12:50:00",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917579:23",
+      "module" : "MYANM001",
+      "moduleName" : "Optimisation numérique",
+      "room" : "AMPHI E - DESCARTES",
+      "site" : "DESCARTES",
+      "start" : "2027-01-18T11:20:00",
+      "title" : "Optimisation numérique"
     },
     {
       "category" : "CM/TD",
