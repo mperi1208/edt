@@ -34,7 +34,7 @@ jobs:
         env:
           EDT_USER: ${{ secrets.EDT_USER }}
           EDT_PASSWORD: ${{ secrets.EDT_PASSWORD }}
-        run: python3 outils/recuperer.py outils/EDTKit.swift "$RUNNER_TEMP/brut.json" profs.json
+        run: python3 outils/recuperer.py outils/EDTKit.swift "$RUNNER_TEMP/brut.json" "$RUNNER_TEMP/session.txt"
 
       # Quelqu'un attend devant son téléphone : on ne recompile que si le code a changé.
       - name: Retrouver le nettoyeur déjà compilé
@@ -59,17 +59,16 @@ jobs:
           cp data.json "$SUP/data.json"
           bin/edt-refresh --from-file "$RUNNER_TEMP/brut.json"
 
+      # La page du téléphone considère la mise à jour finie dès que CETTE étape est terminée
+      # (elle suit les étapes du run) : ne pas la renommer sans changer index.html.
       - name: Publier si utile
         run: |
           SUP="$HOME/.local/share/EDTUVSQ"
           RAISON=$(python3 outils/decide-publication.py "$SUP/data.json" data.json)
           if [ "$RAISON" = "cache illisible" ]; then echo "cache illisible"; exit 1; fi
-          [ -n "$RAISON" ] && cp "$SUP/data.json" data.json
-          # profs.json (enseignants) suit sa propre vie : publié dès qu'il change.
-          [ -f profs.json ] || echo '{}' > profs.json
-          git add data.json profs.json
-          if git diff --cached --quiet; then echo "rien de neuf"; exit 0; fi
-          git diff --cached --quiet -- profs.json || RAISON="${RAISON:+$RAISON, }enseignants"
+          [ -n "$RAISON" ] || { echo "rien de neuf"; exit 0; }
+          cp "$SUP/data.json" data.json
+          git add data.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -q -m "maj $(TZ=Europe/Paris date '+%Y-%m-%d %H:%M') — $RAISON (sans le Mac)"
@@ -77,3 +76,19 @@ jobs:
           # le prochain passage repartira de la version à jour.
           git push -q origin HEAD:main || { git pull -q --rebase origin main && git push -q origin HEAD:main; }
           echo "publié : $RAISON"
+
+      # Après la publication : personne n'attend les noms des enseignants. profs.json suit
+      # sa propre vie et est publié dès qu'il change. Un échec ici n'annule rien.
+      - name: Enseignants
+        continue-on-error: true
+        run: |
+          python3 outils/recuperer.py --profs outils/EDTKit.swift "$RUNNER_TEMP/brut.json" profs.json "$RUNNER_TEMP/session.txt"
+          rm -f "$RUNNER_TEMP/session.txt"
+          [ -f profs.json ] || echo '{}' > profs.json
+          git add profs.json
+          if git diff --cached --quiet; then echo "enseignants inchangés"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "maj $(TZ=Europe/Paris date '+%Y-%m-%d %H:%M') — enseignants (sans le Mac)"
+          git push -q origin HEAD:main || { git pull -q --rebase origin main && git push -q origin HEAD:main; }
+          echo "publié : enseignants"

@@ -947,6 +947,19 @@ async function attendre(n0){
       if (run.conclusion !== "success") throw new Error("Celcat injoignable depuis GitHub");
       return;
     }
+    // Pas besoin d'attendre la fin du run : une fois l'emploi du temps publié, il ne reste que
+    // les noms des enseignants (relus plus tard par chargerProfs). On suit donc les étapes.
+    if (run && run.status === "in_progress") {
+      try {
+        const j = await gh(run.jobs_url + "?t=" + Date.now());
+        const pub = j.ok && ((await j.json()).jobs || []).flatMap(x => x.steps || [])
+                                .find(s => s.name === "Publier si utile");
+        if (pub && pub.status === "completed") {
+          if (pub.conclusion !== "success") throw new Error("Celcat injoignable depuis GitHub");
+          return;
+        }
+      } catch(e) { if (String(e.message).startsWith("Celcat")) throw e; }
+    }
     if (Date.now() > limite) throw new Error(liste ? "GitHub ne répond pas" : "pas de réseau");
   }
 }

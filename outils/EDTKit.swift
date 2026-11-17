@@ -65,12 +65,22 @@ struct Payload: Codable {
 enum EDTKit {
 
     // Celcat met du HTML dans `description` : on le déplie en lignes propres.
+    // Expressions compilées UNE fois : `range(of:options:.regularExpression)` recompile à
+    // chaque appel, ce qui coûte plusieurs secondes sur Linux (GitHub Actions) pour ~400 séances.
+    // Même moteur (ICU) et même recherche du premier résultat : résultat strictement identique.
+    static let entite = try! NSRegularExpression(pattern: "&#[0-9]+;")
+    static let codeEnFin = try! NSRegularExpression(pattern: "\\[[A-Z][A-Z0-9_]{2,}\\]$")
+    static func firstMatch(_ re: NSRegularExpression, in s: String) -> Range<String.Index>? {
+        guard let m = re.firstMatch(in: s, range: NSRange(s.startIndex..., in: s)) else { return nil }
+        return Range(m.range, in: s)
+    }
+
     static func decodeLines(_ raw: String) -> [String] {
         var s = raw
         s = s.replacingOccurrences(of: "<br />", with: "\n")
         s = s.replacingOccurrences(of: "<br/>", with: "\n")
         s = s.replacingOccurrences(of: "<br>", with: "\n")
-        while let r = s.range(of: "&#[0-9]+;", options: .regularExpression) {
+        while let r = firstMatch(entite, in: s) {
             let digits = s[r].dropFirst(2).dropLast()
             let repl = Int(digits).flatMap { UnicodeScalar($0).map { String(Character($0)) } } ?? ""
             s.replaceSubrange(r, with: repl)
@@ -158,7 +168,7 @@ enum EDTKit {
         // "[MYANM012]" en fin de ligne = code module, pas une salle.
         // (Une salle finit par "[Salle de TD]", "[Amphithéâtre]"… : minuscules ou espaces.)
         func isModuleCodeLine(_ l: String) -> Bool {
-            l.range(of: "\\[[A-Z][A-Z0-9_]{2,}\\]$", options: .regularExpression) != nil
+            firstMatch(codeEnFin, in: l) != nil
         }
         remaining = remaining.filter { !isModuleCodeLine($0) }
 

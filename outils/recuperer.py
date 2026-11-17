@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Récupère les données brutes de Celcat SANS le Mac : se connecte avec un identifiant
 et un mot de passe, puis écrit la réponse de GetCalendarData dans un fichier.
-usage : recuperer.py <EDTKit.swift> <fichier de sortie> [profs.json]
+usage : recuperer.py <EDTKit.swift> <fichier de sortie> [session]
+        recuperer.py --profs <EDTKit.swift> <brut> <profs.json> <session>
         identifiants dans les variables d'environnement EDT_USER et EDT_PASSWORD
 
 Tourne dans GitHub Actions, sur un dépôt PUBLIC : les journaux sont lisibles par tous.
@@ -20,9 +21,9 @@ import datetime, html, http.cookiejar, json, os, re, sys, time, urllib.parse, ur
 # republierait sans cesse un emploi du temps « modifié » où les noms auraient disparu.
 MAX_FICHES = 90
 REVOIR_VIDES_JOURS = 14     # un cours proche sans enseignant connu est redemandé
-# Quelqu'un attend devant son téléphone : les fiches ne doivent pas retarder la mise à jour
-# de plus de quelques secondes. Ce qui n'est pas lu le sera au passage suivant.
-TEMPS_FICHES = 4
+# Les fiches sont lues après la publication (personne ne les attend), mais un lancement
+# suivant fait la queue derrière : on borne quand même. Le reste sera lu au passage suivant.
+TEMPS_FICHES = 15
 
 
 def nettoyer(v):
@@ -104,20 +105,57 @@ def conf(source):
     return c
 
 
-def main():
-    if len(sys.argv) not in (3, 4):
-        stop("usage : recuperer.py <EDTKit.swift> <sortie> [profs.json]")
-    c = conf(sys.argv[1])
-    user, mdp = os.environ.get("EDT_USER", ""), os.environ.get("EDT_PASSWORD", "")
-    if not user or not mdp:
-        stop("secrets EDT_USER / EDT_PASSWORD absents")
-
-    nav = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
+def navigateur(jarre):
+    nav = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jarre))
     # Celcat traduit certains libellés (« 10 autres... » / « 10 more... ») selon la langue du
     # navigateur. Le Mac est en français : sans cet en-tête, GitHub recevrait de l'anglais et
     # chacun republierait par-dessus l'autre un emploi du temps « modifié ».
     nav.addheaders = [("User-Agent", "Mozilla/5.0 (Macintosh) edt-maj"),
                       ("Accept-Language", "fr-FR,fr;q=0.9")]
+    return nav
+
+
+def enseignants(c, brut, profs, session):
+    """Second temps, APRÈS la publication de l'emploi du temps : personne ne l'attend.
+    Réutilise la session ouverte par le premier temps (fichier temporaire du runner)."""
+    jarre = http.cookiejar.LWPCookieJar(session)
+    try:
+        jarre.load(ignore_discard=True)
+        seances = json.load(open(brut, encoding="utf-8"))
+    except Exception as e:
+        print(f"[recuperer] enseignants ignorés — {type(e).__name__}")
+        return
+    nav = navigateur(jarre)
+
+    def appel_souple(chemin, champs):             # ne doit jamais faire échouer la mise à jour
+        req = urllib.request.Request(c["host"] + chemin, data=urllib.parse.urlencode(champs).encode())
+        req.add_header("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+        req.add_header("X-Requested-With", "XMLHttpRequest")
+        try:
+            return nav.open(req, timeout=20).read().decode("utf-8", "replace")
+        except Exception:
+            return None
+    try:
+        maj_profs(appel_souple, seances, profs)
+    except Exception as e:
+        print(f"[recuperer] enseignants ignorés — {type(e).__name__}")
+
+
+def main():
+    a = sys.argv[1:]
+    if a[:1] == ["--profs"] and len(a) == 5:
+        enseignants(conf(a[1]), a[2], a[3], a[4])
+        return
+    if len(a) not in (2, 3):
+        stop("usage : recuperer.py <EDTKit.swift> <sortie> [session]  |  "
+             "recuperer.py --profs <EDTKit.swift> <brut> <profs.json> <session>")
+    c = conf(a[0])
+    user, mdp = os.environ.get("EDT_USER", ""), os.environ.get("EDT_PASSWORD", "")
+    if not user or not mdp:
+        stop("secrets EDT_USER / EDT_PASSWORD absents")
+
+    jarre = http.cookiejar.LWPCookieJar()
+    nav = navigateur(jarre)
 
     def appel(etape, chemin, champs=None, ajax=False):
         req = urllib.request.Request(c["host"] + chemin)
@@ -156,23 +194,18 @@ def main():
     if not isinstance(seances, list) or not seances:
         stop("aucune séance reçue")
 
-    with open(sys.argv[2], "w", encoding="utf-8") as f:
+    with open(a[1], "w", encoding="utf-8") as f:
         f.write(brut)
     print(f"[recuperer] {len(seances)} événements bruts")
 
-    if len(sys.argv) == 4:
-        def appel_souple(chemin, champs):             # ne doit jamais faire échouer la mise à jour
-            req = urllib.request.Request(c["host"] + chemin, data=urllib.parse.urlencode(champs).encode())
-            req.add_header("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
-            req.add_header("X-Requested-With", "XMLHttpRequest")
-            try:
-                return nav.open(req, timeout=20).read().decode("utf-8", "replace")
-            except Exception:
-                return None
+    # Session gardée pour le second temps (--profs). Fichier temporaire du runner, privé et
+    # effacé avec lui : jamais dans le dépôt, jamais affiché.
+    if len(a) == 3:
         try:
-            maj_profs(appel_souple, seances, sys.argv[3])
+            jarre.save(a[2], ignore_discard=True, ignore_expires=True)
+            os.chmod(a[2], 0o600)
         except Exception as e:
-            print(f"[recuperer] enseignants ignorés — {type(e).__name__}")
+            print(f"[recuperer] session non gardée — {type(e).__name__}")
 
 
 if __name__ == "__main__":
