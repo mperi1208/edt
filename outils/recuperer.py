@@ -20,6 +20,9 @@ import datetime, html, http.cookiejar, json, os, re, sys, time, urllib.parse, ur
 # republierait sans cesse un emploi du temps « modifié » où les noms auraient disparu.
 MAX_FICHES = 90
 REVOIR_VIDES_JOURS = 14     # un cours proche sans enseignant connu est redemandé
+# Quelqu'un attend devant son téléphone : les fiches ne doivent pas retarder la mise à jour
+# de plus de quelques secondes. Ce qui n'est pas lu le sera au passage suivant.
+TEMPS_FICHES = 4
 
 
 def nettoyer(v):
@@ -63,8 +66,12 @@ def maj_profs(appel_souple, seances, chemin):
             continue                                  # cours passé : inutile
         if i not in connus or (connus[i] == "" and debut <= proche):
             a_voir.append(i)
-    trouves = 0
+    trouves, lues = 0, 0
+    fin = time.monotonic() + TEMPS_FICHES
     for i in a_voir[:MAX_FICHES]:
+        if time.monotonic() > fin:
+            break
+        lues += 1
         brut = appel_souple("/Home/GetSideBarEvent", {"eventId": i})
         if brut is None:
             break                                     # Celcat ne répond plus : on garde l'acquis
@@ -74,14 +81,13 @@ def maj_profs(appel_souple, seances, chemin):
             continue
         connus[i] = nom
         trouves += bool(nom)
-        time.sleep(0.05)
     connus = {i: n for i, n in connus.items() if i in ids}      # cours disparus
     with open(chemin, "w", encoding="utf-8") as f:
         json.dump(connus, f, ensure_ascii=False, indent=0, sort_keys=True)
         f.write("\n")
     # Journal public : des nombres seulement.
-    print(f"[recuperer] enseignants : {min(len(a_voir), MAX_FICHES)} fiches lues, {trouves} noms, "
-          f"{sum(1 for n in connus.values() if n)} connus au total, {max(0, len(a_voir) - MAX_FICHES)} restent à lire")
+    print(f"[recuperer] enseignants : {lues} fiches lues, {trouves} noms, "
+          f"{sum(1 for n in connus.values() if n)} connus au total, {len(a_voir) - lues} restent à lire")
 
 
 def stop(msg):

@@ -933,7 +933,7 @@ async function lancements(){
 async function attendre(n0){
   const limite = Date.now() + ATTENTE_MAX;
   for (;;) {
-    await pause(4000);
+    await pause(2000);   // un run dure ~25 s : chaque seconde d'attente en trop se voit
     // On relit TOUJOURS une fois après la pause : si le téléphone a mis la page en veille
     // entre-temps, l'heure limite est dépassée alors que le travail est peut-être fini.
     let liste = null;
