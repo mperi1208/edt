@@ -22,9 +22,10 @@ concurrency:
 
 jobs:
   maj:
-    # macOS et non Linux : même Swift et même Foundation que le Mac, donc un nettoyage
-    # strictement identique. Un écart ferait republier chacun par-dessus l'autre.
-    runs-on: macos-latest
+    # Linux : les runners macOS sont souvent saturés (file d'attente > 15 min, run annulé).
+    # Le nettoyage reste le même code ; decide-publication.py évite que chacun republie
+    # par-dessus l'autre en cas de petit écart.
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -51,7 +52,7 @@ jobs:
 
       - name: Nettoyer
         run: |
-          SUP="$HOME/Library/Application Support/EDTUVSQ"
+          SUP="$HOME/.local/share/EDTUVSQ"
           mkdir -p "$SUP"
           # Le cache de départ est la version publiée : fetchedAt (dernier changement)
           # n'avance que si les séances changent vraiment.
@@ -60,7 +61,7 @@ jobs:
 
       - name: Publier si utile
         run: |
-          SUP="$HOME/Library/Application Support/EDTUVSQ"
+          SUP="$HOME/.local/share/EDTUVSQ"
           RAISON=$(python3 outils/decide-publication.py "$SUP/data.json" data.json)
           if [ "$RAISON" = "cache illisible" ]; then echo "cache illisible"; exit 1; fi
           [ -n "$RAISON" ] && cp "$SUP/data.json" data.json
