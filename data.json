@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-18T13:50:31Z",
-  "fetchedAt" : "2026-11-18T13:50:31Z",
+  "checkedAt" : "2026-11-18T15:28:46Z",
+  "fetchedAt" : "2026-11-18T15:28:46Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -2669,24 +2669,24 @@
       "end" : "2027-01-11T11:10:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917441:22",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "G105 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2027-01-11T09:40:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-01-11T12:50:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917577:22",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "G105 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2027-01-11T11:20:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
@@ -2865,24 +2865,24 @@
       "end" : "2027-01-18T11:10:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917578:23",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "AMPHI E - DESCARTES",
       "site" : "DESCARTES",
       "start" : "2027-01-18T09:40:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-01-18T12:50:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917579:23",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "AMPHI E - DESCARTES",
       "site" : "DESCARTES",
       "start" : "2027-01-18T11:20:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
@@ -3269,36 +3269,36 @@
       "end" : "2027-02-01T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917779:25",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "AMPHI J - FERMAT",
       "site" : "FERMAT",
       "start" : "2027-02-01T13:50:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-02-01T17:00:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917781:25",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "AMPHI J - FERMAT",
       "site" : "FERMAT",
       "start" : "2027-02-01T15:30:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-02-01T18:40:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917785:25",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "AMPHI J - FERMAT",
       "site" : "FERMAT",
       "start" : "2027-02-01T17:10:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
@@ -3329,24 +3329,24 @@
       "end" : "2027-02-02T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917788:25",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "G105 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2027-02-02T13:50:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-02-02T17:00:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917790:25",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "AMPHI J - FERMAT",
       "site" : "FERMAT",
       "start" : "2027-02-02T15:30:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
@@ -3549,24 +3549,24 @@
       "end" : "2027-02-09T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917788:26",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "G105 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2027-02-09T13:50:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-02-09T17:00:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917790:26",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "AMPHI J - FERMAT",
       "site" : "FERMAT",
       "start" : "2027-02-09T15:30:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
@@ -3669,36 +3669,36 @@
       "end" : "2027-02-12T09:30:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917799:26",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "AMPHI J - FERMAT",
       "site" : "FERMAT",
       "start" : "2027-02-12T08:00:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-02-12T11:10:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917798:26",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "AMPHI J - FERMAT",
       "site" : "FERMAT",
       "start" : "2027-02-12T09:40:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-02-12T12:50:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917797:26",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "AMPHI J - FERMAT",
       "site" : "FERMAT",
       "start" : "2027-02-12T11:20:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
@@ -3777,24 +3777,24 @@
       "end" : "2027-02-23T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917788:28",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "G105 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2027-02-23T13:50:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-02-23T17:00:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917790:28",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "AMPHI J - FERMAT",
       "site" : "FERMAT",
       "start" : "2027-02-23T15:30:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
@@ -3997,24 +3997,24 @@
       "end" : "2027-03-02T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917788:29",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "G105 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2027-03-02T13:50:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-03-02T17:00:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917790:29",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "AMPHI J - FERMAT",
       "site" : "FERMAT",
       "start" : "2027-03-02T15:30:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
@@ -4205,24 +4205,24 @@
       "end" : "2027-03-09T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917788:30",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "101 - DESCARTES",
       "site" : "DESCARTES",
       "start" : "2027-03-09T13:50:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-03-09T17:00:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917790:30",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "101 - DESCARTES",
       "site" : "DESCARTES",
       "start" : "2027-03-09T15:30:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
@@ -4425,24 +4425,24 @@
       "end" : "2027-03-16T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917788:31",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "101 - DESCARTES",
       "site" : "DESCARTES",
       "start" : "2027-03-16T13:50:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-03-16T17:00:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917790:31",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "101 - DESCARTES",
       "site" : "DESCARTES",
       "start" : "2027-03-16T15:30:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
@@ -4645,24 +4645,24 @@
       "end" : "2027-03-23T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917788:32",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "101 - DESCARTES",
       "site" : "DESCARTES",
       "start" : "2027-03-23T13:50:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-03-23T17:00:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917790:32",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "room" : "101 - DESCARTES",
       "site" : "DESCARTES",
       "start" : "2027-03-23T15:30:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
@@ -4765,30 +4765,30 @@
       "end" : "2027-04-02T11:10:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917953:33",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "start" : "2027-04-02T09:40:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-04-02T12:50:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917947:33",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "start" : "2027-04-02T11:20:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
       "end" : "2027-04-02T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917954:33",
-      "module" : "MYANM001",
-      "moduleName" : "Optimisation numérique",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
       "start" : "2027-04-02T13:50:00",
-      "title" : "Optimisation numérique"
+      "title" : "Calcul scientifique et modélisation"
     },
     {
       "category" : "CM/TD",
