@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-17T16:32:38Z",
-  "fetchedAt" : "2026-11-17T16:32:38Z",
+  "checkedAt" : "2026-11-18T13:50:31Z",
+  "fetchedAt" : "2026-11-18T13:50:31Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -1483,18 +1483,6 @@
     },
     {
       "category" : "Contrôle continu",
-      "end" : "2026-11-18T17:50:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5911126:14",
-      "module" : "MYMAA002",
-      "moduleName" : "Introduction au calcul formel",
-      "room" : "2105 - FERMAT",
-      "site" : "FERMAT",
-      "start" : "2026-11-18T13:50:00",
-      "title" : "Introduction au calcul formel"
-    },
-    {
-      "category" : "Contrôle continu",
       "end" : "2026-11-18T17:00:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5911132:14",
@@ -1628,7 +1616,7 @@
       "id" : "-1742255826:1073733534:17:5914695:15",
       "module" : "MYANM001",
       "moduleName" : "Optimisation numérique",
-      "room" : "AMPHI G - FERMAT",
+      "room" : "AMPHI I - FERMAT",
       "site" : "FERMAT",
       "start" : "2026-11-23T15:30:00",
       "title" : "Optimisation numérique"
