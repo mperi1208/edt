@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-18T15:28:46Z",
-  "fetchedAt" : "2026-11-18T15:28:46Z",
+  "checkedAt" : "2026-11-19T12:01:18Z",
+  "fetchedAt" : "2026-11-19T12:01:18Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -2714,6 +2714,18 @@
     },
     {
       "category" : "CM/TD",
+      "end" : "2027-01-12T09:30:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917663:22",
+      "module" : "MYANM013",
+      "moduleName" : "Equations aux dérivées partielles en physique",
+      "room" : "G002 - GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-12T08:00:00",
+      "title" : "Equations aux dérivées partielles en physique"
+    },
+    {
+      "category" : "CM/TD",
       "end" : "2027-01-12T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917661:22",
@@ -2740,13 +2752,13 @@
       "category" : "CM/TD",
       "end" : "2027-01-12T15:20:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917663:22",
-      "module" : "MYANM013",
-      "moduleName" : "Equations aux dérivées partielles en physique",
-      "room" : "G002 - GERMAIN",
+      "id" : "-1742255826:1073733534:17:5917350:22",
+      "module" : "MYANM009",
+      "moduleName" : "Analyse hilbertienne et distributions",
+      "room" : "G003 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2027-01-12T13:50:00",
-      "title" : "Equations aux dérivées partielles en physique"
+      "title" : "Analyse hilbertienne et distributions"
     },
     {
       "category" : "CM/TD",
@@ -2758,18 +2770,6 @@
       "room" : "G003 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2027-01-12T15:30:00",
-      "title" : "Analyse hilbertienne et distributions"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2027-01-12T18:40:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917350:22",
-      "module" : "MYANM009",
-      "moduleName" : "Analyse hilbertienne et distributions",
-      "room" : "G003 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2027-01-12T17:10:00",
       "title" : "Analyse hilbertienne et distributions"
     },
     {
@@ -2910,6 +2910,18 @@
     },
     {
       "category" : "CM/TD",
+      "end" : "2027-01-19T09:30:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917663:23",
+      "module" : "MYANM013",
+      "moduleName" : "Equations aux dérivées partielles en physique",
+      "room" : "G002 - GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-19T08:00:00",
+      "title" : "Equations aux dérivées partielles en physique"
+    },
+    {
+      "category" : "CM/TD",
       "end" : "2027-01-19T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917661:23",
@@ -2930,18 +2942,6 @@
       "room" : "G002 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2027-01-19T11:20:00",
-      "title" : "Equations aux dérivées partielles en physique"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2027-01-19T15:20:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917663:23",
-      "module" : "MYANM013",
-      "moduleName" : "Equations aux dérivées partielles en physique",
-      "room" : "G002 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2027-01-19T13:50:00",
       "title" : "Equations aux dérivées partielles en physique"
     },
     {
@@ -3438,6 +3438,18 @@
     },
     {
       "category" : "CM/TD",
+      "end" : "2027-02-05T09:30:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5919933:25",
+      "module" : "MYANM013",
+      "moduleName" : "Equations aux dérivées partielles en physique",
+      "room" : "G210 - GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-02-05T08:00:00",
+      "title" : "Equations aux dérivées partielles en physique"
+    },
+    {
+      "category" : "CM/TD",
       "end" : "2027-02-05T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917752:25",
@@ -3463,14 +3475,38 @@
     {
       "category" : "CM/TD",
       "end" : "2027-02-05T15:20:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917751:25",
-      "module" : "MYANM013",
-      "moduleName" : "Equations aux dérivées partielles en physique",
-      "room" : "G210 - GERMAIN",
-      "site" : "GERMAIN",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5920078:25",
+      "module" : "MYMAA006",
+      "moduleName" : "Analyse d'algorithmes, programmation",
+      "room" : "AMPHI I - FERMAT",
+      "site" : "FERMAT",
       "start" : "2027-02-05T13:50:00",
-      "title" : "Equations aux dérivées partielles en physique"
+      "title" : "Analyse d'algorithmes, programmation"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-02-05T17:00:00",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5920081:25",
+      "module" : "MYMAA006",
+      "moduleName" : "Analyse d'algorithmes, programmation",
+      "room" : "AMPHI I - FERMAT",
+      "site" : "FERMAT",
+      "start" : "2027-02-05T15:30:00",
+      "title" : "Analyse d'algorithmes, programmation"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-02-05T18:40:00",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5920082:25",
+      "module" : "MYMAA006",
+      "moduleName" : "Analyse d'algorithmes, programmation",
+      "room" : "AMPHI I - FERMAT",
+      "site" : "FERMAT",
+      "start" : "2027-02-05T17:10:00",
+      "title" : "Analyse d'algorithmes, programmation"
     },
     {
       "category" : "CM/TD",
@@ -3886,6 +3922,18 @@
     },
     {
       "category" : "CM/TD",
+      "end" : "2027-02-26T09:30:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5919933:28",
+      "module" : "MYANM013",
+      "moduleName" : "Equations aux dérivées partielles en physique",
+      "room" : "G210 - GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-02-26T08:00:00",
+      "title" : "Equations aux dérivées partielles en physique"
+    },
+    {
+      "category" : "CM/TD",
       "end" : "2027-02-26T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917752:28",
@@ -3906,18 +3954,6 @@
       "room" : "G210 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2027-02-26T11:20:00",
-      "title" : "Equations aux dérivées partielles en physique"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2027-02-26T15:20:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917751:28",
-      "module" : "MYANM013",
-      "moduleName" : "Equations aux dérivées partielles en physique",
-      "room" : "G210 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2027-02-26T13:50:00",
       "title" : "Equations aux dérivées partielles en physique"
     },
     {
@@ -4106,6 +4142,30 @@
     },
     {
       "category" : "CM/TD",
+      "end" : "2027-03-05T09:30:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5919933:29",
+      "module" : "MYANM013",
+      "moduleName" : "Equations aux dérivées partielles en physique",
+      "room" : "G210 - GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-03-05T08:00:00",
+      "title" : "Equations aux dérivées partielles en physique"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-03-05T11:10:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917752:29",
+      "module" : "MYANM013",
+      "moduleName" : "Equations aux dérivées partielles en physique",
+      "room" : "G210 - GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-03-05T09:40:00",
+      "title" : "Equations aux dérivées partielles en physique"
+    },
+    {
+      "category" : "CM/TD",
       "end" : "2027-03-05T12:50:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917749:29",
@@ -4114,18 +4174,6 @@
       "room" : "G210 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2027-03-05T11:20:00",
-      "title" : "Equations aux dérivées partielles en physique"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2027-03-05T15:20:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917751:29",
-      "module" : "MYANM013",
-      "moduleName" : "Equations aux dérivées partielles en physique",
-      "room" : "G210 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2027-03-05T13:50:00",
       "title" : "Equations aux dérivées partielles en physique"
     },
     {
@@ -4314,6 +4362,18 @@
     },
     {
       "category" : "CM/TD",
+      "end" : "2027-03-12T09:30:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5919933:30",
+      "module" : "MYANM013",
+      "moduleName" : "Equations aux dérivées partielles en physique",
+      "room" : "G210 - GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-03-12T08:00:00",
+      "title" : "Equations aux dérivées partielles en physique"
+    },
+    {
+      "category" : "CM/TD",
       "end" : "2027-03-12T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917752:30",
@@ -4334,18 +4394,6 @@
       "room" : "G210 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2027-03-12T11:20:00",
-      "title" : "Equations aux dérivées partielles en physique"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2027-03-12T15:20:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917751:30",
-      "module" : "MYANM013",
-      "moduleName" : "Equations aux dérivées partielles en physique",
-      "room" : "G210 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2027-03-12T13:50:00",
       "title" : "Equations aux dérivées partielles en physique"
     },
     {
@@ -4534,6 +4582,18 @@
     },
     {
       "category" : "CM/TD",
+      "end" : "2027-03-19T09:30:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5917889:31",
+      "module" : "MYANM013",
+      "moduleName" : "Equations aux dérivées partielles en physique",
+      "room" : "G210 - GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-03-19T08:00:00",
+      "title" : "Equations aux dérivées partielles en physique"
+    },
+    {
+      "category" : "CM/TD",
       "end" : "2027-03-19T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917752:31",
@@ -4554,30 +4614,6 @@
       "room" : "G210 - GERMAIN",
       "site" : "GERMAIN",
       "start" : "2027-03-19T11:20:00",
-      "title" : "Equations aux dérivées partielles en physique"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2027-03-19T15:20:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917751:31",
-      "module" : "MYANM013",
-      "moduleName" : "Equations aux dérivées partielles en physique",
-      "room" : "G210 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2027-03-19T13:50:00",
-      "title" : "Equations aux dérivées partielles en physique"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2027-03-19T17:00:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917889:31",
-      "module" : "MYANM013",
-      "moduleName" : "Equations aux dérivées partielles en physique",
-      "room" : "G210 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2027-03-19T15:30:00",
       "title" : "Equations aux dérivées partielles en physique"
     },
     {
