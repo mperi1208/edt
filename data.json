@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-19T12:01:18Z",
-  "fetchedAt" : "2026-11-19T12:01:18Z",
+  "checkedAt" : "2026-11-19T13:10:58Z",
+  "fetchedAt" : "2026-11-19T13:10:58Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -3328,7 +3328,7 @@
       "category" : "CM/TD",
       "end" : "2027-02-02T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917788:25",
+      "id" : "-1742255826:1073733534:17:5920140:25",
       "module" : "MYANM008",
       "moduleName" : "Calcul scientifique et modélisation",
       "room" : "G105 - GERMAIN",
@@ -3582,18 +3582,6 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2027-02-09T15:20:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917788:26",
-      "module" : "MYANM008",
-      "moduleName" : "Calcul scientifique et modélisation",
-      "room" : "G105 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2027-02-09T13:50:00",
-      "title" : "Calcul scientifique et modélisation"
-    },
-    {
-      "category" : "CM/TD",
       "end" : "2027-02-09T17:00:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917790:26",
@@ -3602,6 +3590,18 @@
       "room" : "AMPHI J - FERMAT",
       "site" : "FERMAT",
       "start" : "2027-02-09T15:30:00",
+      "title" : "Calcul scientifique et modélisation"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-02-09T18:40:00",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5920139:26",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
+      "room" : "AMPHI J - FERMAT",
+      "site" : "FERMAT",
+      "start" : "2027-02-09T17:10:00",
       "title" : "Calcul scientifique et modélisation"
     },
     {
@@ -3812,7 +3812,7 @@
       "category" : "CM/TD",
       "end" : "2027-02-23T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917788:28",
+      "id" : "-1742255826:1073733534:17:5920140:28",
       "module" : "MYANM008",
       "moduleName" : "Calcul scientifique et modélisation",
       "room" : "G105 - GERMAIN",
@@ -3830,6 +3830,18 @@
       "room" : "AMPHI J - FERMAT",
       "site" : "FERMAT",
       "start" : "2027-02-23T15:30:00",
+      "title" : "Calcul scientifique et modélisation"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-02-23T18:40:00",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5920141:28",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
+      "room" : "AMPHI J - FERMAT",
+      "site" : "FERMAT",
+      "start" : "2027-02-23T17:10:00",
       "title" : "Calcul scientifique et modélisation"
     },
     {
@@ -4032,7 +4044,7 @@
       "category" : "CM/TD",
       "end" : "2027-03-02T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917788:29",
+      "id" : "-1742255826:1073733534:17:5920140:29",
       "module" : "MYANM008",
       "moduleName" : "Calcul scientifique et modélisation",
       "room" : "G105 - GERMAIN",
@@ -4050,6 +4062,18 @@
       "room" : "AMPHI J - FERMAT",
       "site" : "FERMAT",
       "start" : "2027-03-02T15:30:00",
+      "title" : "Calcul scientifique et modélisation"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-03-02T18:40:00",
+      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
+      "id" : "-1742255826:1073733534:17:5920141:29",
+      "module" : "MYANM008",
+      "moduleName" : "Calcul scientifique et modélisation",
+      "room" : "AMPHI J - FERMAT",
+      "site" : "FERMAT",
+      "start" : "2027-03-02T17:10:00",
       "title" : "Calcul scientifique et modélisation"
     },
     {
@@ -4252,7 +4276,7 @@
       "category" : "CM/TD",
       "end" : "2027-03-09T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917788:30",
+      "id" : "-1742255826:1073733534:17:5920140:30",
       "module" : "MYANM008",
       "moduleName" : "Calcul scientifique et modélisation",
       "room" : "101 - DESCARTES",
@@ -4472,7 +4496,7 @@
       "category" : "CM/TD",
       "end" : "2027-03-16T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917788:31",
+      "id" : "-1742255826:1073733534:17:5920140:31",
       "module" : "MYANM008",
       "moduleName" : "Calcul scientifique et modélisation",
       "room" : "101 - DESCARTES",
@@ -4680,7 +4704,7 @@
       "category" : "CM/TD",
       "end" : "2027-03-23T15:20:00",
       "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917788:32",
+      "id" : "-1742255826:1073733534:17:5920140:32",
       "module" : "MYANM008",
       "moduleName" : "Calcul scientifique et modélisation",
       "room" : "101 - DESCARTES",
