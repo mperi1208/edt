@@ -77,6 +77,21 @@ html,body{touch-action:pan-x pan-y}   /* défilement oui, zoom (pincement, doubl
 .ev.short{padding-top:3px}
 .ev.short .n{font-size:11px}
 .ev.short .r{display:none}
+/* PAYSAGE SUR TÉLÉPHONE (2026-11-19) : toute la semaine, 8 h–20 h, tient dans l'écran sans
+   défiler. La hauteur d'une heure est calculée dans render() ; ici, tout se tasse. */
+body.paysage header{padding:5px 12px 4px;gap:8px}
+body.paysage header h1{font-size:15px}
+body.paysage .dayhead{padding:0 0 2px}
+body.paysage .dayhead .dw{font-size:9px}
+body.paysage .dayhead .dd{font-size:13px;line-height:1.1}
+body.paysage .axis span{font-size:9px;transform:translateY(-5px)}
+body.paysage .ev{padding:1px 4px 1px 5px;border-radius:5px;border-left-width:3px}
+body.paysage .ev .t{font-size:8.5px}
+body.paysage .ev .n{font-size:9.5px;line-height:1.15;margin:0}
+body.paysage .ev .b{font-size:7.5px;padding:0 3px;letter-spacing:0}
+body.paysage .ev .r{display:none}
+body.paysage .ev .mapbtn{width:13px;height:13px;right:2px;bottom:2px}
+body.paysage .ev .mapbtn svg{width:8px;height:8px}
 
 /* secondaires : présents mais très en retrait */
 /* Discrets, mais leur étendue doit rester lisible : sans fond ni bordure visible,
@@ -593,6 +608,7 @@ function render(){
   const grid=document.getElementById("grid");
   if(!DATA){ grid.innerHTML='<div class="empty">Chargement…</div>'; return; }
   document.body.classList.toggle("day", isNarrow());
+  if (isNarrow()) document.body.classList.remove("paysage");
   renderCC();
   if(isNarrow()){ renderDay(); stampMeta(); return; }
 
@@ -608,6 +624,15 @@ function render(){
     if((byDay[ymd(d)]||[]).length) maxDay=i;
   }
   const ndays=maxDay+1, hours=DAY_END-DAY_START;
+  // Hauteur d'une heure : 62 px, sauf téléphone en paysage, où 8 h–20 h doit tenir dans l'écran.
+  const paysage = window.innerWidth > window.innerHeight && window.innerHeight < 520;
+  document.body.classList.toggle("paysage", paysage);
+  let HH = 62;
+  if (paysage) {
+    const haut = grid.getBoundingClientRect().top + (window.scrollY || 0);
+    HH = Math.max(14, Math.floor((window.innerHeight - haut - 40) / hours));   // 40 : en-tête des jours + marge
+  }
+  document.documentElement.style.setProperty("--h", HH + "px");
   grid.style.gridTemplateColumns = "44px repeat("+ndays+", minmax(0,1fr))";
   document.documentElement.style.setProperty("--hours",hours);
 
@@ -623,7 +648,7 @@ function render(){
     html+=`<div class="dayhead${ymd(d)===today?" is-today":""}"><div class="dw">${dw}</div><div class="dd">${d.getDate()}</div></div>`;
   }
   html+='<div class="axis">';
-  for(let h=DAY_START;h<=DAY_END;h++) html+=`<span style="top:${(h-DAY_START)*62}px">${h}h</span>`;
+  for(let h=DAY_START;h<=DAY_END;h++) html+=`<span style="top:${(h-DAY_START)*HH}px">${h}h</span>`;
   html+='</div>';
 
   const nowD=new Date();
@@ -631,15 +656,15 @@ function render(){
     const d=new Date(start); d.setDate(d.getDate()+i);
     const key=ymd(d), isToday=key===today;
     html+=`<div class="col${isToday?" is-today":""}">`;
-    for(let h=DAY_START;h<=DAY_END;h++) html+=`<div class="hline" style="top:${(h-DAY_START)*62}px"></div>`;
+    for(let h=DAY_START;h<=DAY_END;h++) html+=`<div class="hline" style="top:${(h-DAY_START)*HH}px"></div>`;
     if(isToday){
       const m=minutes(nowD);
-      if(m>=DAY_START*60&&m<=DAY_END*60) html+=`<div class="now" style="top:${(m-DAY_START*60)/60*62}px"></div>`;
+      if(m>=DAY_START*60&&m<=DAY_END*60) html+=`<div class="now" style="top:${(m-DAY_START*60)/60*HH}px"></div>`;
     }
     layout(byDay[key]||[]).forEach(ev=>{
       const s0=Math.max(ev.s,DAY_START*60), e0=Math.min(ev.e,DAY_END*60);
       if(e0<=s0) return;
-      const top=(s0-DAY_START*60)/60*62, h=Math.max(22,(e0-s0)/60*62-3);
+      const top=(s0-DAY_START*60)/60*HH, h=Math.max(paysage ? 12 : 22,(e0-s0)/60*HH-(paysage ? 2 : 3));
       const prim=isPrimary(ev), c=prim?colorFor(ev):"var(--dim)";
       const w=100/ev.ncols, left=ev.col*w;
       const cat=(ev.category||"").replace("Contrôle continu","CC").replace("Réunion de pré-rentrée","Pré-rentrée");
