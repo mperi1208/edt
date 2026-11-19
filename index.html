@@ -1011,6 +1011,15 @@ function saisirJeton(){
 // machine) ne sert plus qu'en secours, si la fonction échoue et qu'un jeton GitHub est là.
 // La clé (edt_…) est saisie une fois sur l'appareil, comme le jeton, et jamais publiée.
 const FN = "https://cudbzrwznyqvzejhmxzi.supabase.co/functions/v1/edt-maj";
+// Lien d'installation de la clé : …/edt/#cle=edt_… (ouvert une fois sur l'appareil). La clé est
+// enregistrée puis retirée de l'adresse. Le fragment (#…) n'est jamais envoyé à un serveur.
+(function(){
+  const m = /^#cle=(edt_[A-Za-z0-9]+)$/.exec(location.hash || "");
+  if (!m) return;
+  mem.set(CLE.cle, m[1]);
+  mem.set(CLE.essai, null);
+  try { history.replaceState(null, "", location.pathname + location.search); } catch(e) { location.hash = ""; }
+})();
 const DELAI_DIRECT = 30 * 1000;        // à l'ouverture, pas deux vérifications en 30 s
 const trieCles = v => Array.isArray(v) ? v.map(trieCles)
   : v && typeof v === "object" ? Object.keys(v).sort().reduce((o, k) => (o[k] = trieCles(v[k]), o), {}) : v;
