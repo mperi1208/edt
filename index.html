@@ -339,7 +339,7 @@ const canEdit = !!window.EDT_CAN_EDIT;
 
 // Mémoire du téléphone (jeton GitHub, heure de la dernière vérification réussie).
 // Reste sur l'appareil : rien de tout ça n'est publié.
-const CLE = { jeton:"edt.jeton", verif:"edt.verifie", essai:"edt.essai" };
+const CLE = { jeton:"edt.jeton", verif:"edt.verifie", essai:"edt.essai", cle:"edt.cle" };
 // Enseignants : {identifiant du cours: nom}, publié à part dans profs.json par GitHub (Celcat
 // ne les donne que dans la fiche détaillée de chaque cours). Gardé en mémoire pour l'affichage
 // hors connexion.
@@ -994,18 +994,62 @@ async function lireDonnees(){
 }
 
 function saisirJeton(){
-  const s = (prompt("Pour mettre à jour depuis ce téléphone, colle ici le jeton GitHub (demandé une seule fois).\nAnnuler : recharger seulement ce qui est déjà publié.") || "").trim();
+  const s = (prompt("Pour mettre à jour depuis ce téléphone, colle ici la clé de mise à jour (edt_…) ou, à défaut, le jeton GitHub (demandé une seule fois).\nAnnuler : recharger seulement ce qui est déjà publié.") || "").trim();
   if (!s) return;
+  if (/^edt_[A-Za-z0-9]+$/.test(s)) { mem.set(CLE.cle, s); return; }
   // Un caractère parasite (guillemet, espace insécable) rendrait l'en-tête invalide à vie.
   if (/^[A-Za-z0-9_]+$/.test(s)) mem.set(CLE.jeton, s);
   else alert("Ce texte ne ressemble pas à un jeton GitHub : il n'a pas été enregistré.");
 }
 
+// MISE À JOUR DIRECTE (2026-11-19) : une fonction Supabase (edt-maj) se connecte à Celcat et
+// renvoie les séances déjà nettoyées, en ~2 s. GitHub Actions (30 à 40 s : il faut démarrer une
+// machine) ne sert plus qu'en secours, si la fonction échoue et qu'un jeton GitHub est là.
+// La clé (edt_…) est saisie une fois sur l'appareil, comme le jeton, et jamais publiée.
+const FN = "https://cudbzrwznyqvzejhmxzi.supabase.co/functions/v1/edt-maj";
+const DELAI_DIRECT = 30 * 1000;        // à l'ouverture, pas deux vérifications en 30 s
+const trieCles = v => Array.isArray(v) ? v.map(trieCles)
+  : v && typeof v === "object" ? Object.keys(v).sort().reduce((o, k) => (o[k] = trieCles(v[k]), o), {}) : v;
+const signature = l => JSON.stringify(trieCles((l || []).slice().sort((a, b) =>
+  a.start < b.start ? -1 : a.start > b.start ? 1 : String(a.id) < String(b.id) ? -1 : 1)));
+async function majDirecte(){
+  const r = await fetch(FN, {method:"POST", cache:"no-store", headers:{"x-edt-cle": mem.get(CLE.cle)}});
+  let d = null; try { d = await r.json(); } catch(e) {}
+  if (r.status === 401) throw Object.assign(new Error("clé refusée"), {cle:true});
+  if (!r.ok || !d || !Array.isArray(d.sessions)) throw new Error((d && d.erreur) || "HTTP " + r.status);
+  delete d.ms;
+  // fetchedAt = dernier CHANGEMENT : inchangé si les séances sont les mêmes (comme le Mac)
+  if (DATA && DATA.fetchedAt && signature(DATA.sessions) === signature(d.sessions)) d.fetchedAt = DATA.fetchedAt;
+  return d;
+}
+
 // manuel = bouton ↻ ; sinon ouverture de la page ou retour dessus.
 async function lancerMaj(manuel){
   if (majEnCours) return;
-  if (!mem.get(CLE.jeton) && manuel) saisirJeton();
+  if (!mem.get(CLE.jeton) && !mem.get(CLE.cle) && manuel) saisirJeton();
   const b = $("refresh");
+  if (mem.get(CLE.cle)) {
+    if (!manuel && Date.now() - Number(mem.get(CLE.essai) || 0) < DELAI_DIRECT) return;
+    majEnCours = true;
+    b.classList.add("busy");
+    majStatut("mise à jour…", false);
+    try {
+      const d = await majDirecte();
+      mem.set(CLE.essai, String(Date.now()));
+      mem.set(CLE.verif, new Date().toISOString());
+      applyData(d);
+      edtRefreshDone(true);
+      return;
+    } catch(e) {
+      if (e.cle) mem.set(CLE.cle, null);        // elle sera redemandée au prochain ↻
+      if (!mem.get(CLE.jeton)) {
+        b.classList.remove("busy");
+        majStatut("échec : " + (e.cle ? "clé refusée, touche ↻" : String(e.message || e)), String(e.message || e));
+        return;
+      }
+      // sinon : secours par GitHub Actions, ci-dessous
+    } finally { majEnCours = false; }
+  }
   if (!mem.get(CLE.jeton)) {
     if (!manuel) return;
     majEnCours = true;
