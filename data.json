@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-19T13:10:58Z",
-  "fetchedAt" : "2026-11-19T13:10:58Z",
+  "checkedAt" : "2026-11-19T14:42:17Z",
+  "fetchedAt" : "2026-11-19T14:42:17Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -2180,18 +2180,6 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2026-12-10T17:00:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5890845:17",
-      "module" : "MYANM007",
-      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "G104 M- GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2026-12-10T15:30:00",
-      "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "CM/TD",
       "end" : "2026-12-11T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
       "id" : "-1742255826:1073733534:17:5829505:17",
@@ -2200,18 +2188,6 @@
       "room" : "G104 M- GERMAIN",
       "site" : "GERMAIN",
       "start" : "2026-12-11T09:40:00",
-      "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2026-12-11T12:50:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829515:17",
-      "module" : "MYANM007",
-      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "G104 M- GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2026-12-11T11:20:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -2296,26 +2272,16 @@
       "title" : "Optimisation numérique"
     },
     {
-      "category" : "Contrôle continu",
-      "end" : "2026-12-15T12:50:00",
+      "category" : "CM/TD",
+      "end" : "2026-12-15T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829519:18",
+      "id" : "-1742255826:1073733534:17:5920226:18",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI C - DESCARTES",
-      "site" : "DESCARTES",
+      "room" : "2206 - FERMAT",
+      "site" : "FERMAT",
       "start" : "2026-12-15T09:40:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "TD",
-      "end" : "2026-12-15T17:00:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5845425:18",
-      "room" : "AMPHI I - FERMAT",
-      "site" : "FERMAT",
-      "start" : "2026-12-15T13:50:00",
-      "title" : "Projet de groupe"
     },
     {
       "category" : "CM/TD",
@@ -2389,51 +2355,15 @@
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
-      "category" : "CM/TD",
-      "end" : "2026-12-17T15:20:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5890825:18",
-      "module" : "MYANM007",
-      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "G210 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2026-12-17T13:50:00",
-      "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2026-12-17T17:00:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5890851:18",
-      "module" : "MYANM007",
-      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "G210 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2026-12-17T15:30:00",
-      "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2026-12-18T11:10:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829505:18",
-      "module" : "MYANM007",
-      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "G104 M- GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2026-12-18T09:40:00",
-      "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "CM/TD",
+      "category" : "Contrôle continu",
       "end" : "2026-12-18T12:50:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829515:18",
+      "id" : "-1742255826:1073733534:17:5829519:18",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "G104 M- GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2026-12-18T11:20:00",
+      "room" : "AMPHI F - FERMAT",
+      "site" : "FERMAT",
+      "start" : "2026-12-18T09:40:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
