@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-19T14:42:17Z",
-  "fetchedAt" : "2026-11-19T14:42:17Z",
+  "checkedAt" : "2026-11-20T13:18:22Z",
+  "fetchedAt" : "2026-11-20T13:18:22Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -1934,7 +1934,7 @@
       "category" : "CM/TD",
       "end" : "2026-12-03T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829516:16",
+      "id" : "-1742255826:1073733534:17:5920587:16",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
       "room" : "G104 M- GERMAIN",
@@ -2142,27 +2142,15 @@
       "title" : "Introduction au calcul formel"
     },
     {
-      "category" : "CM/TD",
-      "end" : "2026-12-10T11:10:00",
-      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829516:17",
-      "module" : "MYANM007",
-      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "G104 M- GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2026-12-10T09:40:00",
-      "title" : "Inférence statistique et théorie de l'apprentissage"
-    },
-    {
-      "category" : "CM/TD",
+      "category" : "Contrôle continu",
       "end" : "2026-12-10T12:50:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829518:17",
+      "id" : "-1742255826:1073733534:17:5920586:17",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "G104 M- GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2026-12-10T11:20:00",
+      "room" : "AMPHI C - DESCARTES",
+      "site" : "DESCARTES",
+      "start" : "2026-12-10T09:40:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -2334,7 +2322,7 @@
       "category" : "CM/TD",
       "end" : "2026-12-17T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829516:18",
+      "id" : "-1742255826:1073733534:17:5920587:18",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
       "room" : "G104 M- GERMAIN",
