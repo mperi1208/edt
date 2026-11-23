@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-23T10:11:14Z",
-  "fetchedAt" : "2026-11-20T13:18:22Z",
+  "checkedAt" : "2026-11-23T17:09:53Z",
+  "fetchedAt" : "2026-11-23T17:09:53Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -2589,8 +2589,8 @@
       "id" : "-1742255826:1073733534:17:5917441:22",
       "module" : "MYANM008",
       "moduleName" : "Calcul scientifique et modélisation",
-      "room" : "G105 - GERMAIN",
-      "site" : "GERMAIN",
+      "room" : "101 - DESCARTES",
+      "site" : "DESCARTES",
       "start" : "2027-01-11T09:40:00",
       "title" : "Calcul scientifique et modélisation"
     },
@@ -2601,8 +2601,8 @@
       "id" : "-1742255826:1073733534:17:5917577:22",
       "module" : "MYANM008",
       "moduleName" : "Calcul scientifique et modélisation",
-      "room" : "G105 - GERMAIN",
-      "site" : "GERMAIN",
+      "room" : "101 - DESCARTES",
+      "site" : "DESCARTES",
       "start" : "2027-01-11T11:20:00",
       "title" : "Calcul scientifique et modélisation"
     },
