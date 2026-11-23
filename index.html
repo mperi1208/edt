@@ -817,6 +817,37 @@ function ouvrirSec(ouvrir){
 function garderChoix(){
   try { localStorage.setItem("edt.secondaires", JSON.stringify(CHOIX_SEC)); } catch(e){}
   render(); remplirSec();
+  envoyerSec();
+}
+// SYNCHRO Mac ↔ téléphone : les choix vivent aussi dans Supabase (table edt_reglages), via la
+// fonction edt-maj (?reglages=1) et la même clé que la mise à jour. Sur le téléphone, la clé est
+// dans la mémoire de l'appareil ; sur le Mac, dans overrides.json (OVER.cle, jamais publié).
+// Le dernier qui modifie gagne ; un envoi raté est retenté au prochain chargement.
+const cleSync = () => mem.get(CLE.cle) || (OVER && OVER.cle) || "";
+async function appelSec(corps){
+  const r = await fetch(FN + "?reglages=1", {method:"POST", cache:"no-store",
+    headers:{"x-edt-cle": cleSync(), "content-type":"application/json"}, body: corps ? JSON.stringify(corps) : ""});
+  const o = await r.json().catch(() => null);
+  if (!r.ok || !o || typeof o.secondaires !== "object") throw new Error((o && o.erreur) || ("HTTP " + r.status));
+  return o.secondaires;
+}
+async function envoyerSec(){
+  if (!cleSync()) return;
+  mem.set("edt.secondaires.attente", "1");
+  try { await appelSec({secondaires: CHOIX_SEC}); mem.set("edt.secondaires.attente", null); }
+  catch(e){ console.warn("synchro des secondaires impossible", e); }
+}
+async function chargerSec(){
+  if (!cleSync()) return;
+  if (mem.get("edt.secondaires.attente")) return envoyerSec();   // un choix local pas encore parti
+  try {
+    const s = await appelSec(null);
+    if (JSON.stringify(s) === JSON.stringify(CHOIX_SEC)) return;
+    CHOIX_SEC = s;
+    try { localStorage.setItem("edt.secondaires", JSON.stringify(CHOIX_SEC)); } catch(e){}
+    if (DATA) render();
+    if (!g("secpop").hidden) remplirSec();
+  } catch(e){ console.warn("lecture des secondaires impossible", e); }
 }
 g("togglesec").onclick = () => ouvrirSec(g("secpop").hidden);
 g("secclose").onclick = g("secfond").onclick = () => ouvrirSec(false);
@@ -1260,7 +1291,10 @@ window.applyData = function(d){
   if(!cursor) cursor = dayToOpen();
   render();
 };
-chargerProfs(); chargerRetouches();
+chargerProfs(); chargerRetouches(); chargerSec();
+// Choix des secondaires faits sur l'autre appareil : relus à chaque retour sur la page.
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") chargerSec(); });
+window.addEventListener("focus", () => chargerSec());
 if(window.EDT_DATA) applyData(window.EDT_DATA);
 else {
   fetch("overrides.json?t="+Date.now(),{cache:"no-store"})
