@@ -186,7 +186,32 @@ body.day .sp{flex:0 0 100%;height:0}          /* force les boutons sur leur prop
 body.day #prev,body.day #today,body.day #next{flex:0 0 auto}
 body.day h1{font-size:14px}
 body.day .range{font-size:13px}
-body.day #togglesec{display:none}
+/* menu « Secondaires ▾ » : sous le bouton sur le Mac, en bas de l'écran sur le téléphone */
+#togglesec{white-space:nowrap}
+.secfond{position:fixed;inset:0;z-index:40;background:transparent}
+.secfond[hidden],.secpop[hidden]{display:none}
+.secpop{position:fixed;z-index:41;top:52px;right:18px;width:320px;max-height:calc(100vh - 70px);
+  display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);
+  border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.14);padding:12px 14px}
+.sechd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-size:14px}
+.secmask{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-weight:500}
+.secaide{color:var(--dim);font-size:11px;margin:8px 0 2px}
+.seclist{overflow-y:auto;flex:1 1 auto;-webkit-overflow-scrolling:touch}
+.secrow{display:flex;align-items:center;gap:9px;padding:7px 2px;cursor:pointer;border-radius:6px}
+.secrow:hover{background:var(--bg)}
+.secrow .pt{width:9px;height:9px;border-radius:50%;flex:0 0 auto;background:var(--c)}
+.secrow .nm{flex:1;line-height:1.3}
+.secrow.on .nm{color:var(--dim)}
+.secrow .nb{color:var(--dim);font-size:11px;font-variant-numeric:tabular-nums}
+.secpop input[type=checkbox]{width:17px;height:17px;margin:0;accent-color:#5b7ca8;flex:0 0 auto}
+.secreset{margin-top:10px;align-self:flex-start;font-size:12px;color:var(--dim)}
+@media (max-width:700px){
+  .secfond{background:rgba(0,0,0,.3)}
+  .secpop{top:auto;left:0;right:0;bottom:0;width:auto;max-height:75vh;border-radius:16px 16px 0 0;
+    border-bottom:0;padding:14px 16px calc(14px + env(safe-area-inset-bottom))}
+  .secrow{padding:10px 2px;font-size:14px}
+  .secpop input[type=checkbox]{width:20px;height:20px}
+}
 @media (max-width:700px){
   button,a.btn{padding:6px 12px}
   body.day .meta{margin-left:auto}
@@ -205,10 +230,18 @@ body.day #togglesec{display:none}
   <button id="refresh" title="Forcer une mise à jour depuis Celcat">↻</button>
   <button id="add" title="Ajouter un créneau">+</button>
   <button id="unhide" title="Séances masquées" hidden>Masquées</button>
-  <button id="togglesec" title="Afficher ou masquer les créneaux secondaires">Secondaires</button>
+  <button id="togglesec" title="Choisir les matières secondaires (grisées)" aria-expanded="false">Secondaires ▾</button>
   <a class="btn" id="site" href="https://edt.uvsq.fr/" target="_blank" rel="noopener"
      title="Ouvrir l'emploi du temps officiel sur edt.uvsq.fr">Site UVSQ ↗</a>
 </header>
+<div class="secfond" id="secfond" hidden></div>
+<div class="secpop" id="secpop" hidden role="dialog" aria-label="Matières secondaires">
+  <div class="sechd"><b>Matières secondaires</b><button class="icon" id="secclose" title="Fermer">✕</button></div>
+  <label class="secmask"><input type="checkbox" id="sechide"> Masquer les secondaires</label>
+  <div class="secaide">Cochée = grisée (secondaire)</div>
+  <div class="seclist" id="seclist"></div>
+  <button class="secreset" id="secreset">Rétablir les choix par défaut</button>
+</div>
 <div class="wrap"><div class="grid" id="grid"></div>
   <section class="cc" id="cc" hidden></section></div>
 
@@ -306,21 +339,23 @@ window.EDTPlan = (function(){
 </script>
 
 <script>
-// Seules les OPTIONS non choisies sont grisées (cf. maquette M1 AMS, BCC 3).
-// Tout le reste — cours obligatoires, y compris ceux du S2 pas encore publiés,
-// forum, projet de groupe, pré-rentrée — s'affiche normalement.
-const MUTED_MODULES = [
+// Matières secondaires (grisées) PAR DÉFAUT. Chaque appareil peut ensuite cocher / décocher
+// ce qu'il veut dans le menu « Secondaires ▾ » (choix gardé dans sa mémoire, clé edt.secondaires).
+const DEFAULT_SEC = [
   "MYMAA002",   // Introduction au calcul formel
   "MYCHP104",   // Programmation orientée objet (Guyancourt)
   "MYMAA008",   // Théorie de l'information (S2) — finalement pas choisie
   "MYCHP200",   // Optimisation et recherche opérationnelle (S2, Guyancourt)
-  "MSANGS1"     // Anglais science Master S1 — secondaire
+  "MSANGS1",    // Anglais science Master S1
+  "MYMAS006",   // Séminaire invité (entreprise et recherche)
+  "TRAJET"      // navette Versailles–Guyancourt, liée à la POO
 ];              // Analyse d'algorithmes (MYMAA006) est choisie : pas grisée.
-const MUTED_TITLES  = [
-  /MYCHP104|Programmation Orient/i,   // les cours de Guyancourt n'ont pas de code module dans Celcat,
-  /MYCHP200|recherche op[ée]rationnelle/i,  // seulement dans l'intitulé
-  /MYMAA008|th[ée]orie de l.information/i,
-  /TRAJET/i                           // navette Versailles–Guyancourt, liée à la POO
+// Cours sans code module dans Celcat (Guyancourt, navette) : reconnus à leur intitulé.
+const TITLE_KEYS = [
+  [/MYCHP104|Programmation Orient/i, "MYCHP104"],
+  [/MYCHP200|recherche op[ée]rationnelle/i, "MYCHP200"],
+  [/MYMAA008|th[ée]orie de l.information/i, "MYMAA008"],
+  [/TRAJET/i, "TRAJET"]
 ];
 const COLORS = {
   MYANM007:"#2f7ae5", MYANM001:"#d2691e", MYANM009:"#7b53c1", MYMAS001:"#1f9e6e",
@@ -460,8 +495,17 @@ function labelFor(s){
   if (t) t = t.charAt(0).toUpperCase() + t.slice(1);
   return t || s.category || "—";
 }
-const isMuted = s => (s.module && MUTED_MODULES.includes(s.module))
-                  || MUTED_TITLES.some(r => r.test(s.title || ""));
+// Une « matière » = son code module (sans suffixe : « MYCHP200 -2 »), sinon son intitulé.
+function matiere(s){
+  if (s.perso) return null;                       // ses propres créneaux : jamais grisés
+  if (s.module) return s.module.trim().split(/\s/)[0];
+  const t = TITLE_KEYS.find(([r]) => r.test(s.title || ""));
+  return t ? t[1] : labelFor(s);
+}
+let CHOIX_SEC = {};                                // {matière: true (grisée) | false}
+try { CHOIX_SEC = JSON.parse(localStorage.getItem("edt.secondaires") || "{}") || {}; } catch(e){}
+const estSec = k => k != null && (k in CHOIX_SEC ? CHOIX_SEC[k] : DEFAULT_SEC.includes(k));
+const isMuted = s => estSec(matiere(s));
 const isPrimary = s => !isMuted(s);
 
 // Couleur de la barre : fixe pour les matières connues, stable (hachage) pour les
@@ -742,11 +786,53 @@ document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) tick();
 document.getElementById("prev").onclick=()=>move(-1);
 document.getElementById("next").onclick=()=>move(1);
 document.getElementById("today").onclick=()=>{cursor=dayToOpen();render();};
-document.getElementById("togglesec").onclick=()=>{
-  document.body.classList.toggle("hide-sec");
-  try{localStorage.setItem("hideSec",document.body.classList.contains("hide-sec")?"1":"0")}catch(e){}
-  renderCC();
+// ---------------------------------------------------------------- menu des secondaires
+const g = id => document.getElementById(id);   // `$` n'est défini que plus bas
+function listeMatieres(){
+  const m = new Map();
+  ALL.forEach(s => {
+    const k = matiere(s); if (k == null) return;
+    const x = m.get(k) || {k, n:0, nom:"", s};
+    x.n++;
+    const nom = k === "TRAJET" ? "Trajet Guyancourt ↔ Versailles" : labelFor(s);
+    if (!x.nom || nom.length < x.nom.length) x.nom = nom;   // l'intitulé le plus propre
+    m.set(k, x);
+  });
+  return [...m.values()].sort((a,b) => a.nom.localeCompare(b.nom, "fr"));
+}
+function remplirSec(){
+  g("sechide").checked = document.body.classList.contains("hide-sec");
+  g("seclist").innerHTML = listeMatieres().map(x => {
+    const on = estSec(x.k);
+    return `<label class="secrow${on?" on":""}" style="--c:${colorFor(x.s)}">
+      <input type="checkbox" data-k="${esc(x.k)}"${on?" checked":""}>
+      <span class="pt"></span><span class="nm">${esc(x.nom)}</span><span class="nb">${x.n}</span></label>`;
+  }).join("") || '<div class="secaide">Aucun cours chargé.</div>';
+}
+function ouvrirSec(ouvrir){
+  g("secpop").hidden = g("secfond").hidden = !ouvrir;
+  g("togglesec").setAttribute("aria-expanded", ouvrir ? "true" : "false");
+  if (ouvrir) remplirSec();
+}
+function garderChoix(){
+  try { localStorage.setItem("edt.secondaires", JSON.stringify(CHOIX_SEC)); } catch(e){}
+  render(); remplirSec();
+}
+g("togglesec").onclick = () => ouvrirSec(g("secpop").hidden);
+g("secclose").onclick = g("secfond").onclick = () => ouvrirSec(false);
+g("sechide").onchange = e => {
+  document.body.classList.toggle("hide-sec", e.target.checked);
+  try{localStorage.setItem("hideSec",e.target.checked?"1":"0")}catch(e){}
+  render();
 };
+g("seclist").onchange = e => {
+  const k = e.target.dataset && e.target.dataset.k; if (k == null) return;
+  if (e.target.checked === DEFAULT_SEC.includes(k)) delete CHOIX_SEC[k];   // retour au défaut
+  else CHOIX_SEC[k] = e.target.checked;
+  garderChoix();
+};
+g("secreset").onclick = () => { CHOIX_SEC = {}; garderChoix(); };
+addEventListener("keydown", e => { if (e.key === "Escape" && !g("secpop").hidden) ouvrirSec(false); });
 addEventListener("keydown",e=>{
   if(!$("ovl").hidden || !$("ovl2").hidden || /^(INPUT|SELECT|TEXTAREA)$/.test((e.target||{}).tagName)) return;
   if(e.ctrlKey||e.metaKey||e.altKey) return;
