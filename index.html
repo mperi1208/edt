@@ -505,7 +505,11 @@ function matiere(s){
 let CHOIX_SEC = {};                                // {matière: true (grisée) | false}
 try { CHOIX_SEC = JSON.parse(localStorage.getItem("edt.secondaires") || "{}") || {}; } catch(e){}
 const estSec = k => k != null && (k in CHOIX_SEC ? CHOIX_SEC[k] : DEFAULT_SEC.includes(k));
-const isMuted = s => estSec(matiere(s));
+// Les CC de ces matières restent normaux même si la matière est secondaire.
+const CC_TOUJOURS = ["MSANGS1"];   // anglais : les cours sont secondaires, pas le CC
+const estCC = s => /contr[ôo]le continu|^CC$|examen|partiel/i.test(s.category || "")
+                || /\bCC\b|contr[ôo]le continu|examen|partiel/i.test(s.title || "");
+const isMuted = s => estSec(matiere(s)) && !(estCC(s) && CC_TOUJOURS.includes(matiere(s)));
 const isPrimary = s => !isMuted(s);
 
 // Couleur de la barre : fixe pour les matières connues, stable (hachage) pour les
