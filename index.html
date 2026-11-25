@@ -424,15 +424,24 @@ function chargerProfs(){
       if (DATA) { rebuild(); render(); }
     }).catch(() => {});
 }
-// Contrôles continus corrigés ou ajoutés dans l'app Mac, publiés dans retouches.json pour que
-// le téléphone les voie. Le Mac, lui, a l'original (overrides.json) et n'en a pas besoin.
-let PUB = {edits:{}, custom:[]};
-function poserRetouches(o){
+// Retouches faites dans l'app Mac, vues par le téléphone. Deux sources :
+//  - Supabase (edt_reglages.retouches, via edt-maj ?reglages=1 et la clé) : TOUT (salles,
+//    intitulés, types, cours masqués, créneaux perso) — privé, c'est la source préférée ;
+//  - retouches.json (dépôt public) : seulement les contrôles continus, en secours sans clé.
+// Le Mac, lui, a l'original (overrides.json) et n'en a pas besoin.
+let PUB = {edits:{}, custom:[], hidden:[]}, pubComplet = false;
+function poserRetouches(o, complet){
   if (!o || typeof o !== "object") return false;
-  PUB = {edits: o.edits || {}, custom: Array.isArray(o.custom) ? o.custom : []};
+  if (pubComplet && !complet) return false;       // la version publique ne remplace pas la complète
+  PUB = {edits: o.edits || {}, custom: Array.isArray(o.custom) ? o.custom : [],
+         hidden: Array.isArray(o.hidden) ? o.hidden : []};
+  if (complet) pubComplet = true;
   return true;
 }
-if (!canEdit) { try { poserRetouches(JSON.parse(localStorage.getItem("edt.retouches") || "null")); } catch(e){} }
+if (!canEdit) {
+  try { poserRetouches(JSON.parse(localStorage.getItem("edt.retouches.mac") || "null"), true); } catch(e){}
+  try { poserRetouches(JSON.parse(localStorage.getItem("edt.retouches") || "null")); } catch(e){}
+}
 function chargerRetouches(){
   if (canEdit) return;
   fetch("retouches.json?t=" + Date.now(), {cache:"no-store"})
@@ -452,7 +461,7 @@ const mem = {
 // Les modifications vivent à part : data.json est réécrit en entier deux fois par jour.
 function rebuild(){
   OVER.custom = OVER.custom || []; OVER.edits = OVER.edits || {}; OVER.hidden = OVER.hidden || [];
-  const cache = new Set(OVER.hidden);
+  const cache = new Set(OVER.hidden.concat(PUB.hidden || []));
   const base = ((DATA && DATA.sessions) || [])
     .filter(s => !cache.has(s.id))
     .map(s => { const p = PUB.edits[s.id], l = OVER.edits[s.id];      // le local l'emporte
@@ -476,6 +485,7 @@ function saveOver(){
   try {
     if (window.webkit && webkit.messageHandlers && webkit.messageHandlers.edt) {
       webkit.messageHandlers.edt.postMessage({type:"overrides", data: JSON.parse(JSON.stringify(OVER))});
+      envoyerRetouches();
       // Le téléphone ne voit une retouche qu'une fois publiée, et la publication suit une
       // vérification : on en lance une, après un court délai pour regrouper plusieurs retouches.
       clearTimeout(window._publierRetouches);
@@ -828,12 +838,29 @@ function garderChoix(){
 // dans la mémoire de l'appareil ; sur le Mac, dans overrides.json (OVER.cle, jamais publié).
 // Le dernier qui modifie gagne ; un envoi raté est retenté au prochain chargement.
 const cleSync = () => mem.get(CLE.cle) || (OVER && OVER.cle) || "";
-async function appelSec(corps){
+async function appelReglages(corps){
   const r = await fetch(FN + "?reglages=1", {method:"POST", cache:"no-store",
     headers:{"x-edt-cle": cleSync(), "content-type":"application/json"}, body: corps ? JSON.stringify(corps) : ""});
   const o = await r.json().catch(() => null);
   if (!r.ok || !o || typeof o.secondaires !== "object") throw new Error((o && o.erreur) || ("HTTP " + r.status));
-  return o.secondaires;
+  if (!canEdit) recevoirRetouches(o.retouches);
+  return o;
+}
+const appelSec = async corps => (await appelReglages(corps)).secondaires;
+// Retouches du Mac → Supabase, à chaque modification et à l'ouverture (rattrape un envoi raté).
+// Jamais la clé : seulement edits, custom, hidden.
+async function envoyerRetouches(){
+  if (!canEdit || !cleSync()) return;
+  const r = {edits: OVER.edits || {}, custom: OVER.custom || [], hidden: OVER.hidden || []};
+  try { await appelReglages({retouches: JSON.parse(JSON.stringify(r))}); }
+  catch(e){ console.warn("envoi des retouches impossible", e); }
+}
+function recevoirRetouches(r){
+  if (!r || typeof r !== "object") return;
+  const avant = JSON.stringify(pubComplet ? PUB : null);
+  if (!poserRetouches(r, true)) return;
+  try { localStorage.setItem("edt.retouches.mac", JSON.stringify(r)); } catch(e){}
+  if (JSON.stringify(PUB) !== avant && DATA) { rebuild(); render(); }
 }
 async function envoyerSec(){
   if (!cleSync()) return;
@@ -1295,7 +1322,7 @@ window.applyData = function(d){
   if(!cursor) cursor = dayToOpen();
   render();
 };
-chargerProfs(); chargerRetouches(); chargerSec();
+chargerProfs(); chargerRetouches(); chargerSec(); envoyerRetouches();
 // Choix des secondaires faits sur l'autre appareil : relus à chaque retour sur la page.
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") chargerSec(); });
 window.addEventListener("focus", () => chargerSec());
