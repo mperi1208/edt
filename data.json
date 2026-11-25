@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-23T17:09:53Z",
-  "fetchedAt" : "2026-11-23T17:09:53Z",
+  "checkedAt" : "2026-11-25T18:02:35Z",
+  "fetchedAt" : "2026-11-25T18:02:35Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -1700,8 +1700,6 @@
       "id" : "-1742255826:1073733534:17:5911127:15",
       "module" : "MYMAA002",
       "moduleName" : "Introduction au calcul formel",
-      "room" : "G107 - GERMAIN",
-      "site" : "GERMAIN",
       "start" : "2026-11-25T13:50:00",
       "title" : "Introduction au calcul formel"
     },
@@ -2522,16 +2520,27 @@
       "title" : "Introduction au calcul formel"
     },
     {
-      "category" : "Contrôle continu",
-      "end" : "2027-01-07T12:50:00",
+      "category" : "CM/TD",
+      "end" : "2027-01-07T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
-      "id" : "-1742255826:1073733534:17:5829633:21",
+      "id" : "-1742255826:1073733534:17:5925304:21",
       "module" : "MYANM007",
       "moduleName" : "Inférence statistique et théorie de l'apprentissage",
-      "room" : "AMPHI F - FERMAT",
-      "site" : "FERMAT",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
       "start" : "2027-01-07T09:40:00",
-      "teacher" : "Pascal Moyal",
+      "title" : "Inférence statistique et théorie de l'apprentissage"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-01-07T12:50:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "id" : "-1742255826:1073733534:17:5925303:21",
+      "module" : "MYANM007",
+      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-07T11:20:00",
       "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
@@ -2727,12 +2736,36 @@
       "title" : "Introduction au calcul formel"
     },
     {
+      "category" : "CM/TD",
+      "end" : "2027-01-14T11:10:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "id" : "-1742255826:1073733534:17:5925304:22",
+      "module" : "MYANM007",
+      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-14T09:40:00",
+      "title" : "Inférence statistique et théorie de l'apprentissage"
+    },
+    {
       "category" : "",
       "end" : "2027-01-14T12:50:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917664:22",
       "start" : "2027-01-14T11:20:00",
       "title" : "CRENEAU RESERVE AU TRAJET ENTRE GUYANCOURT ET VERSAILLES"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-01-14T12:50:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "id" : "-1742255826:1073733534:17:5925303:22",
+      "module" : "MYANM007",
+      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-14T11:20:00",
+      "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
       "category" : "CM/TD",
@@ -3107,12 +3140,36 @@
       "title" : "Analyse d'algorithmes, programmation"
     },
     {
+      "category" : "CM/TD",
+      "end" : "2027-01-28T11:10:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "id" : "-1742255826:1073733534:17:5925304:24",
+      "module" : "MYANM007",
+      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-28T09:40:00",
+      "title" : "Inférence statistique et théorie de l'apprentissage"
+    },
+    {
       "category" : "",
       "end" : "2027-01-28T12:50:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917664:24",
       "start" : "2027-01-28T11:20:00",
       "title" : "CRENEAU RESERVE AU TRAJET ENTRE GUYANCOURT ET VERSAILLES"
+    },
+    {
+      "category" : "CM/TD",
+      "end" : "2027-01-28T12:50:00",
+      "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26], M1 Saclay Mathématiques et Apprentissage Statsistique [MYMAS1_26]",
+      "id" : "-1742255826:1073733534:17:5925303:24",
+      "module" : "MYANM007",
+      "moduleName" : "Inférence statistique et théorie de l'apprentissage",
+      "room" : "G104 M- GERMAIN",
+      "site" : "GERMAIN",
+      "start" : "2027-01-28T11:20:00",
+      "title" : "Inférence statistique et théorie de l'apprentissage"
     },
     {
       "category" : "CM/TD",
