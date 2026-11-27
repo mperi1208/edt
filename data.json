@@ -1,6 +1,6 @@
 {
-  "checkedAt" : "2026-11-27T09:33:21Z",
-  "fetchedAt" : "2026-11-27T09:33:21Z",
+  "checkedAt" : "2026-11-27T10:32:06Z",
+  "fetchedAt" : "2026-11-27T10:32:06Z",
   "rangeEnd" : "2027-08-31",
   "rangeStart" : "2026-09-01",
   "sessions" : [
@@ -4225,30 +4225,6 @@
     },
     {
       "category" : "CM/TD",
-      "end" : "2027-03-08T15:20:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917800:30",
-      "module" : "MYMAA008",
-      "moduleName" : "Théorie de l'information",
-      "room" : "G209 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2027-03-08T13:50:00",
-      "title" : "Théorie de l'information"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2027-03-08T17:00:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917802:30",
-      "module" : "MYMAA008",
-      "moduleName" : "Théorie de l'information",
-      "room" : "G209 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2027-03-08T15:30:00",
-      "title" : "Théorie de l'information"
-    },
-    {
-      "category" : "CM/TD",
       "end" : "2027-03-09T11:10:00",
       "groups" : "M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
       "id" : "-1742255826:1073733534:17:5917725:30",
@@ -4778,6 +4754,8 @@
       "id" : "-1742255826:1073733534:17:5926449:33",
       "module" : "MYMAA008",
       "moduleName" : "Théorie de l'information",
+      "room" : "G209 - GERMAIN",
+      "site" : "GERMAIN",
       "start" : "2027-03-30T13:50:00",
       "title" : "Théorie de l'information"
     },
@@ -4788,6 +4766,8 @@
       "id" : "-1742255826:1073733534:17:5926454:33",
       "module" : "MYMAA008",
       "moduleName" : "Théorie de l'information",
+      "room" : "G209 - GERMAIN",
+      "site" : "GERMAIN",
       "start" : "2027-03-30T15:30:00",
       "title" : "Théorie de l'information"
     },
@@ -4846,6 +4826,8 @@
       "id" : "-1742255826:1073733534:17:5926455:33",
       "module" : "MYMAA008",
       "moduleName" : "Théorie de l'information",
+      "room" : "G209 - GERMAIN",
+      "site" : "GERMAIN",
       "start" : "2027-04-01T13:50:00",
       "title" : "Théorie de l'information"
     },
@@ -4856,6 +4838,8 @@
       "id" : "-1742255826:1073733534:17:5926456:33",
       "module" : "MYMAA008",
       "moduleName" : "Théorie de l'information",
+      "room" : "G209 - GERMAIN",
+      "site" : "GERMAIN",
       "start" : "2027-04-01T15:30:00",
       "title" : "Théorie de l'information"
     },
@@ -4912,30 +4896,6 @@
       "site" : "GERMAIN",
       "start" : "2027-04-05T11:20:00",
       "title" : "Méthodes numériques avancée et programmation"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2027-04-05T15:20:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917800:34",
-      "module" : "MYMAA008",
-      "moduleName" : "Théorie de l'information",
-      "room" : "G209 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2027-04-05T13:50:00",
-      "title" : "Théorie de l'information"
-    },
-    {
-      "category" : "CM/TD",
-      "end" : "2027-04-05T17:00:00",
-      "groups" : "M1 Saclay Algèbre Appliquée et Cryptologie [MYAAC1_26], M1 Saclay Analyse Modélisation Simulation [MYAMS1_26]",
-      "id" : "-1742255826:1073733534:17:5917802:34",
-      "module" : "MYMAA008",
-      "moduleName" : "Théorie de l'information",
-      "room" : "G209 - GERMAIN",
-      "site" : "GERMAIN",
-      "start" : "2027-04-05T15:30:00",
-      "title" : "Théorie de l'information"
     },
     {
       "category" : "CM/TD",
